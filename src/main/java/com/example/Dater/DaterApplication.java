@@ -1,13 +1,13 @@
-package com.example.Dater_BE;
+package com.example.Dater;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DaterBeApplication {
+public class DaterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DaterBeApplication.class, args);
+		SpringApplication.run(DaterApplication.class, args);
 	}
 
 }
