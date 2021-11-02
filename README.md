@@ -2,8 +2,8 @@
 
 ## dev links
 
--   **spring -> Mongo tutorial** - [link](https://spring.io/guides/gs/accessing-data-mongodb/)
--   **React -> Spring** - [link]()
+-   [Mongo, spring REST services](https://medium.com/javarevisited/building-a-rest-service-with-spring-boot-and-mongodb-part-1-2de01e4f434d)
+-   [spring -> Mongo tutorial](https://spring.io/guides/gs/accessing-data-mongodb/)
 -   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
 -   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
 
@@ -19,11 +19,7 @@
     -   `docker run -d --name=mongo -p 37017:27017 mongo`
 
 -   To connect with created Dockerfile, a connection string must be proved. for example
-
-    -   mongodb://localhost:37017
-        To build & run Gradle back-end
-
--   ....
+    -   `mongodb://localhost:37017`
 
 ### To start the gradle server
 
