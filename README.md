@@ -1,9 +1,15 @@
 ## Setup
 
-**spring -> Mongo tutorial**
-[link](https://spring.io/guides/gs/accessing-data-mongodb/)
+## dev links
 
-To build & run mongoDB Dockerifle
+-   **spring -> Mongo tutorial** - [link](https://spring.io/guides/gs/accessing-data-mongodb/)
+-   **React -> Spring** - [link]()
+-   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
+-   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
+
+## Setup
+
+### To build & run mongoDB Dockerifle
 
 -   navigate to mongo docker folder
 -   To build the image
@@ -19,31 +25,18 @@ To build & run mongoDB Dockerifle
 
 -   ....
 
-## Front-end
+### To start the gradle server
 
--   [link](https://github.com/Seeru-crypto/Dater_FE) to Dater_FE Git repo.
+-   gradle Bootrun
 
-### Technical info
+### useful info
 
--   uses React framework, react prime components and axios.
--   Ports:
-    -   prod uses: 4000
-    -   dev uses: 4001
+Front end uses ports:
 
-## Back-End
-
-### Technical info
-
--   Ports:
-    -   prod uses: 5000
-    -   dev uses: 5001
--   uses Spring
+-   prod uses: 4000
+-   dev uses: 4001
 
 ### ToDo:
-
-sending Emails seems pretty straight forward. see [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
-
-How to schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
 
 -   [ ] Server servers API endpoints
     -   [ ] uses Swagger automated API documentation
@@ -53,7 +46,7 @@ How to schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring
     -   [ ] DELETE Event
     -   [ ] UPDATE Event
 -   [ ] During start-up server creates a custom schema to DB
--   [ ] Server can implement CRUD functionality to DB
+-   [x] Server can implement CRUD functionality to DB
 -   [ ] Server Check the dates in DB once every 24h
     -   [ ] Server just sends the e-mail at a specified date.
     -   [ ] Server checks the dates and takes into account the days before variable, before sending the email.
@@ -63,9 +56,8 @@ How to schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring
     -   [ ] a function that that sends the email, using a given template
 -   [ ] Create server Dockerfile
 
-### Elasticsearch Database
+### MongoDB Database
 
 -   uses port 5432
--   [ ] Create DB Dockerfile, with default settings
--   [ ] create neccesary indexes indexes: - Events (Name, createdTimestamp, Date, Reminder, Reminder days, ?reminder interval, description, userId (Elasticsearch ID), Event ID (Elasticsearch ID)) - Users (email aadress, username, userId (Elasticsearch ID), password, Event limit (1-100), User Group (admin, demo, user)) - logs (user, activity, timestamp)
+-   [x] Create DB Dockerfile, with default settings
 -   [ ] Integrate automatic test data generation into the docker file
