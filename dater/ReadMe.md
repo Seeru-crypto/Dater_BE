@@ -2,7 +2,7 @@
 
 ## dev links
 
--   [Mongo, spring REST services](https://medium.com/javarevisited/building-a-rest-service-with-spring-boot-and-mongodb-part-1-2de01e4f434d)
+-   [Mongo, spring REST services](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
 -   [spring -> Mongo tutorial](https://spring.io/guides/gs/accessing-data-mongodb/)
 -   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
 -   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
