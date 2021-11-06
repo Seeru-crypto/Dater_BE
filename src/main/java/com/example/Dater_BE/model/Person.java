@@ -1,4 +1,4 @@
-package com.example.dater.model;
+package com.example.Dater_BE.model;
 
 import org.springframework.data.annotation.Id;
 
