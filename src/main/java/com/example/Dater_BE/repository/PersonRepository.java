@@ -14,6 +14,13 @@ public interface PersonRepository extends MongoRepository<Person, String> {
 
   List<Person> findByFirstName(@Param("name") String firstName);
 
-  Person findByIdPerson(@Param("id") String id);
+  Person save(Person person);
+
+  void delete(Person person);
+
+  // Person findOne(String id);
+
+  // Offical example
+  // https://github.com/spring-projects/spring-data-book/blob/master/mongodb/src/main/java/com/oreilly/springdata/mongodb/core/CustomerRepository.java
 
 }
