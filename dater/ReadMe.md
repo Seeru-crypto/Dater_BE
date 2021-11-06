@@ -6,6 +6,7 @@
 -   [spring -> Mongo tutorial](https://spring.io/guides/gs/accessing-data-mongodb/)
 -   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
 -   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
+-   MongoDB query [builder](https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#repositories.query-methods.details)
 
 ## Setup
 
