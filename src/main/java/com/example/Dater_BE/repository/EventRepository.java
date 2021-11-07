@@ -10,9 +10,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "event", path = "event")
 public interface EventRepository extends MongoRepository<Event, String> {
 
-    // List<Event> findByEvents(@Param("name") String name);
-    public Event save(Event event);
-
     Event findByEventName(String eventName);
+
+    Event findByDate(String date);
+
+    Event findByEventReminder(Boolean reminder);
+
+    Event findByEventDescription(String description);
 
 }
