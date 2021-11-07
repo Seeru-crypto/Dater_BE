@@ -2,8 +2,6 @@ package com.example.Dater_BE.model;
 
 import org.springframework.data.annotation.Id;
 
-
-
 public class Event {
     @Id
     private String id;
@@ -14,12 +12,12 @@ public class Event {
     private Integer reminderDays;
     private String description;
 
-    public String getEntryName() {
+    public String getEventName() {
         return eventName;
     }
 
-    public void setEntryName(String entryName) {
-        this.eventName = entryName;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getDate() {
