@@ -2,6 +2,8 @@ package com.example.Dater_BE.model;
 
 import org.springframework.data.annotation.Id;
 
+
+
 public class Event {
     @Id
     private String id;
