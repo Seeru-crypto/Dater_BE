@@ -3,6 +3,7 @@
 ### To build & run mongoDB Dockerifle
 
 -   navigate to mongo docker folder
+
 -   To build the image
     -   `docker build -t mongo .`
 -   To run the image
