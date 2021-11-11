@@ -33,7 +33,7 @@ Front end uses ports:
     -   [x] UPDATE Event
 -   [x] During start-up server creates a custom schema to DB
 -   [x] Server can implement CRUD functionality to DB
--   [ ] Integrate React Application with Spring boot back-end
+-   [x] Integrate React Application with Spring boot back-end
 -   [ ] Server Check the dates in DB once every 24h
     -   [ ] Server just sends the e-mail at a specified date.
     -   [ ] Server checks the dates and takes into account the days before variable, before sending the email.
@@ -54,3 +54,4 @@ Front end uses ports:
 -   [!!! Mongo, spring REST services](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
 -   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
 -   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
+-   [Schedule jobs using built-in scheduler](https://spring.io/guides/gs/scheduling-tasks/)
