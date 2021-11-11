@@ -34,16 +34,20 @@ Front end uses ports:
     -   [x] UPDATE Event
 -   [x] During start-up server creates a custom schema to DB
 -   [x] Server can implement CRUD functionality to DB
--   [ ] Integrate React Application with Spring boot back-end
--   [ ] Server Check the dates in DB once every 24h
-    -   [ ] Server just sends the e-mail at a specified date.
-    -   [ ] Server checks the dates and takes into account the days before variable, before sending the email.
--   [ ] function that sends e-mail to designated aadress
-    -   [ ] a function that sends a email
-    -   [ ] Design a unfiform template for the email, which uses given variables (name of event, date)
-    -   [ ] a function that that sends the email, using a given template
+-   [x] Integrate React Application with Spring boot back-end
+-   [ ] Server Sends the e-mail at a specified date.
+    -   [ ] Server Check the dates in DB once every 24h
+        -   [x] [Create recurring tasks](https://spring.io/guides/gs/scheduling-tasks/)
+        -   [ ] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
+        -   [ ] Create date check logic
+    -   [ ] function that sends e-mail to designated aadress
+        -   [ ] [Function that sends a email](https://mailtrap.io/blog/spring-send-email)
+        -   [ ] Function that that sends the email, using a given template, which uses given variables
+                (name of event, date)
+        -   [ ] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
+-   [ ] Create admin object model.
 -   [ ] Create server Dockerfile
--   [ ] Add Swagger Module
+-   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
 
 ### MongoDB Database
 
@@ -51,7 +55,3 @@ Front end uses ports:
 -   [x] Create DB Dockerfile, with default settings
 
 ## dev links
-
--   [!!! Mongo, spring REST services](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
--   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
--   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)

@@ -8,8 +8,10 @@ import com.example.Dater_BE.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class DaterApplication implements CommandLineRunner {
 
 	@Autowired
