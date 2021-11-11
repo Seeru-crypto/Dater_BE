@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 public class Event {
     @Id
     private String id;
-
     private String eventName;
     private String date;
     private Boolean reminder;

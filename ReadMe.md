@@ -55,3 +55,4 @@ Front end uses ports:
 -   Sending Emails - [link](https://mailtrap.io/blog/spring-send-email/) for in-depth how to
 -   Schecdule jobs with spring quartz, [link](https://www.baeldung.com/spring-quartz-schedule)
 -   [Schedule jobs using built-in scheduler](https://spring.io/guides/gs/scheduling-tasks/)
+-   [How to access mongoDB from spirng](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
