@@ -3,6 +3,7 @@
 ### To build & run mongoDB Dockerifle
 
 -   navigate to mongo docker folder
+
 -   To build the image
     -   `docker build -t mongo .`
 -   To run the image
@@ -37,8 +38,8 @@ Front end uses ports:
 -   [ ] Server Sends the e-mail at a specified date.
     -   [ ] Server Check the dates in DB once every 24h
         -   [x] [Create recurring tasks](https://spring.io/guides/gs/scheduling-tasks/)
-        -   [ ] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
-        -   [ ] Create date check logic
+        -   [x] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
+        -   [x] Create date check logic
     -   [ ] function that sends e-mail to designated aadress
         -   [ ] [Function that sends a email](https://mailtrap.io/blog/spring-send-email)
         -   [ ] Function that that sends the email, using a given template, which uses given variables
