@@ -5,15 +5,12 @@ import com.example.Dater_BE.service.EventService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class EventDateChecker {
-    private static final DateTimeFormatter ISO_LOCAL_DATE_TIME = null;
-    List<Event> result;
-    List<String> reminderDates;
+    List<Event> eventList;
 
     private final EventService eventService;
 
@@ -24,20 +21,19 @@ public class EventDateChecker {
 
     public void getEventData() {
 
-        result = eventService.getStorage();
+        eventList = eventService.getStorage();
 
-        LocalDateTime date2 = LocalDateTime.now();
+        LocalDate currentDate = LocalDate.now();
 
-        String parsedDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(date2).substring(0, 19);
+        for (Event event : eventList) {
+            String date = event.getDate().substring(0, 10);
+            LocalDate myObj = LocalDate.parse((CharSequence) date);
+            Long reminderInDays = Long.parseLong(Integer.toString(event.getReminderDays()));
+            LocalDate eventReminderDate = myObj.minusDays(reminderInDays);
 
-        for (Event event : result) {
-            String date = event.getDate().substring(0, 19);
-            LocalDateTime myObj = LocalDateTime.parse((CharSequence) date);
-            System.out.println("Current DateTime is " + parsedDate);
-
-            System.out.println("reminder is " + event.getReminderDays());
-            System.out.println("new Date obj is " + myObj);
-
+            if (currentDate.equals(eventReminderDate)) {
+                System.out.println("Send out an email! for event " + event.getEventName());
+            }
         }
     }
 
