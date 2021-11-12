@@ -26,6 +26,10 @@ public class EventDateChecker {
         LocalDate currentDate = LocalDate.now();
 
         for (Event event : eventList) {
+
+            if (!event.getReminder())
+                continue;
+            System.out.println("Checkking event " + event.getEventName());
             String date = event.getDate().substring(0, 10);
             LocalDate myObj = LocalDate.parse((CharSequence) date);
             Long reminderInDays = Long.parseLong(Integer.toString(event.getReminderDays()));
@@ -33,6 +37,8 @@ public class EventDateChecker {
 
             if (currentDate.equals(eventReminderDate)) {
                 System.out.println("Send out an email! for event " + event.getEventName());
+                System.out.println("***");
+
             }
         }
     }

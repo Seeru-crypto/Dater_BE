@@ -29,8 +29,8 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent1.setEventName("Default 1");
 		defaultEvent1.setDescription("description 1");
 		defaultEvent1.setReminder(true);
-		defaultEvent1.setReminderDays(11);
-		defaultEvent1.setDate("2021-11-07T15:05:53.600Z");
+		defaultEvent1.setReminderDays(0);
+		defaultEvent1.setDate("2021-11-12T20:09:41.413Z");
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setEventName("Default 2");
@@ -38,10 +38,18 @@ public class DaterApplication implements CommandLineRunner {
 				+ "Aperiam reprehenderit suscipit dolor unde dolorem aspernatur nisi.");
 		defaultEvent2.setReminder(false);
 		defaultEvent2.setReminderDays(0);
-		defaultEvent2.setDate("2021-11-12T20:09:41.413Z");
+		defaultEvent2.setDate("2021-11-07T15:05:53.600Z");
+
+		Event defaultEvent3 = new Event();
+		defaultEvent3.setEventName("Default 3");
+		defaultEvent3.setDescription(" ");
+		defaultEvent3.setReminder(true);
+		defaultEvent3.setReminderDays(12);
+		defaultEvent3.setDate("2021-03-02T21:15:48.976Z");
 
 		eventRepository.save(defaultEvent1);
 		eventRepository.save(defaultEvent2);
+		eventRepository.save(defaultEvent3);
 
 		System.out.println("------");
 		System.out.println("The following events were created.");
