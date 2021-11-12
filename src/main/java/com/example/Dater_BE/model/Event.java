@@ -51,4 +51,11 @@ public class Event {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "Event[id=%s, eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s']", id,
+                eventName, date, reminder, reminderDays, description);
+    }
+
 }
