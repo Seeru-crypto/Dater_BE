@@ -45,7 +45,8 @@ Front end uses ports:
                 (name of event, date)
         -   [ ] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
 -   [ ] Create admin object model.
--   [ ] Setup Heroku Ci/Cd pipeline
+-   [ ] Setup Heroku CI/CD pipeline
+-   [ ] Add 80% test coverage
 -   [ ] Create server Dockerfile
 -   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
 
