@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class dailyCheck {
 
+    private EventDateChecker eventDateChecker;
     private static final Logger log = LoggerFactory.getLogger(dailyCheck.class);
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -18,6 +19,7 @@ public class dailyCheck {
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
+        eventDateChecker.getEventData();
     }
 
 }
