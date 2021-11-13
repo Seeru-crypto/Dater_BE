@@ -11,7 +11,6 @@ import java.util.List;
 
 import java.io.IOException;
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 @Configuration
 public class EventDateChecker {
@@ -26,7 +25,7 @@ public class EventDateChecker {
         this.eventService = eventService;
     }
 
-    public void getEventData() throws AddressException, MessagingException, IOException {
+    public void getEventData() throws MessagingException {
         eventList = eventService.getStorage();
         LocalDate currentDate = LocalDate.now();
 
@@ -35,7 +34,7 @@ public class EventDateChecker {
                 continue;
             System.out.println("Checking event: " + event.getEventName());
             String date = event.getDate().substring(0, 10);
-            LocalDate myObj = LocalDate.parse((CharSequence) date);
+            LocalDate myObj = LocalDate.parse(date);
             Long reminderInDays = Long.parseLong(Integer.toString(event.getReminderDays()));
             LocalDate eventReminderDate = myObj.minusDays(reminderInDays);
 

@@ -26,7 +26,7 @@ public class Mail {
     private final boolean AUTH = true;
     private final boolean STARTTLS = true;
 
-    public void send(Event event) throws AddressException, MessagingException, IOException {
+    public void send(Event event) throws MessagingException {
         Message msg = new MimeMessage(setSession(setProperties()));
 
         msg.setSentDate(new Date());
