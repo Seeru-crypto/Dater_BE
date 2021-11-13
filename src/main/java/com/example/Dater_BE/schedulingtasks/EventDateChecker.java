@@ -41,7 +41,7 @@ public class EventDateChecker {
 
             if (currentDate.equals(eventReminderDate)) {
                 System.out.println("Send out an email! for event " + event.getEventName());
-                mailer.send();
+                mailer.send(event);
                 System.out.println("***");
 
             }

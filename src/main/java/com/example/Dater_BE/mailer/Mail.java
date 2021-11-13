@@ -13,6 +13,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.example.Dater_BE.model.Event;
+
 public class Mail {
     private final String PORT = "587";
     private final String HOST = "smtp.mailtrap.io";
@@ -24,7 +26,7 @@ public class Mail {
     private final boolean AUTH = true;
     private final boolean STARTTLS = true;
 
-    public void send() throws AddressException, MessagingException, IOException {
+    public void send(Event event) throws AddressException, MessagingException, IOException {
         Message msg = new MimeMessage(setSession(setProperties()));
 
         msg.setSentDate(new Date());
@@ -32,8 +34,8 @@ public class Mail {
 
         msg.setFrom(new InternetAddress(EMAIL, false));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(myMail));
-
-        msg.setContent("This test works!", "text/html");
+        String messageBody = ("This event has been triggered! " + event.getEventName());
+        msg.setContent(messageBody, "text/html");
 
         Transport.send(msg);
     }

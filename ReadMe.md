@@ -41,7 +41,8 @@ Front end uses ports:
         -   [x] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
         -   [x] Create date check logic
     -   [ ] function that sends e-mail to designated aadress
-        -   [ ] [Function that sends a email](https://mailtrap.io/blog/spring-send-email)
+        -   [x] [Testing emails](https://mailtrap.io/blog/spring-send-email),
+        -   [ ] [Emailer implementation](https://www.baeldung.com/spring-email)
         -   [ ] Function that that sends the email, using a given template, which uses given variables
                 (name of event, date)
         -   [ ] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
