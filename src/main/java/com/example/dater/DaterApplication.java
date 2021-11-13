@@ -1,10 +1,10 @@
-package com.example.Dater_BE;
+package com.example.dater;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.Dater_BE.model.Event;
-import com.example.Dater_BE.repository.EventRepository;
+import com.example.dater.model.Event;
+import com.example.dater.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

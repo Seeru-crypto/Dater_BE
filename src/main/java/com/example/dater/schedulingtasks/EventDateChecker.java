@@ -1,16 +1,14 @@
-package com.example.Dater_BE.schedulingtasks;
-
-import com.example.Dater_BE.model.Event;
-import com.example.Dater_BE.service.EventService;
-import com.example.Dater_BE.mailer.Mail;
+package com.example.dater.schedulingtasks;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.List;
-
-import java.io.IOException;
 import javax.mail.MessagingException;
+
+import com.example.dater.mailer.Mail;
+import com.example.dater.model.Event;
+import com.example.dater.service.EventService;
 
 @Configuration
 public class EventDateChecker {
@@ -30,18 +28,15 @@ public class EventDateChecker {
         LocalDate currentDate = LocalDate.now();
 
         for (Event event : eventList) {
-            if (!event.getReminder())
+            if (Boolean.FALSE.equals(event.getReminder()))
                 continue;
-            System.out.println("Checking event: " + event.getEventName());
             String date = event.getDate().substring(0, 10);
             LocalDate myObj = LocalDate.parse(date);
             Long reminderInDays = Long.parseLong(Integer.toString(event.getReminderDays()));
             LocalDate eventReminderDate = myObj.minusDays(reminderInDays);
 
             if (currentDate.equals(eventReminderDate)) {
-                System.out.println("Send out an email! for event " + event.getEventName());
                 mailer.send(event);
-                System.out.println("***");
 
             }
         }

@@ -1,12 +1,12 @@
-package com.example.Dater_BE.service;
-
-import com.example.Dater_BE.model.Event;
-import com.example.Dater_BE.repository.EventRepository;
+package com.example.dater.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import com.example.dater.model.Event;
+import com.example.dater.repository.EventRepository;
 
 @Service
 public class EventService {
