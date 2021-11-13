@@ -1,7 +1,11 @@
 package com.example.Dater_BE.schedulingtasks;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +26,8 @@ public class dailyCheck {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
-    public void reportCurrentTime() {
+    @Scheduled(fixedRate = 10000)
+    public void reportCurrentTime() throws AddressException, MessagingException, IOException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");
         eventDateChecker.getEventData();
     }

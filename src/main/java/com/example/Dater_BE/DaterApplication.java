@@ -26,11 +26,11 @@ public class DaterApplication implements CommandLineRunner {
 		eventRepository.deleteAll();
 
 		Event defaultEvent1 = new Event();
-		defaultEvent1.setEventName("Default 1");
+		defaultEvent1.setEventName("email send event!");
 		defaultEvent1.setDescription("description 1");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(0);
-		defaultEvent1.setDate("2021-11-12T20:09:41.413Z");
+		defaultEvent1.setDate("2021-11-13T20:09:41.413Z");
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setEventName("Default 2");
@@ -41,7 +41,7 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent2.setDate("2021-11-07T15:05:53.600Z");
 
 		Event defaultEvent3 = new Event();
-		defaultEvent3.setEventName("Default 3");
+		defaultEvent3.setEventName("Doesnt send email");
 		defaultEvent3.setDescription(" ");
 		defaultEvent3.setReminder(true);
 		defaultEvent3.setReminderDays(12);
@@ -59,5 +59,4 @@ public class DaterApplication implements CommandLineRunner {
 		}
 
 	}
-
 }

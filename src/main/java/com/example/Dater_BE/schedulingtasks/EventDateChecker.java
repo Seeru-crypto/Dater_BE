@@ -2,15 +2,22 @@ package com.example.Dater_BE.schedulingtasks;
 
 import com.example.Dater_BE.model.Event;
 import com.example.Dater_BE.service.EventService;
+import com.example.Dater_BE.mailer.Mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.List;
 
+import java.io.IOException;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 @Configuration
 public class EventDateChecker {
+
     List<Event> eventList;
+    Mail mailer = new Mail();
 
     private final EventService eventService;
 
@@ -19,7 +26,7 @@ public class EventDateChecker {
         this.eventService = eventService;
     }
 
-    public void getEventData() {
+    public void getEventData() throws AddressException, MessagingException, IOException {
         eventList = eventService.getStorage();
         LocalDate currentDate = LocalDate.now();
 
@@ -34,13 +41,10 @@ public class EventDateChecker {
 
             if (currentDate.equals(eventReminderDate)) {
                 System.out.println("Send out an email! for event " + event.getEventName());
+                mailer.send();
                 System.out.println("***");
 
             }
         }
-    }
-
-    public void checkEventDates() {
-
     }
 }
