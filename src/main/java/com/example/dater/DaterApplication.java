@@ -30,7 +30,7 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent1.setDescription("description 1");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(0);
-		defaultEvent1.setDate("2021-11-13T20:09:41.413Z");
+		defaultEvent1.setDate("2021-11-14T20:09:41.413Z");
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setEventName("Default 2");

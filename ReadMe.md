@@ -60,3 +60,12 @@ Front end uses ports:
 ## dev links
 
 https://www.section.io/engineering-education/spring-boot-smtp/
+
+The config email security settings has to be turned on to allow outside apps to access this email acc.
+
+        Replace the email-address and email password with your actual email address and password.
+
+        For the configurations above to work in our applications, we must set up Gmail to allow connections from less secure apps.
+
+        On your Gmail account, click on manage account.
+        On the manage account screen click on the security menu item and select turn on access to less secure apps as shown below.
