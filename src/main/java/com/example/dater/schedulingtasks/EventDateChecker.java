@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.mail.MessagingException;
 
-import com.example.dater.mailer.Mail;
+import com.example.dater.mailer.Mail2;
 import com.example.dater.model.Event;
 import com.example.dater.service.EventService;
 
@@ -14,7 +14,7 @@ import com.example.dater.service.EventService;
 public class EventDateChecker {
 
     List<Event> eventList;
-    Mail mailer = new Mail();
+    Mail2 mailer = new Mail2();
 
     private final EventService eventService;
 

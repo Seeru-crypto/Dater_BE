@@ -58,3 +58,5 @@ Front end uses ports:
 -   [x] Create DB Dockerfile, with default settings
 
 ## dev links
+
+https://www.section.io/engineering-education/spring-boot-smtp/

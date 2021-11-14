@@ -13,11 +13,11 @@ import javax.mail.internet.MimeMessage;
 
 import com.example.dater.model.Event;
 
-public class Mail {
+public class Mail2 {
     private static final String PORT = "587";
-    private static final String HOST = "smtp.mailtrap.io";
-    private static final String USERNAME = "93fb9fb132fbdd";
-    private static final String PASSWORD = "21d60ee5dffeea";
+    private static final String HOST = "smtp.gmail.com";
+    private static final String USERNAME = "my.gmail@gmail.com";
+    private static final String PASSWORD = "password";
     private static final String EMAIL = "0ee688744d-d9c16d@inbox.mailtrap.io";
     private static final String MYMAIL = "puupuha@gmail.com";
 
