@@ -7,7 +7,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 import com.example.dater.service.SendMailService;
 
-import com.example.dater.mailer.Mail2;
 import com.example.dater.model.Event;
 import com.example.dater.service.EventService;
 import com.example.dater.model.Mail;
@@ -17,7 +16,6 @@ public class EventDateChecker {
 
     Boolean sentStatus = false;
     List<Event> eventList;
-    Mail2 mailer = new Mail2();
 
     private final EventService eventService;
     private SendMailService sendMailService;
@@ -46,8 +44,6 @@ public class EventDateChecker {
                 newMail.setMessage(event.getEventName());
                 sendMailService.sendMail(newMail);
                 sentStatus = true;
-                
-                // mailer.send(event);
 
             }
         }
