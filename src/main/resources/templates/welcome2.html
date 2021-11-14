@@ -14,12 +14,10 @@
         <title>Email</title>
     </head>
     <body>
-        <div>Event name is: <b th:text="${event.eventName}"></b></div>
-        <div>Description is: <b th:text="${event.description}"></b></div>
-        <div>date is: <b th:text="${event.date}"></b></div>
-        <div>Reminder before is: <b th:text="${event.reminderDays}"></b></div>
+        <div>Events are:</div>
+        <tr th:each="event: ${eventList}">
+            <td th:text="${event.eventName}" />
+            <td th:text="${event.description}" />
+        </tr>
     </body>
 </html>
-
-{% comment %} To iterate through array:
-https://www.baeldung.com/thymeleaf-arrays {% endcomment %}

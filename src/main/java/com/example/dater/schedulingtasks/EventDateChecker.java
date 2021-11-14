@@ -11,6 +11,7 @@ import com.example.dater.service.SendMailService;
 
 import com.example.dater.model.Event;
 import com.example.dater.service.EventService;
+import java.util.*;
 
 @Configuration
 public class EventDateChecker {
@@ -29,6 +30,7 @@ public class EventDateChecker {
     public void getEventData() throws MessagingException {
         eventList = eventService.getStorage();
         LocalDate currentDate = LocalDate.now();
+        List<Event> eventsToSendOut = new ArrayList<Event>();
         for (Event event : eventList) {
             if (Boolean.FALSE.equals(event.getReminder())) {
                 continue;
@@ -41,21 +43,18 @@ public class EventDateChecker {
 
             if (Boolean.TRUE
                     .equals(event.getAccountForYear() && currentDate.equals(eventReminderDate) && !sentStatus)) {
-                System.out.println("*** Email has been sent: " + event.getEventName());
-                sendMailService.sendMimeMail(event);
-                sentStatus = true;
-
+                eventsToSendOut.add(event);
             } else {
                 Boolean dayAndMonthMatch = (currentDate.getDayOfMonth() == eventReminderDate.getDayOfMonth()
                         && currentDate.getMonthValue() == eventReminderDate.getMonthValue());
 
                 if (Boolean.TRUE.equals(dayAndMonthMatch && !sentStatus)) {
-                    System.out.println("*** Email has been sent: " + event.getEventName());
-                    sendMailService.sendMimeMail(event);
-                    sentStatus = true;
+                    eventsToSendOut.add(event);
                 }
             }
         }
+        sendMailService.sendMimeMailList(eventsToSendOut);
+        System.out.println("*** Messages to send out " + eventsToSendOut.size());
     }
 
 }

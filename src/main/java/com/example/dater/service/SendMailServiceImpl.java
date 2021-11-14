@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 
 import com.example.dater.model.Event;
 import com.example.dater.model.Mail;
+import java.util.List;
 
 @Service
 public class SendMailServiceImpl implements SendMailService {
@@ -55,4 +56,21 @@ public class SendMailServiceImpl implements SendMailService {
         javaMailSender.send(mimeMessage);
 
     }
+
+    public void sendMimeMailList(List<Event> eventList) throws MessagingException {
+
+        javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+        Context context = new Context();
+        context.setVariable("eventList", eventList);
+        String process = templateEngine.process("welcome2", context);
+
+        helper.setText(process, true);
+        helper.setTo("iBlueman260@gmail.com");
+        helper.setSubject("Tulevad sündmused Listis!");
+
+        javaMailSender.send(mimeMessage);
+
+    }
+
 }
