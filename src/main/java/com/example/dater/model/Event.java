@@ -10,6 +10,15 @@ public class Event {
     private Boolean reminder;
     private Integer reminderDays;
     private String description;
+    private Boolean accountForYear;
+
+    public Boolean getAccountForYear() {
+        return accountForYear;
+    }
+
+    public void setAccountForYear(Boolean accountForYear) {
+        this.accountForYear = accountForYear;
+    }
 
     public String getEventName() {
         return eventName;
@@ -54,8 +63,9 @@ public class Event {
     @Override
     public String toString() {
         return String.format(
-                "Event[id=%s, eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s']", id,
-                eventName, date, reminder, reminderDays, description);
+                "Event[id=%s, eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s']",
+                id, eventName, date, reminder, reminderDays, description, accountForYear);
+
     }
 
 }

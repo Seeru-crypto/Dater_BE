@@ -2,10 +2,10 @@ package com.example.dater.service;
 
 import javax.mail.MessagingException;
 
-import com.example.dater.model.Mail;
+import com.example.dater.model.Event;
 
 public interface SendMailService {
-    void sendMail(Mail mail);
+    void sendMail();
 
-    void sendMailWithAttachments(Mail mail) throws MessagingException;
+    void sendMimeMail(Event event) throws MessagingException;
 }
