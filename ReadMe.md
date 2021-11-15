@@ -25,7 +25,7 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 
     -   `docker run -d --name=mongo -p 270717:27017 mongo`
 
--   To test the connection, a connection string can be used`mongodb://localhost:270717`
+-   To test the connection, a connection string can be used `mongodb://localhost:270717`
 
 3. Start Gradle server
 
@@ -40,12 +40,14 @@ Front end uses ports:
 
 ### ToDo:
 
--   [x] Server servers API endpoints
+-   [ ] Server servers API endpoints
     -   [x] GET events
         -   [x] with specific ID
     -   [x] POST Events
     -   [x] DELETE Event
     -   [x] UPDATE Event
+    -   [x] Add GetBy endpoints (Description, date, ect). 
+    -   [ ] Add data validation for POST requests.
 -   [x] During start-up server creates a custom schema to DB
 -   [x] Server can implement CRUD functionality to DB
 -   [x] Integrate React Application with Spring boot back-end
@@ -63,10 +65,14 @@ Front end uses ports:
                 (name of event, date)
         -   [ ] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
 -   [ ] Create admin object model.
--   [ ] Setup Heroku CI/CD pipeline
--   [ ] Add 80% test coverage
+-   [ ] Add Send email REST API endpoint.
+-   [ ] Add 66% test coverage
 -   [ ] Create server Dockerfile
 -   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+-   [ ] Publish
+    - [ ] Setup authentication module
+    - [ ] Setup MongoDB server
+    - [ ] Publish FE & BE in heroku. 
 
 ### MongoDB Database
 
