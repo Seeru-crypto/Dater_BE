@@ -20,10 +20,9 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 -   navigate to mongo docker folder
 
 -   To build the image
-    -   `docker build -t mongo .`
+    -   `docker pull mongo`
 -   To run the image
-
-    -   `docker run -d --name=mongo -p 270717:27017 mongo`
+    -   `docker run -d --name mongo -p 270717:27017 mongo`
 
 -   To test the connection, a connection string can be used `mongodb://localhost:270717`
 

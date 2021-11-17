@@ -1,5 +1,6 @@
 package com.example.dater;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 @EnableScheduling
+@Log4j2
 public class DaterApplication implements CommandLineRunner {
 
 	@Autowired
@@ -30,7 +34,8 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent1.setDescription("This is a description!");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(0);
-		defaultEvent1.setDate("2021-11-14T20:09:41.413Z");
+		String date = LocalDateTime.now().toString();
+		defaultEvent1.setDate(date);
 		defaultEvent1.setAccountForYear(false);
 
 		Event defaultEvent2 = new Event();
@@ -62,12 +67,10 @@ public class DaterApplication implements CommandLineRunner {
 		eventRepository.save(defaultEvent2);
 		eventRepository.save(defaultEvent3);
 		eventRepository.save(defaultEvent4);
-
-		System.out.println("------");
-		System.out.println("The following events were created.");
-
+		log.info("-------------------");
+		log.info("The following events were created.");
 		for (Event event : eventRepository.findAll()) {
-			System.out.println(event);
+			log.info("*** " + event.getEventName());
 		}
 
 	}
