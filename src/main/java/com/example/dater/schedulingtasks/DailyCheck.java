@@ -1,7 +1,9 @@
-package com.example.Dater_BE.schedulingtasks;
+package com.example.dater.schedulingtasks;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,20 +12,20 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class dailyCheck {
+public class DailyCheck {
     private EventDateChecker eventDateChecker;
 
     @Autowired
-    public dailyCheck(EventDateChecker eventDateChecker) {
+    public DailyCheck(EventDateChecker eventDateChecker) {
         this.eventDateChecker = eventDateChecker;
     }
 
-    private static final Logger log = LoggerFactory.getLogger(dailyCheck.class);
+    private static final Logger log = LoggerFactory.getLogger(DailyCheck.class);
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
-    public void reportCurrentTime() {
+    @Scheduled(fixedRate = 10000)
+    public void reportCurrentTime() throws MessagingException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");
         eventDateChecker.getEventData();
     }
