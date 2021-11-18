@@ -58,7 +58,6 @@ public class SendMailServiceImpl implements SendMailService {
 
     }
 
-    @Profile("live")
     public void sendMimeMailList(List<Event> eventList) throws MessagingException {
 
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
