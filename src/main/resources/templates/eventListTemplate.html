@@ -51,23 +51,4 @@
             <a href="google.com">Events table</a>
         </div>
     </body>
-
-    <script th:inline="javascript">
-            var keys = Object.keys( ${eventList});
-        var len = keys.length
-
-                console.log( len);
-                //var newDate = "date is " +  [[${event.date}]];
-                //console.log(newDate);
-
-                            function getStandardDate(date) {
-
-
-                                number day = new Date (date).getDate();
-                                number month = new Date (date).getMonth();
-                                number year = new Date (date).getYear();
-                                const result = (day+" - "+month+" - "+year);
-                                return result;
-                    }
-    </script>
 </html>
