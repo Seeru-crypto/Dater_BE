@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Email</title>
+
+        <style>
+            table {
+                width: 100%;
+                border: 1px solid #000;
+            }
+
+            th,
+            td {
+                width: 25%;
+                text-align: left;
+                vertical-align: top;
+                border: 1px solid #000;
+                border-collapse: collapse;
+                padding: 0.3em;
+                caption-side: bottom;
+            }
+
+            caption {
+                padding: 0.3em;
+            }
+        </style>
+    </head>
+    <body>
+        <div>Events are:</div>
+        <table aria-describedby="Shows events which need to be notified!">
+            <th id="eventName">Event name:</th>
+            <th id="eventDate">Event date:</th>
+            <th id="eventDesc">Event description:</th>
+            <tr th:each="event: ${eventList}">
+                <td th:text="${event.eventName}" />
+                <td th:text="${event.date}" />
+                <td th:text="${event.description}" />
+            </tr>
+        </table>
+        <div>
+            <a href="google.com">Events table</a>
+        </div>
+    </body>
+
+    <script th:inline="javascript">
+            var keys = Object.keys( ${eventList});
+        var len = keys.length
+
+                console.log( len);
+                //var newDate = "date is " +  [[${event.date}]];
+                //console.log(newDate);
+
+                            function getStandardDate(date) {
+
+
+                                number day = new Date (date).getDate();
+                                number month = new Date (date).getMonth();
+                                number year = new Date (date).getYear();
+                                const result = (day+" - "+month+" - "+year);
+                                return result;
+                    }
+    </script>
+</html>

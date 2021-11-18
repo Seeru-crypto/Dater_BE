@@ -21,6 +21,7 @@ import java.util.*;
 public class EventDateChecker {
     private final EventService eventService;
     private SendMailService sendMailService;
+    private Boolean sentStatus = false;
 
     List<Event> eventList;
 
@@ -46,22 +47,27 @@ public class EventDateChecker {
             Boolean dayAndMonthMatch = (currentDate.getDayOfMonth() == eventReminderDate.getDayOfMonth()
                     && currentDate.getMonthValue() == eventReminderDate.getMonthValue());
             Boolean yearsMatch = (currentDate.getYear() == eventReminderDate.getYear());
+            System.out.println("Event " + event.getEventName() + " has a year match of " + yearsMatch);
 
-            if (Boolean.TRUE
-                    .equals(event.getAccountForYear() && yearsMatch && dayAndMonthMatch)) {
+            if (Boolean.TRUE.equals(event.getAccountForYear() && yearsMatch && dayAndMonthMatch)) {
                 eventsToSendOut.add(event);
             }
             if (Boolean.TRUE.equals(!(event.getAccountForYear())) && Boolean.TRUE.equals(dayAndMonthMatch)) {
                 eventsToSendOut.add(event);
             }
         }
-        //sendMailService.sendMimeMailList(eventsToSendOut);
-        log.info("*** Messages to send out " + eventsToSendOut.size());
+
+        if (!sentStatus && eventsToSendOut.size() != 0) {
+            sendMailService.sendMimeMailList(eventsToSendOut);
+            System.out.println("Events that were sent out " + eventsToSendOut.size());
+            sentStatus = true;
+        }
+        // log.info("*** Messages to send out " + eventsToSendOut.size());
 
         if (eventList.isEmpty()) {
-            log.info("****** Messages to send out: ");
+            // log.info("****** Messages to send out: ");
             for (Event event : eventsToSendOut) {
-                log.info(event.getEventName());
+                // log.info(event.getEventName());
             }
         }
     }
