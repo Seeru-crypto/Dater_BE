@@ -47,7 +47,6 @@ public class EventDateChecker {
             Boolean dayAndMonthMatch = (currentDate.getDayOfMonth() == eventReminderDate.getDayOfMonth()
                     && currentDate.getMonthValue() == eventReminderDate.getMonthValue());
             Boolean yearsMatch = (currentDate.getYear() == eventReminderDate.getYear());
-            System.out.println("Event " + event.getEventName() + " has a year match of " + yearsMatch);
 
             if (Boolean.TRUE.equals(event.getAccountForYear() && yearsMatch && dayAndMonthMatch)) {
                 eventsToSendOut.add(event);
@@ -58,17 +57,16 @@ public class EventDateChecker {
         }
 
         if (!sentStatus && eventsToSendOut.size() != 0) {
+
+            for (int a = 0; a < eventsToSendOut.size(); a++) {
+                Event event = eventsToSendOut.get(a);
+                event.setDate(event.getDate().substring(0, 10));
+                eventsToSendOut.set(a, event);
+            }
+
             sendMailService.sendMimeMailList(eventsToSendOut);
             System.out.println("Events that were sent out " + eventsToSendOut.size());
             sentStatus = true;
-        }
-        // log.info("*** Messages to send out " + eventsToSendOut.size());
-
-        if (eventList.isEmpty()) {
-            // log.info("****** Messages to send out: ");
-            for (Event event : eventsToSendOut) {
-                // log.info(event.getEventName());
-            }
         }
     }
 

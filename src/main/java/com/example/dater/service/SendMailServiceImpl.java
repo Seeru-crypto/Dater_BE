@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 import com.example.dater.model.Event;
 import com.example.dater.model.Mail;
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class SendMailServiceImpl implements SendMailService {
@@ -67,7 +68,11 @@ public class SendMailServiceImpl implements SendMailService {
 
         helper.setText(process, true);
         helper.setTo("iBlueman260@gmail.com");
-        helper.setSubject("Tulevad sündmused Listis!");
+        LocalDate currentDate = LocalDate.now();
+
+        String subject = ("Event report: " + currentDate);
+
+        helper.setSubject(subject);
 
         javaMailSender.send(mimeMessage);
 
