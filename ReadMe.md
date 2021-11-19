@@ -4,6 +4,8 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 
 ---
 
+https://www.bezkoder.com/spring-boot-mongodb-pagination/
+
 ## Setup
 
 1.  On first time setup, user needs to configure email aadres, which is used to send out emails.
@@ -22,6 +24,7 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 -   To build the image
     -   `docker pull mongo`
 -   To run the image
+
     -   `docker run -d --name mongo -p 270717:27017 mongo`
 
 -   To test the connection, a connection string can be used `mongodb://localhost:270717`
@@ -45,7 +48,7 @@ Front end uses ports:
     -   [x] POST Events
     -   [x] DELETE Event
     -   [x] UPDATE Event
-    -   [x] Add GetBy endpoints (Description, date, ect). 
+    -   [x] Add GetBy endpoints (Description, date, ect).
     -   [ ] Add data validation for POST requests.
 -   [x] During start-up server creates a custom schema to DB
 -   [x] Server can implement CRUD functionality to DB
@@ -69,9 +72,9 @@ Front end uses ports:
 -   [ ] Create server Dockerfile
 -   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
 -   [ ] Publish
-    - [ ] Setup authentication module
-    - [ ] Setup MongoDB server
-    - [ ] Publish FE & BE in heroku. 
+    -   [ ] Setup authentication module
+    -   [ ] Setup MongoDB server
+    -   [ ] Publish FE & BE in heroku.
 
 ### MongoDB Database
 
