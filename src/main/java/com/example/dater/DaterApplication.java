@@ -28,24 +28,32 @@ public class DaterApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		eventRepository.deleteAll();
+		String date = LocalDateTime.now().toString();
 
 		Event defaultEvent1 = new Event();
-		defaultEvent1.setEventName("Send event 1");
-		defaultEvent1.setDescription("This is a test event, which should be shown!");
+		defaultEvent1.setEventName("Kohting Komeedis");
+		defaultEvent1.setDescription("Algab 18.00, võta märkmik kaasa. Osta sümboolne kink");
 		defaultEvent1.setReminder(true);
-		defaultEvent1.setReminderDays(0);
-		String date = LocalDateTime.now().toString();
-		defaultEvent1.setDate(date);
+		defaultEvent1.setReminderDays(1);
+		defaultEvent1.setDate("2021-11-21T16:03:50.623343200");
 		defaultEvent1.setAccountForYear(true);
 
 		Event defaultEvent2 = new Event();
-		defaultEvent2.setEventName("Doesnt send email");
+		defaultEvent2.setEventName("Kohting Komeedis");
 		defaultEvent2.setDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid."
 				+ "Aperiam reprehenderit suscipit dolor unde dolorem aspernatur nisi.");
 		defaultEvent2.setReminder(false);
 		defaultEvent2.setReminderDays(0);
 		defaultEvent2.setDate("2021-11-07T15:05:53.600Z");
 		defaultEvent2.setAccountForYear(true);
+
+		Event defaultEvent5 = new Event();
+		defaultEvent5.setEventName("email send event!");
+		defaultEvent5.setDescription("This is a description!");
+		defaultEvent5.setReminder(false);
+		defaultEvent5.setReminderDays(0);
+		defaultEvent5.setDate(date);
+		defaultEvent5.setAccountForYear(false);
 
 		Event defaultEvent3 = new Event();
 		defaultEvent3.setEventName("Doesnt send email 2");
@@ -56,17 +64,19 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent3.setAccountForYear(false);
 
 		Event defaultEvent4 = new Event();
-		defaultEvent4.setEventName("Send event 2");
+		defaultEvent4.setEventName("Osta ISPA aktsiaid");
 		defaultEvent4.setDescription("This is the second event, which should be sent!");
 		defaultEvent4.setReminder(true);
-		defaultEvent4.setReminderDays(0);
-		defaultEvent4.setDate(date);
+		defaultEvent4.setReminderDays(7);
+		defaultEvent4.setDate("2021-11-27T21:15:48.976Z");
 		defaultEvent4.setAccountForYear(false);
 
 		eventRepository.save(defaultEvent1);
 		eventRepository.save(defaultEvent2);
 		eventRepository.save(defaultEvent3);
 		eventRepository.save(defaultEvent4);
+		eventRepository.save(defaultEvent5);
+
 		// log.info("-------------------");
 		// log.info("The following events were created.");
 		for (Event event : eventRepository.findAll()) {

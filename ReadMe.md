@@ -4,6 +4,8 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 
 ---
 
+https://devcenter.heroku.com/articles/config-vars
+
 https://www.bezkoder.com/spring-boot-mongodb-pagination/
 
 ## Setup

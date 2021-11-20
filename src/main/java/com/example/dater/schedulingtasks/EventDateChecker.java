@@ -49,13 +49,18 @@ public class EventDateChecker {
             Boolean yearsMatch = (currentDate.getYear() == eventReminderDate.getYear());
 
             if (Boolean.TRUE.equals(event.getAccountForYear() && yearsMatch && dayAndMonthMatch)) {
+                System.out.println("Added in 1 : " + event);
+
                 eventsToSendOut.add(event);
             }
             if (Boolean.TRUE.equals(!(event.getAccountForYear())) && Boolean.TRUE.equals(dayAndMonthMatch)) {
+                System.out.println("Added in 2 : " + event);
+
                 eventsToSendOut.add(event);
             }
         }
 
+        System.out.println("events to send out: " + eventsToSendOut.size());
         if (!sentStatus && eventsToSendOut.size() != 0) {
 
             for (int a = 0; a < eventsToSendOut.size(); a++) {
