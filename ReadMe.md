@@ -73,10 +73,11 @@ Front end uses ports:
 -   [ ] Add 66% test coverage
 -   [ ] Create server Dockerfile
 -   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+-   [ ] Change MongoDB admin password!
 -   [ ] Publish
-    -   [ ] Setup authentication module
-    -   [ ] Setup MongoDB server
+    -   [x] Setup MongoDB server
     -   [ ] Publish FE & BE in heroku.
+-   [ ] Setup authentication module
 
 ### MongoDB Database
 
