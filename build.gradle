@@ -38,6 +38,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
+bootJar {
+    archiveClassifier.set('boot')
+}
+
+jar {
+    archiveClassifier.set('')
+}
 
 test {
 	useJUnitPlatform()
