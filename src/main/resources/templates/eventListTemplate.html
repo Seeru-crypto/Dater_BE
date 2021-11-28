@@ -43,11 +43,11 @@
         <table aria-describedby="Shows events which need to be notified!">
             <th id="eventName">Event name:</th>
             <th id="eventDate">Event date:</th>
-            <th id="eventDesc">Event description:</th>
+            <th id="eventDesc">Event eventDescription:</th>
             <tr th:each="event: ${eventList}">
                 <td th:text="${event.eventName}" />
                 <td th:text="${event.date}" />
-                <td th:text="${event.description}" />
+                <td th:text="${event.eventDescription}" />
             </tr>
         </table>
         <div>

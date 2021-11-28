@@ -32,7 +32,7 @@ public class DaterApplication implements CommandLineRunner {
 
 		Event defaultEvent1 = new Event();
 		defaultEvent1.setEventName("Kohting Komeedis");
-		defaultEvent1.setDescription("Algab 18.00, võta märkmik kaasa. Osta sümboolne kink");
+		defaultEvent1.seteventDescription("Algab 18.00, võta märkmik kaasa. Osta sümboolne kink");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(1);
 		defaultEvent1.setDate("2021-11-21T16:03:50.623343200");
@@ -40,7 +40,7 @@ public class DaterApplication implements CommandLineRunner {
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setEventName("Kohting Komeedis");
-		defaultEvent2.setDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid."
+		defaultEvent2.seteventDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid."
 				+ "Aperiam reprehenderit suscipit dolor unde dolorem aspernatur nisi.");
 		defaultEvent2.setReminder(false);
 		defaultEvent2.setReminderDays(0);
@@ -49,7 +49,7 @@ public class DaterApplication implements CommandLineRunner {
 
 		Event defaultEvent5 = new Event();
 		defaultEvent5.setEventName("email send event!");
-		defaultEvent5.setDescription("This is a description!");
+		defaultEvent5.seteventDescription("This is a eventDescription!");
 		defaultEvent5.setReminder(false);
 		defaultEvent5.setReminderDays(0);
 		defaultEvent5.setDate(date);
@@ -57,7 +57,7 @@ public class DaterApplication implements CommandLineRunner {
 
 		Event defaultEvent3 = new Event();
 		defaultEvent3.setEventName("Doesnt send email 2");
-		defaultEvent3.setDescription(" ");
+		defaultEvent3.seteventDescription(" ");
 		defaultEvent3.setReminder(true);
 		defaultEvent3.setReminderDays(12);
 		defaultEvent3.setDate("2021-01-01T21:15:48.976Z");
@@ -65,7 +65,7 @@ public class DaterApplication implements CommandLineRunner {
 
 		Event defaultEvent4 = new Event();
 		defaultEvent4.setEventName("Osta ISPA aktsiaid");
-		defaultEvent4.setDescription("This is the second event, which should be sent!");
+		defaultEvent4.seteventDescription("This is the second event, which should be sent!");
 		defaultEvent4.setReminder(true);
 		defaultEvent4.setReminderDays(7);
 		defaultEvent4.setDate("2021-11-27T21:15:48.976Z");

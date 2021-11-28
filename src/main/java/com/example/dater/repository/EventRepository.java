@@ -19,6 +19,6 @@ public interface EventRepository extends MongoRepository<Event, String> {
 
     List<Event> findByReminder(Boolean reminder);
 
-    List<Event> findByDescription(String description);
+    List<Event> findByeventDescription(String eventDescription);
 
 }

@@ -50,7 +50,7 @@ Front end uses ports:
     -   [x] POST Events
     -   [x] DELETE Event
     -   [x] UPDATE Event
-    -   [x] Add GetBy endpoints (Description, date, ect).
+    -   [x] Add GetBy endpoints (eventDescription, date, ect).
     -   [ ] Add data validation for POST requests.
 -   [x] During start-up server creates a custom schema to DB
 -   [x] Server can implement CRUD functionality to DB

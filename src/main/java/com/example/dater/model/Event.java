@@ -9,7 +9,7 @@ public class Event {
     private String date;
     private Boolean reminder;
     private Integer reminderDays;
-    private String description;
+    private String eventDescription;
     private Boolean accountForYear;
 
     public String getId() {
@@ -60,19 +60,19 @@ public class Event {
         this.reminderDays = reminderDays;
     }
 
-    public String getDescription() {
-        return description;
+    public String geteventDescription() {
+        return eventDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void seteventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Event[id='%s', eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s']",
-                id, eventName, date, reminder, reminderDays, description, accountForYear);
+                "Event[id='%s', eventName='%s', date='%s', reminder='%s', reminderDays='%s', eventDescription='%s', accountForYear='%s']",
+                id, eventName, date, reminder, reminderDays, eventDescription, accountForYear);
 
     }
 
