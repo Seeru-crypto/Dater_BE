@@ -12,6 +12,14 @@ public class Event {
     private String description;
     private Boolean accountForYear;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Boolean getAccountForYear() {
         return accountForYear;
     }
@@ -63,7 +71,7 @@ public class Event {
     @Override
     public String toString() {
         return String.format(
-                "Event[id=%s, eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s']",
+                "Event[id='%s', eventName='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s']",
                 id, eventName, date, reminder, reminderDays, description, accountForYear);
 
     }
