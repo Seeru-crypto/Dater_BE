@@ -27,6 +27,6 @@ public class DailyCheck {
     @Scheduled(fixedRate = 10000)
     public void reportCurrentTime() throws MessagingException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");
-        eventDateChecker.getEventData();
+        eventDateChecker.checkEventDates();
     }
 }

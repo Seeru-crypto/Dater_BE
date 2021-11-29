@@ -31,7 +31,7 @@ public class EventDateChecker {
         this.sendMailService = sendMailService;
     }
 
-    public void getEventData() throws MessagingException {
+    public void checkEventDates() throws MessagingException {
         eventList = eventService.getStorage();
         LocalDate currentDate = LocalDate.now();
         List<Event> eventsToSendOut = new ArrayList<>();

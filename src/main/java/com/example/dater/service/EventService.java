@@ -21,4 +21,5 @@ public class EventService {
     public List<Event> getStorage() {
         return eventRepository.findAll();
     }
+
 }
