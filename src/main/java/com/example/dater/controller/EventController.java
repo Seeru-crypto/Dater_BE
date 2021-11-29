@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.dater.schedulingtasks.EventDateChecker;
+import javax.mail.MessagingException;
 
 @CrossOrigin
 @RestController
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
 
     private final EventService eventService;
+    private final EventDateChecker eventDateChecker;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, EventDateChecker eventDateChecker) {
         this.eventService = eventService;
+        this.eventDateChecker = eventDateChecker;
     }
 
     @GetMapping("/event")
@@ -28,4 +32,12 @@ public class EventController {
         return eventService.getStorage();
     }
 
+    @GetMapping("/checkEvents")
+    public void checkItems() {
+        try {
+            eventDateChecker.checkEventDates();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 }
