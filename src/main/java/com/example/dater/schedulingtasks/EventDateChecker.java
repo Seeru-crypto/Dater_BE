@@ -61,7 +61,7 @@ public class EventDateChecker {
         }
 
         System.out.println("events to send out: " + eventsToSendOut.size());
-        if (!sentStatus && eventsToSendOut.size() != 0) {
+        if (eventsToSendOut.size() != 0) {
 
             for (int a = 0; a < eventsToSendOut.size(); a++) {
                 Event event = eventsToSendOut.get(a);
@@ -69,9 +69,10 @@ public class EventDateChecker {
                 eventsToSendOut.set(a, event);
             }
 
+            System.out.println("Events that were sent out " + eventsToSendOut);
+
             sendMailService.sendMimeMailList(eventsToSendOut);
             System.out.println("Events that were sent out " + eventsToSendOut.size());
-            sentStatus = true;
         }
     }
 

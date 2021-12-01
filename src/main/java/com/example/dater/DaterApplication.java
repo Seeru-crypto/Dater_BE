@@ -31,11 +31,11 @@ public class DaterApplication implements CommandLineRunner {
 		String date = LocalDateTime.now().toString();
 
 		Event defaultEvent1 = new Event();
-		defaultEvent1.setEventName("Kohting Komeedis");
-		defaultEvent1.seteventDescription("Algab 18.00, võta märkmik kaasa. Osta sümboolne kink");
+		defaultEvent1.setEventName("Send message");
+		defaultEvent1.seteventDescription("desc");
 		defaultEvent1.setReminder(true);
-		defaultEvent1.setReminderDays(1);
-		defaultEvent1.setDate("2021-11-21T16:03:50.623343200");
+		defaultEvent1.setReminderDays(0);
+		defaultEvent1.setDate("2021-12-01T16:03:50.623343200");
 		defaultEvent1.setAccountForYear(true);
 
 		Event defaultEvent2 = new Event();
