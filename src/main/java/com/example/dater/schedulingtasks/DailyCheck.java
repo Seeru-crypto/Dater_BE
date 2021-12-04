@@ -24,7 +24,7 @@ public class DailyCheck {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(fixedRate = 1800000)
     public void reportCurrentTime() throws MessagingException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");
         eventDateChecker.checkEventDates();

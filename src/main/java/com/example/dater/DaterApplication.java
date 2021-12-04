@@ -39,7 +39,7 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent1.setAccountForYear(true);
 
 		Event defaultEvent2 = new Event();
-		defaultEvent2.setEventName("Kohting Komeedis");
+		defaultEvent2.setEventName("Maratoni võistlus");
 		defaultEvent2.seteventDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid."
 				+ "Aperiam reprehenderit suscipit dolor unde dolorem aspernatur nisi.");
 		defaultEvent2.setReminder(false);
@@ -64,7 +64,7 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent3.setAccountForYear(false);
 
 		Event defaultEvent4 = new Event();
-		defaultEvent4.setEventName("Osta ISPA aktsiaid");
+		defaultEvent4.setEventName("Buy ISPA stocks");
 		defaultEvent4.seteventDescription("This is the second event, which should be sent!");
 		defaultEvent4.setReminder(true);
 		defaultEvent4.setReminderDays(7);

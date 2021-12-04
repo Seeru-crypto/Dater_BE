@@ -55,7 +55,6 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setSubject("Tulevad sündmused!");
 
         javaMailSender.send(mimeMessage);
-
     }
 
     public void sendMimeMailList(List<Event> eventList) throws MessagingException {
@@ -75,7 +74,5 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setSubject(subject);
 
         javaMailSender.send(mimeMessage);
-
     }
-
 }
