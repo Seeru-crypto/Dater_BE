@@ -8,8 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = {"http://localhost:4001", "http://localhost:3000"})
-
+@CrossOrigin
 @RepositoryRestResource(collectionResourceRel = "event", path = "event")
 
 public interface EventRepository extends MongoRepository<Event, String> {
@@ -20,6 +19,6 @@ public interface EventRepository extends MongoRepository<Event, String> {
 
     List<Event> findByReminder(Boolean reminder);
 
-    List<Event> findByDescription(String description);
+    List<Event> findByeventDescription(String eventDescription);
 
 }

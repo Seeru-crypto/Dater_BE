@@ -18,6 +18,9 @@
                 width: 100%;
                 border: 1px solid #000;
             }
+            .tableRef {
+                padding-top: 1rem;
+            }
 
             th,
             td {
@@ -40,15 +43,15 @@
         <table aria-describedby="Shows events which need to be notified!">
             <th id="eventName">Event name:</th>
             <th id="eventDate">Event date:</th>
-            <th id="eventDesc">Event description:</th>
             <tr th:each="event: ${eventList}">
                 <td th:text="${event.eventName}" />
                 <td th:text="${event.date}" />
-                <td th:text="${event.description}" />
             </tr>
         </table>
         <div>
-            <a href="google.com">Events table</a>
+            <a class="tableRef" href="http://localhost:4001/eventList"
+                >Events table</a
+            >
         </div>
     </body>
 </html>
