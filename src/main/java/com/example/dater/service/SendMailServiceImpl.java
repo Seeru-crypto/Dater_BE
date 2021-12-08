@@ -1,6 +1,5 @@
 package com.example.dater.service;
 
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.thymeleaf.context.Context;
 import javax.mail.MessagingException;
 
 import com.example.dater.model.Event;
-import com.example.dater.model.Mail;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -23,22 +21,6 @@ public class SendMailServiceImpl implements SendMailService {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
 
-    }
-
-    @Override
-    public void sendMail() {
-
-        Mail mail = new Mail();
-
-        mail.setRecipient("..@gmail.com");
-        mail.setSubject("subject");
-        mail.setMessage("message");
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(mail.getRecipient(), mail.getRecipient());
-        msg.setSubject(mail.getSubject());
-        msg.setText(mail.getMessage());
-        javaMailSender.send(msg);
     }
 
     @Override

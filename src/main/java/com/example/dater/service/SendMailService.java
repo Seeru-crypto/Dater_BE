@@ -6,7 +6,6 @@ import com.example.dater.model.Event;
 import java.util.List;
 
 public interface SendMailService {
-    void sendMail();
 
     void sendMimeMail(Event event) throws MessagingException;
 

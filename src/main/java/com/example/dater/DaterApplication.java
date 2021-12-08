@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.dater.model.Event;
+import com.example.dater.model.Settings;
 import com.example.dater.repository.EventRepository;
+import com.example.dater.repository.SettingRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +23,9 @@ public class DaterApplication implements CommandLineRunner {
 	@Autowired
 	private EventRepository eventRepository;
 
+	@Autowired
+	private SettingRepository settingRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DaterApplication.class, args);
 	}
@@ -28,6 +33,8 @@ public class DaterApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		eventRepository.deleteAll();
+		settingRepository.deleteAll();
+
 		String date = LocalDateTime.now().toString();
 
 		Event defaultEvent1 = new Event();
@@ -76,6 +83,13 @@ public class DaterApplication implements CommandLineRunner {
 		eventRepository.save(defaultEvent3);
 		eventRepository.save(defaultEvent4);
 		eventRepository.save(defaultEvent5);
+
+		Settings setting = new Settings();
+		setting.setCheckInterval(150);
+		setting.setEmailAddress("email@gmail.com");
+		setting.setSendEmails(true);
+		setting.setSendSMS(false);
+		settingRepository.save(setting);
 
 		// log.info("-------------------");
 		// log.info("The following events were created.");

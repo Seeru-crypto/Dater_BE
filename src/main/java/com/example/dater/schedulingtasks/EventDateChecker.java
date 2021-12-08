@@ -21,7 +21,6 @@ import java.util.*;
 public class EventDateChecker {
     private final EventService eventService;
     private SendMailService sendMailService;
-    private Boolean sentStatus = false;
 
     List<Event> eventList;
 
