@@ -57,7 +57,7 @@ public class DaterApplication implements CommandLineRunner {
 		Event defaultEvent5 = new Event();
 		defaultEvent5.setEventName("email send event!");
 		defaultEvent5.seteventDescription("This is a eventDescription!");
-		defaultEvent5.setReminder(false);
+		defaultEvent5.setReminder(true);
 		defaultEvent5.setReminderDays(0);
 		defaultEvent5.setDate(date);
 		defaultEvent5.setAccountForYear(false);
@@ -87,7 +87,7 @@ public class DaterApplication implements CommandLineRunner {
 		Settings setting = new Settings();
 		setting.setCheckInterval(150);
 		setting.setEmailAddress("email@gmail.com");
-		setting.setSendEmails(true);
+		setting.setSendEmails(false);
 		setting.setSendSMS(false);
 		settingRepository.save(setting);
 
