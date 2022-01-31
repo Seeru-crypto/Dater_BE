@@ -1,6 +1,7 @@
 package com.example.dater.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.dater.model.Event;
 
@@ -16,6 +17,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
     List<Event> findByEventName(String eventName);
 
     List<Event> findByDate(String date);
+
+    Optional<Event> findById(String id);
 
     List<Event> findByReminder(Boolean reminder);
 

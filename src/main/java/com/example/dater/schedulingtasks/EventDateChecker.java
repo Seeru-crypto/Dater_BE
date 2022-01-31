@@ -61,17 +61,12 @@ public class EventDateChecker {
 
         System.out.println("events to send out: " + eventsToSendOut.size());
         if (eventsToSendOut.size() != 0) {
-
             for (int a = 0; a < eventsToSendOut.size(); a++) {
                 Event event = eventsToSendOut.get(a);
                 event.setDate(event.getDate().substring(0, 10));
                 eventsToSendOut.set(a, event);
             }
-
-            System.out.println("Events that were sent out " + eventsToSendOut);
-
             sendMailService.sendMimeMailList(eventsToSendOut);
-            System.out.println("Events that were sent out " + eventsToSendOut.size());
         }
     }
 

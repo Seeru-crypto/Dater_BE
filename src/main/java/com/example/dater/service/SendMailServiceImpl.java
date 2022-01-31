@@ -5,7 +5,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import com.example.dater.service.SettingsService;
 import com.example.dater.model.Settings;
 
 import javax.mail.MessagingException;
@@ -48,12 +47,17 @@ public class SendMailServiceImpl implements SendMailService {
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         List<Settings> list = settingService.getSettings();
         String emailAddressTo = "";
+        Boolean emailToggle = false;
         try {
             emailAddressTo = list.get(0).getEmailAddress();
+            emailToggle = list.get(0).getSendEmails();
         } catch (Exception e) {
             System.out.println("error has occured " + e);
         }
-        // String emailAddressTo = list.get(0).getEmailAddress();
+        if (!emailToggle) {
+            System.out.println("Emails are not enabled");
+            return;
+        }
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         Context context = new Context();
         context.setVariable("eventList", eventList);
@@ -64,14 +68,8 @@ public class SendMailServiceImpl implements SendMailService {
 
         helper.setTo(emailAddressTo);
         LocalDate currentDate = LocalDate.now();
-
         String subject = ("Event report: " + currentDate);
-
         helper.setSubject(subject);
-
-        Boolean sendEmailToggle = list.get(0).getSendEmails();
-
-        if (sendEmailToggle)
-            javaMailSender.send(mimeMessage);
+        javaMailSender.send(mimeMessage);
     }
 }
