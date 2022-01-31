@@ -36,18 +36,19 @@ public class SendMailServiceImpl implements SendMailService {
         String process = templateEngine.process("welcome", context);
 
         helper.setText(process, true);
-        helper.setTo("iBlueman260@gmail.com");
+        helper.setTo("email@gmail.com");
         helper.setSubject("Tulevad sündmused!");
 
         javaMailSender.send(mimeMessage);
     }
 
     public void sendMimeMailList(List<Event> eventList) throws MessagingException {
+        String emailAddressTo = "";
+        Boolean emailToggle = false;
 
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         List<Settings> list = settingService.getSettings();
-        String emailAddressTo = "";
-        Boolean emailToggle = false;
+
         try {
             emailAddressTo = list.get(0).getEmailAddress();
             emailToggle = list.get(0).getSendEmails();
@@ -61,6 +62,8 @@ public class SendMailServiceImpl implements SendMailService {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         Context context = new Context();
         context.setVariable("eventList", eventList);
+
+        // ToDo make eventListTemplate configurable from front end!
         String process = templateEngine.process("eventListTemplate", context);
 
         helper.setText(process, true);
