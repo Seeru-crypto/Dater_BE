@@ -2,9 +2,7 @@ package com.example.dater.schedulingtasks;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.mail.MessagingException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,11 @@ public class DailyCheck {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
+    private long converter(long min){
+        return (min * 60000);
+    }
+
+    // ToDo make schedule rate dynamic and make a ms
     @Scheduled(fixedRate = 1800000)
     public void reportCurrentTime() throws MessagingException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");
