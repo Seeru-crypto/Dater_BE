@@ -63,7 +63,6 @@ public class SendMailServiceImpl implements SendMailService {
         Context context = new Context();
         context.setVariable("eventList", eventList);
 
-        // ToDo make eventListTemplate configurable from front end!
         String process = templateEngine.process("eventListTemplate", context);
 
         helper.setText(process, true);

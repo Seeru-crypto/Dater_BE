@@ -26,7 +26,7 @@ public class DailyCheck {
         return (min * 60000);
     }
 
-    // ToDo make schedule rate dynamic and make a ms
+    // ToDo Lisa fixrate App property faili
     @Scheduled(fixedRate = 1800000)
     public void reportCurrentTime() throws MessagingException {
         log.info(dateFormat.format(new Date()), " : Checking event dates");

@@ -32,7 +32,6 @@
                 padding: 0.3em;
                 caption-side: bottom;
             }
-
             caption {
                 padding: 0.3em;
             }
@@ -44,8 +43,8 @@
             <th id="eventName">Event name:</th>
             <th id="eventDate">Event date:</th>
             <tr th:each="event: ${eventList}">
-                <td th:text="${event.eventName}" />
-                <td th:text="${event.date}" />
+                <td th:text="${event.eventName}"></td>
+                <td th:text="${event.date}"></td>
             </tr>
         </table>
         <div>
