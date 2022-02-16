@@ -1,13 +1,12 @@
 # Dater Back-end
 
-This is the Dater project Back-end server. It is built using Spring Boot, thymeleaf and implements basic CRUD functionality, checks all the events in the database daily and if needed sends out a daily report incomming events to the user.
+This is the Dater project Back-end server. It is built using Spring Boot, thymeleaf and implements basic CRUD functionality, checks all the events in the database daily and if needed sends out a daily report incoming events to the user.
+
+[Data validation is spring](https://www.baeldung.com/spring-boot-bean-validation)
+
 
 ---
-
-https://devcenter.heroku.com/articles/config-vars
-
-https://www.bezkoder.com/spring-boot-mongodb-pagination/
-
+// ToDo update readme
 ## Setup
 
 1.  On first time setup, user needs to configure email aadres, which is used to send out emails.
@@ -21,15 +20,12 @@ https://www.bezkoder.com/spring-boot-mongodb-pagination/
 
 2.  Setup mongoDb docker
 
--   navigate to mongo docker folder
-
--   To build the image
-    -   `docker pull mongo`
--   To run the image
-
-    -   `docker run -d --name mongo -p 270717:27017 mongo`
-
--   To test the connection, a connection string can be used `mongodb://localhost:270717`
+   - navigate to mongo docker folder
+   - To build the image
+       -   `docker pull mongo`
+   - To run the image
+       -   `docker run -d --name mongo -p 270717:27017 mongo`
+   - To test the connection, a connection string can be used `mongodb://localhost:270717`
 
 3. Start Gradle server
 
