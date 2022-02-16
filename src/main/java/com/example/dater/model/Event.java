@@ -2,13 +2,23 @@ package com.example.dater.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Event {
     @Id
     private String id;
+    @NotBlank(message = "Name is mandatory")
+    @Size(min = 1, max = 25, message = "Name is mandatory")
     private String eventName;
     private String date;
+    @NotNull
     private Boolean reminder;
+    @Max(31)
     private Integer reminderDays;
+    @Size(min = 1, max = 25, message = "Desc is mandatory")
     private String eventDescription;
     private Boolean accountForYear;
 
