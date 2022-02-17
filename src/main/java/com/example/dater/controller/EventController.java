@@ -27,7 +27,7 @@ public class EventController {
         this.eventDateChecker = eventDateChecker;
     }
 
-    @GetMapping("/event")
+    @GetMapping("/events")
     public List<Event> getItems() {
         return eventService.getStorage();
     }

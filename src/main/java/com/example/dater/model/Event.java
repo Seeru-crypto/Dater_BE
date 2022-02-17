@@ -18,7 +18,6 @@ public class Event {
     private Boolean reminder;
     @Max(31)
     private Integer reminderDays;
-    @Size(min = 1, max = 25, message = "Desc is mandatory")
     private String eventDescription;
     private Boolean accountForYear;
 

@@ -1,27 +1,12 @@
 package com.example.dater.repository;
 
-import java.util.List;
+import com.example.dater.model.Event;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.util.Optional;
 
-import com.example.dater.model.Event;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-@CrossOrigin
-@RepositoryRestResource(collectionResourceRel = "event", path = "event")
 
 public interface EventRepository extends MongoRepository<Event, String> {
 
-    List<Event> findByEventName(String eventName);
-
-    List<Event> findByDate(String date);
-
     Optional<Event> findById(String id);
-
-    List<Event> findByReminder(Boolean reminder);
-
-    List<Event> findByeventDescription(String eventDescription);
-
 }

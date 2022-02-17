@@ -12,11 +12,13 @@ import com.example.dater.repository.SettingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.time.LocalDateTime;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableSwagger2
 @Log4j2
 public class DaterApplication implements CommandLineRunner {
 

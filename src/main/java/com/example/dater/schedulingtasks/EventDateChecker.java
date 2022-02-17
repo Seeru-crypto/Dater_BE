@@ -67,6 +67,7 @@ public class EventDateChecker {
                 eventsToSendOut.set(a, event);
             }
             sendMailService.sendMimeMailList(eventsToSendOut);
+            // POST TO LOGS
         }
     }
 
