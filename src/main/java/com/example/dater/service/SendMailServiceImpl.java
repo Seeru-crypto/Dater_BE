@@ -1,17 +1,20 @@
 package com.example.dater.service;
 
+import com.example.dater.model.Event;
+import com.example.dater.model.Settings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import com.example.dater.model.Settings;
 
 import javax.mail.MessagingException;
-
-import com.example.dater.model.Event;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
+
+
 
 @Service
 public class SendMailServiceImpl implements SendMailService {
@@ -25,27 +28,12 @@ public class SendMailServiceImpl implements SendMailService {
         this.templateEngine = templateEngine;
         this.settingService = settingService;
     }
-
-    @Override
-    public void sendMimeMail(Event event) throws MessagingException {
-
-        javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        Context context = new Context();
-        context.setVariable("event", event);
-        String process = templateEngine.process("welcome", context);
-
-        helper.setText(process, true);
-        helper.setTo("email@gmail.com");
-        helper.setSubject("Tulevad sündmused!");
-
-        javaMailSender.send(mimeMessage);
-    }
+    private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
     public void sendMimeMailList(List<Event> eventList) throws MessagingException {
+
         String emailAddressTo = "";
         Boolean emailToggle = false;
-
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         List<Settings> list = settingService.getSettings();
 
@@ -53,12 +41,13 @@ public class SendMailServiceImpl implements SendMailService {
             emailAddressTo = list.get(0).getEmailAddress();
             emailToggle = list.get(0).getSendEmails();
         } catch (Exception e) {
-            System.out.println("error has occured " + e);
+            log.info("error has occured " + e);
         }
         if (!emailToggle) {
-            System.out.println("Emails are not enabled");
+            log.info("Emails are not enabled");
             return;
         }
+        // POST TO LOGS DATE, CONTENT as LIST, what caused the email, email address
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         Context context = new Context();
         context.setVariable("eventList", eventList);
@@ -66,8 +55,7 @@ public class SendMailServiceImpl implements SendMailService {
         String process = templateEngine.process("eventListTemplate", context);
 
         helper.setText(process, true);
-        System.out.println("emailAddressTo is  " + emailAddressTo);
-
+        log.info("Email address set to ", emailAddressTo);
         helper.setTo(emailAddressTo);
         LocalDate currentDate = LocalDate.now();
         String subject = ("Event report: " + currentDate);

@@ -44,13 +44,12 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent1.seteventDescription("desc");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(0);
-		defaultEvent1.setDate("2021-12-01T16:03:50.623343200");
+		defaultEvent1.setDate("2021-12-01T16:03:50.623");
 		defaultEvent1.setAccountForYear(true);
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setEventName("Maratoni võistlus");
-		defaultEvent2.seteventDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid."
-				+ "Aperiam reprehenderit suscipit dolor unde dolorem aspernatur nisi.");
+		defaultEvent2.seteventDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid.");
 		defaultEvent2.setReminder(false);
 		defaultEvent2.setReminderDays(0);
 		defaultEvent2.setDate("2021-11-07T15:05:53.600Z");
@@ -93,11 +92,7 @@ public class DaterApplication implements CommandLineRunner {
 		setting.setSendSMS(false);
 		settingRepository.save(setting);
 
-		// log.info("-------------------");
-		// log.info("The following events were created.");
-		for (Event event : eventRepository.findAll()) {
-			// log.info("*** " + event.getEventName());
-		}
-
+		 log.info("-------------------");
+		 log.info("The following events were created.");
 	}
 }

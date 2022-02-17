@@ -1,36 +1,54 @@
 package com.example.dater.controller;
 
+import com.example.dater.model.Event;
+import com.example.dater.schedulingtasks.EventDateChecker;
+import com.example.dater.service.EventService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 import java.util.List;
 
-import com.example.dater.service.EventService;
-import com.example.dater.model.Event;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.dater.schedulingtasks.EventDateChecker;
-import javax.mail.MessagingException;
-
+@RequiredArgsConstructor
 @CrossOrigin
 @RestController
-@RequestMapping(path = "api/")
+@RequestMapping(path = "api/events")
 public class EventController {
 
     private final EventService eventService;
     private final EventDateChecker eventDateChecker;
 
-    @Autowired
-    public EventController(EventService eventService, EventDateChecker eventDateChecker) {
-        this.eventService = eventService;
-        this.eventDateChecker = eventDateChecker;
+    @GetMapping
+    public List<Event> findAll() {
+        return eventService.findAll();
     }
 
-    @GetMapping("/events")
-    public List<Event> getItems() {
-        return eventService.getStorage();
+    @PostMapping
+    public Event save(@RequestBody Event newEvent) {
+        return eventService.save(newEvent);
     }
+
+    @DeleteMapping(path = "{eventId}")
+    public void delete(@PathVariable("eventId") String eventId){
+        eventService.delete(eventId);
+    }
+
+//    @PutMapping("/employees/{id}")
+//    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+//
+//        return repository.findById(id)
+//                .map(employee -> {
+//                    employee.setName(newEmployee.getName());
+//                    employee.setRole(newEmployee.getRole());
+//                    return repository.save(employee);
+//                })
+//                .orElseGet(() -> {
+//                    newEmployee.setId(id);
+//                    return repository.save(newEmployee);
+//                });
+//    }
+
+
 
     @GetMapping("/checkEvents")
     public void checkItems() {

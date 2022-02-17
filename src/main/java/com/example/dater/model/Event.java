@@ -11,13 +11,15 @@ public class Event {
     @Id
     private String id;
     @NotBlank(message = "Name is mandatory")
-    @Size(min = 1, max = 25, message = "Name is mandatory")
+    @Size(min = 1, max = 26, message = "Name is mandatory")
     private String eventName;
+    @Size(min = 20, max = 26, message = "date value is incorrect")
     private String date;
     @NotNull
     private Boolean reminder;
     @Max(31)
     private Integer reminderDays;
+    @Size(max=121, message = "desc len is too high")
     private String eventDescription;
     private Boolean accountForYear;
 

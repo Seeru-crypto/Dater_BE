@@ -2,12 +2,18 @@ package com.example.dater.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Settings {
 
     @Id
     private String id;
+    @NotNull
     private Boolean sendEmails;
+    @NotNull
     private Boolean sendSMS;
+    @Size(max = 35, message = "Email value is incorrect")
     private String emailAddress;
     private int checkInterval;
 
