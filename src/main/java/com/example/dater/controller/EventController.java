@@ -33,22 +33,15 @@ public class EventController {
         eventService.delete(eventId);
     }
 
-//    @PutMapping("/employees/{id}")
-//    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
-//
-//        return repository.findById(id)
-//                .map(employee -> {
-//                    employee.setName(newEmployee.getName());
-//                    employee.setRole(newEmployee.getRole());
-//                    return repository.save(employee);
-//                })
-//                .orElseGet(() -> {
-//                    newEmployee.setId(id);
-//                    return repository.save(newEmployee);
-//                });
-//    }
+    @DeleteMapping
+    public void deleteEvents(@RequestBody List<String> eventIds){
+        eventService.deleteEvents(eventIds);
+    }
 
-
+    @PutMapping(path = "{eventId}")
+    public void put(@PathVariable("eventId") String eventId, @RequestBody Event event ){
+        eventService.update(event, eventId);
+    }
 
     @GetMapping("/checkEvents")
     public void checkItems() {

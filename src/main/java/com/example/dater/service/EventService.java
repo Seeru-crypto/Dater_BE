@@ -4,6 +4,7 @@ import com.example.dater.model.Event;
 import com.example.dater.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,13 +22,19 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    @Transactional
+    public Event update(Event event, String eventId) {
+        Event exisingEvent = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalStateException("event with ID " + eventId + "does not exist"));
+        exisingEvent.setEvent(event);
+        return eventRepository.save(exisingEvent);
+    }
+
     public void delete(String eventId) {
-        boolean exists = eventRepository.existsById(eventId);
-        if (!exists) {
-            throw new IllegalStateException("Event with the ID " + eventId+" does not exist");
-        }
         eventRepository.deleteById(eventId);
-    };
+    }
 
-
+    public void deleteEvents(List<String> eventIds) {
+        eventRepository.deleteAllById(eventIds);
+    }
 }

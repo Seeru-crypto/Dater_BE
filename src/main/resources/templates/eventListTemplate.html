@@ -43,7 +43,7 @@
             <th id="eventName">Event name:</th>
             <th id="eventDate">Event date:</th>
             <tr th:each="event: ${eventList}">
-                <td th:text="${event.eventName}"></td>
+                <td th:text="${event.name}"></td>
                 <td th:text="${event.date}"></td>
             </tr>
         </table>
