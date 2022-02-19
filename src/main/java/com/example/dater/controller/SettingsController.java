@@ -1,31 +1,27 @@
 package com.example.dater.controller;
 
 import java.util.List;
-
 import com.example.dater.service.SettingsService;
 import com.example.dater.model.Settings;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
-@RequestMapping(path = "api/")
+@RequiredArgsConstructor
+@RequestMapping(path = "api/settings")
 public class SettingsController {
 
     private final SettingsService settingService;
 
-    @Autowired
-    public SettingsController(SettingsService settingService) {
-        this.settingService = settingService;
-    }
-
-    @GetMapping("/settings")
+    @GetMapping()
     public List<Settings> getItems() {
         return settingService.getSettings();
+    }
+
+    @PutMapping(path = "{settingId}")
+    public void put(@PathVariable("settingId") String settingId, @RequestBody Settings settings ){
+        settingService.update(settings, settingId);
     }
 
 }

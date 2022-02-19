@@ -11,8 +11,6 @@ public class Settings {
     private String id;
     @NotNull
     private Boolean sendEmails;
-    @NotNull
-    private Boolean sendSMS;
     @Size(max = 35, message = "Email value is incorrect")
     private String emailAddress;
     private int checkInterval;
@@ -33,14 +31,6 @@ public class Settings {
         this.sendEmails = sendEmails;
     }
 
-    public Boolean getSendSMS() {
-        return sendSMS;
-    }
-
-    public void setSendSMS(Boolean sendSMS) {
-        this.sendSMS = sendSMS;
-    }
-
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -55,6 +45,12 @@ public class Settings {
 
     public void setCheckInterval(int checkInterval) {
         this.checkInterval = checkInterval;
+    }
+
+    public void setSettings(Settings settings) {
+        this.sendEmails = settings.sendEmails;
+        this.emailAddress = settings.emailAddress;
+        this.checkInterval = settings.checkInterval;
     }
 
 }

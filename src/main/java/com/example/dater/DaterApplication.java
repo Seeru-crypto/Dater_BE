@@ -89,7 +89,6 @@ public class DaterApplication implements CommandLineRunner {
 		setting.setCheckInterval(150);
 		setting.setEmailAddress("email@gmail.com");
 		setting.setSendEmails(false);
-		setting.setSendSMS(false);
 		settingRepository.save(setting);
 
 		 log.info("-------------------");

@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import java.util.List;
 
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
 @RequestMapping(path = "api/events")
 public class EventController {

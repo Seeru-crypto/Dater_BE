@@ -25,4 +25,4 @@ logging.level:
 #logging:level:root: trace
 
 # @valueToken
-TOKEN: token
+MY_TOKEN: token
