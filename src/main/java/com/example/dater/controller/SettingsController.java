@@ -6,6 +6,7 @@ import com.example.dater.model.Settings;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+// ToDo when deploying remove localhost from CORS list
 @CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +21,8 @@ public class SettingsController {
     }
 
     @PutMapping(path = "{settingId}")
-    public void put(@PathVariable("settingId") String settingId, @RequestBody Settings settings ){
-        settingService.update(settings, settingId);
+    public void put(@PathVariable("settingId") String settingId, @RequestBody Settings settings, @RequestParam Integer pin ){
+        settingService.update(settings, settingId, pin);
     }
 
 }

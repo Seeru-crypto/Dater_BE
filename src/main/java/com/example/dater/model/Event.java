@@ -88,6 +88,15 @@ public class Event {
         this.accountForYear = event.accountForYear;
     }
 
+    public void setEvent(String name, String date, Boolean reminder, Integer reminderDays, String description, Boolean accountForYear) {
+        this.name = name;
+        this.date = date;
+        this.reminder = reminder;
+        this.reminderDays = reminderDays;
+        this.description = description;
+        this.accountForYear = accountForYear;
+    }
+
     @Override
     public String toString() {
         return String.format(

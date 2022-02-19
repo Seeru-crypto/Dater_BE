@@ -1,14 +1,12 @@
 package com.example.dater.controller;
 
 import com.example.dater.model.Event;
-import com.example.dater.schedulingtasks.EventDateChecker;
 import com.example.dater.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import java.util.List;
-
+// ToDo when deploying remove localhost from CORS list
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
@@ -16,7 +14,6 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
-    private final EventDateChecker eventDateChecker;
 
     @GetMapping
     public List<Event> findAll() {
@@ -45,10 +42,6 @@ public class EventController {
 
     @GetMapping("/checkEvents")
     public void checkItems() {
-        try {
-            eventDateChecker.checkEventDates();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        eventService.checkEventDates();
     }
 }

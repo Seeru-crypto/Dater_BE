@@ -11,7 +11,7 @@ public class Settings {
     private String id;
     @NotNull
     private Boolean sendEmails;
-    @Size(max = 35, message = "Email value is incorrect")
+    @Size(max = 35, message = "Email is too long")
     private String emailAddress;
     private int checkInterval;
 

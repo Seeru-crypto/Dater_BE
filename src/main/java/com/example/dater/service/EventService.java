@@ -2,10 +2,12 @@ package com.example.dater.service;
 
 import com.example.dater.model.Event;
 import com.example.dater.repository.EventRepository;
+import com.example.dater.schedulingtasks.EventDateChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -13,6 +15,7 @@ import java.util.List;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final EventDateChecker eventDateChecker;
 
     public List<Event> findAll() {
         return eventRepository.findAll();
@@ -36,5 +39,14 @@ public class EventService {
 
     public void deleteEvents(List<String> eventIds) {
         eventRepository.deleteAllById(eventIds);
+    }
+
+    // ToDo replace temp pin with proper o-auth
+    public void checkEventDates() {
+        try {
+            eventDateChecker.checkEventDates();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }

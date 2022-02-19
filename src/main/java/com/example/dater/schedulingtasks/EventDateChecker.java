@@ -1,8 +1,9 @@
 package com.example.dater.schedulingtasks;
 
 import com.example.dater.model.Event;
-import com.example.dater.service.EventService;
+import com.example.dater.repository.EventRepository;
 import com.example.dater.service.SendMailService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,22 +13,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Configuration
 @Log4j2
 public class EventDateChecker {
-    private final EventService eventService;
+    private final EventRepository eventRepository;
     private SendMailService sendMailService;
 
     List<Event> eventList;
 
     @Autowired
-    public EventDateChecker(EventService eventService, SendMailService sendMailService) {
-        this.eventService = eventService;
+    public EventDateChecker(EventRepository eventRepository, SendMailService sendMailService) {
+        this.eventRepository = eventRepository;
         this.sendMailService = sendMailService;
     }
 
     public void checkEventDates() throws MessagingException {
-        eventList = eventService.findAll();
+        eventList = eventRepository.findAll();
         LocalDate currentDate = LocalDate.now();
         List<Event> eventsToSendOut = new ArrayList<>();
         for (Event event : eventList) {
@@ -50,7 +52,6 @@ public class EventDateChecker {
         }
 
         log.info("******************");
-        log.info("Number of events to send out ", eventsToSendOut.size());
         if (eventsToSendOut.isEmpty())
             return;
 
