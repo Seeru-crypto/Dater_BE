@@ -30,10 +30,16 @@ public class EventController {
         eventService.delete(eventId);
     }
 
-    @DeleteMapping
-    public void deleteEvents(@RequestBody List<String> eventIds){
+//    @DeleteMapping
+//    public void deleteEvents(@RequestBody List<String> eventIds){
+//        eventService.deleteEvents(eventIds);
+//    }
+
+    @PostMapping(path = "/delete")
+    public void deleteEvents(@RequestBody List<String> eventIds) {
         eventService.deleteEvents(eventIds);
     }
+
 
     @PutMapping(path = "{eventId}")
     public void put(@PathVariable("eventId") String eventId, @RequestBody Event event ){
