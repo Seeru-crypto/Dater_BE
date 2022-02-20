@@ -16,8 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-
 @Service
 public class SendMailServiceImpl implements SendMailService {
     private final JavaMailSender javaMailSender;
@@ -34,7 +32,7 @@ public class SendMailServiceImpl implements SendMailService {
     }
     private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
-    public void sendMimeMailList(List<Event> eventList) throws MessagingException {
+    public void sendMimeMailList(List<Event> eventList, String iniatedBy) throws MessagingException {
         Log newLog = new Log();
         String emailAddressTo = "ERROR!";
         Boolean emailToggle = false;
@@ -64,10 +62,7 @@ public class SendMailServiceImpl implements SendMailService {
         String subject = ("Event report: " + LocalDate.now());
         helper.setSubject(subject);
 
-        newLog.setSentToAddress(emailAddressTo);
-        newLog.setDate(localDateTime.toString());
-        newLog.setInitiatedBy("wip");
-        newLog.setMailContent(eventList.toString());
+        newLog.setLog(localDateTime.toString(), emailAddressTo, iniatedBy, eventList.toString(), 10);
         logService.save(newLog);
         javaMailSender.send(mimeMessage);
         log.info("Email sent!");

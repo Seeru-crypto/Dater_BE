@@ -20,7 +20,6 @@
         </mj-section>
 
         <mj-section>
-
             <mj-column>
                 <mj-divider border-color="#3da9fc"/>
                 <mj-text font-size="1rem" css-class="table-row2" color="#3da9fc" font-family="helvetica">Hello!

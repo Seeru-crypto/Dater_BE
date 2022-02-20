@@ -28,7 +28,7 @@ public class EventDateChecker {
         this.sendMailService = sendMailService;
     }
 
-    public void checkEventDates() throws MessagingException {
+    public void checkEventDates(String iniatedBy) throws MessagingException {
         eventList = eventRepository.findAll();
         LocalDate currentDate = LocalDate.now();
         List<Event> eventsToSendOut = new ArrayList<>();
@@ -60,7 +60,7 @@ public class EventDateChecker {
             event.setDate(event.getDate().substring(0, 10));
             eventsToSendOut.set(a, event);
         }
-        sendMailService.sendMimeMailList(eventsToSendOut);
+        sendMailService.sendMimeMailList(eventsToSendOut, iniatedBy);
     }
 
 }

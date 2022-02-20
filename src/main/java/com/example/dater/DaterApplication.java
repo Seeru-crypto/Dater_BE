@@ -3,6 +3,7 @@ package com.example.dater;
 import com.example.dater.model.Event;
 import com.example.dater.model.Settings;
 import com.example.dater.repository.EventRepository;
+import com.example.dater.repository.LogRepository;
 import com.example.dater.repository.SettingRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class DaterApplication implements CommandLineRunner {
 
 	@Autowired
 	private SettingRepository settingRepository;
+	@Autowired
+	private LogRepository logRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DaterApplication.class, args);
@@ -34,6 +37,7 @@ public class DaterApplication implements CommandLineRunner {
 	public void run(String... args) {
 		eventRepository.deleteAll();
 		settingRepository.deleteAll();
+//		logRepository.deleteAll();
 
 		String date = LocalDateTime.now().toString();
 

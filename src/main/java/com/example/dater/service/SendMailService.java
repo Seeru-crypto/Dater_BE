@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SendMailService {
 
-    void sendMimeMailList(List<Event> eventList) throws MessagingException;
+    void sendMimeMailList(List<Event> eventList, String iniatedBy) throws MessagingException;
 
 }

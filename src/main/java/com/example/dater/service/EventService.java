@@ -42,9 +42,9 @@ public class EventService {
     }
 
     // ToDo replace temp pin with proper o-auth
-    public void checkEventDates() {
+    public void checkEventDates(String iniatedBy) {
         try {
-            eventDateChecker.checkEventDates();
+            eventDateChecker.checkEventDates(iniatedBy);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
