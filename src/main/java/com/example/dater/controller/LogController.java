@@ -10,7 +10,7 @@ import java.util.List;
 // ToDo when deploying remove localhost from CORS list
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "api/log")
+@RequestMapping(path = "api/logs")
 public class LogController {
 
     private final LogService logService;

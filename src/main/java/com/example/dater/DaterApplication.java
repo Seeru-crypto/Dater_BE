@@ -35,6 +35,7 @@ public class DaterApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
+		// ToDo remove test data deletion and insertion from production!
 		eventRepository.deleteAll();
 		settingRepository.deleteAll();
 //		logRepository.deleteAll();
