@@ -38,17 +38,17 @@ public class DaterApplication implements CommandLineRunner {
 		String date = LocalDateTime.now().toString();
 
 		Event defaultEvent1 = new Event();
-		defaultEvent1.setName("Send message");
-		defaultEvent1.setDescription("desc");
+		defaultEvent1.setName("Buy Ispa stocks");
+		defaultEvent1.setDescription("divident Ex-Date, buy 20 shares at 17.56 PS");
 		defaultEvent1.setReminder(true);
 		defaultEvent1.setReminderDays(0);
-		defaultEvent1.setDate("2021-12-01T16:03:50.623");
+		defaultEvent1.setDate(date);
 		defaultEvent1.setAccountForYear(true);
 
 		Event defaultEvent2 = new Event();
 		defaultEvent2.setName("Maratoni võistlus");
-		defaultEvent2.setDescription("Qui et quia commodi neque sit maxime. Molestiae quia veritatis aliquid.");
-		defaultEvent2.setReminder(false);
+		defaultEvent2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie tincidunt lorem, et tincidunt dui iaculis dui.");
+		defaultEvent2.setReminder(true);
 		defaultEvent2.setReminderDays(0);
 		defaultEvent2.setDate(date);
 		defaultEvent2.setAccountForYear(true);
@@ -61,9 +61,18 @@ public class DaterApplication implements CommandLineRunner {
 		defaultEvent3.setDate("2021-01-01T21:15:48.976Z");
 		defaultEvent3.setAccountForYear(false);
 
+		Event defaultEvent4 = new Event();
+		defaultEvent4.setName("Doesnt send email");
+		defaultEvent4.setDescription(" ");
+		defaultEvent4.setReminder(false);
+		defaultEvent4.setReminderDays(0);
+		defaultEvent4.setDate(date);
+		defaultEvent4.setAccountForYear(false);
+
 		eventRepository.save(defaultEvent1);
 		eventRepository.save(defaultEvent2);
 		eventRepository.save(defaultEvent3);
+		eventRepository.save(defaultEvent4);
 
 		Settings setting = new Settings();
 		setting.setCheckInterval(150);

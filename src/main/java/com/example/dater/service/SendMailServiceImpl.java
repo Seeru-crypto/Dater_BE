@@ -36,7 +36,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     public void sendMimeMailList(List<Event> eventList) throws MessagingException {
         Log newLog = new Log();
-        String emailAddressTo = "";
+        String emailAddressTo = "ERROR!";
         Boolean emailToggle = false;
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         List<Settings> list = settingService.getSettings();
@@ -45,9 +45,9 @@ public class SendMailServiceImpl implements SendMailService {
             emailAddressTo = list.get(0).getEmailAddress();
             emailToggle = list.get(0).getSendEmails();
         } catch (Exception e) {
-            log.warn("error has occured " + e);
+            log.warn("error has occured ", e);
         }
-        if (!emailToggle) {
+        if (Boolean.FALSE.equals(emailToggle)) {
             log.info("Emails are not enabled");
             return;
         }
@@ -60,9 +60,8 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setText(process, true);
 
         helper.setTo(emailAddressTo);
-        LocalDate currentDate = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.now();
-        String subject = ("Event report: " + currentDate);
+        String subject = ("Event report: " + LocalDate.now());
         helper.setSubject(subject);
 
         newLog.setSentToAddress(emailAddressTo);

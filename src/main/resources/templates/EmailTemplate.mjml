@@ -1,0 +1,77 @@
+<mjml>
+    <mj-head>
+        <mj-meta name="viewport" content="initial-scale=1"/>
+        <mj-breakpoint width="320px"/>
+        <mj-preview>Dater report</mj-preview>
+        <mj-title>Dater report title</mj-title>
+
+    </mj-head>
+    <mj-body>
+        <mj-section background-color="#f0f0f0">
+            <mj-column>
+                <mj-text font-style="italic"
+                         font-size="1.5rem"
+                         padding="1rem"
+                         color="#3da9fc"
+                         align="center">
+                    Dater
+                </mj-text>
+            </mj-column>
+        </mj-section>
+
+        <mj-section>
+
+            <mj-column>
+                <mj-divider border-color="#3da9fc"/>
+                <mj-text font-size="1rem" css-class="table-row2" color="#3da9fc" font-family="helvetica">Hello!
+                </mj-text>
+                <mj-text font-size="1rem" color="#3da9fc" font-family="helvetica">These are the upcoming events
+                </mj-text>
+            </mj-column>
+        </mj-section>
+        <mj-section>
+            <mj-column background-color="#fafafa">
+                <mj-table css-class="custom-table" color="#094067">
+                    <tr style="border-bottom:1px solid #ecedee;text-align:left;">
+                        <th style="padding: 15px 0;">Name</th>
+                        <th style="padding: 15px 0;">Date</th>
+                        <th style="padding: 15px 0;">Description</th>
+                    </tr>
+<!--                    DEV_DATA                -->
+<!--                    <tr style="padding-top: 5px">-->
+<!--                        <td style="padding: 15px 0; ; width: 30%; font-size: larger">-->
+<!--                            osta ISPA aktsiaid</td>-->
+<!--                        <td style="padding: 15px 0; width: 30%; font-size: larger">11-12-2020</td>-->
+<!--                        <td style="padding: 15px 0 15px 7px; width: 30%; font-size: larger">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie tincidunt lorem, et tincidunt dui iaculis dui.-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                    <tr style="border-bottom: 1px solid #ecedee; padding-top: 5px" th:each="event: ${eventList}">
+                        <td style="padding: 15px 0; ; width: 30%; font-size: larger" th:text="${event.name}"></td>
+                        <td style="padding: 15px 0; width: 30%; font-size: larger" th:text="${event.date}"></td>
+                        <td style="padding: 15px 0 15px 7px; width: 30%; font-size: larger" th:text="${event.description}"></td>
+                    </tr>
+                </mj-table>
+            </mj-column>
+        </mj-section>
+        <mj-section>
+            <mj-column>
+                <mj-button font-family="Helvetica" href="https://date-manager-front.herokuapp.com/"
+                           background-color="#3da9fc" color="white">
+                    See Dates
+                </mj-button>
+            </mj-column>
+        </mj-section>
+        <mj-section>
+            <mj-column>
+                <mj-text color="#d3d3d3">
+                    This is an automated message
+                    <br>
+                    If you recieved this email contact admin at
+                    <a href="puupuha@gmail.com">email</a>
+                </mj-text>
+            </mj-column>
+        </mj-section>
+
+
+    </mj-body>
+</mjml>
