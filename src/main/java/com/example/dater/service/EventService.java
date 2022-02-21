@@ -41,7 +41,7 @@ public class EventService {
         eventRepository.deleteAllById(eventIds);
     }
 
-    // ToDo replace temp pin with proper o-auth
+    // ToDo will be replaced with proper o-auth in module 3
     public void checkEventDates(String iniatedBy) {
         try {
             eventDateChecker.checkEventDates(iniatedBy);

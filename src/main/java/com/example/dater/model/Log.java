@@ -18,6 +18,7 @@ public class Log {
     private String mailContent;
     @NotNull
     private Integer schedulerValue;
+    private String errorDesc;
 
     public void setDate(String date) {
         this.date = date;
@@ -37,6 +38,10 @@ public class Log {
 
     public void setSchedulerValue(Integer schedulerValue) {
         this.schedulerValue = schedulerValue;
+    }
+
+    public void setErrorDesc(String errorDesc) {
+        this.errorDesc = errorDesc;
     }
 
     public void setLog(String date, String sentToAddress, String initiatedBy, String mailContent, Integer schedulerValue){
@@ -62,15 +67,20 @@ public class Log {
     public String getMailContent() {
         return mailContent;
     }
+
     public Integer getSchedulerValue() {
         return schedulerValue;
+    }
+
+    public String getErrorDesc() {
+        return errorDesc;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Event[id='%s', sentToAddress='%s', date='%s', initiatedBy='%s', mailContent='%s']",
-                id, sentToAddress, date, initiatedBy, mailContent);
+                "Event[id='%s', sentToAddress='%s', date='%s', initiatedBy='%s', mailContent='%s', errorDesc='%s']",
+                id, sentToAddress, date, initiatedBy, mailContent, errorDesc);
     }
 
 }

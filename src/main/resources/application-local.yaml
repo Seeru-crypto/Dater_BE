@@ -22,4 +22,4 @@ spring.mail:
 #logging
 logging.level.org.springframework.data: debug
 #logging.level.root: trace
-MY_TOKEN: token
+FRONT_URL: "http://localhost:3000/"

@@ -6,9 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-// ToDo when deploying remove localhost from CORS list
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
+//@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
 @RequestMapping(path = "api/events")
 public class EventController {

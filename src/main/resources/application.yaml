@@ -25,4 +25,4 @@ logging.level:
 #logging:level:root: trace
 
 # @valueToken
-MY_TOKEN: token
+FRONT_URL: "https://date-manager-front.herokuapp.com/"

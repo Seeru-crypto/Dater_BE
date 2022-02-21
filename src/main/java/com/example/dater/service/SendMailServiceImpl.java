@@ -5,6 +5,7 @@ import com.example.dater.model.Log;
 import com.example.dater.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -63,9 +64,16 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setSubject(subject);
 
         newLog.setLog(localDateTime.toString(), emailAddressTo, iniatedBy, eventList.toString(), 10);
-        logService.save(newLog);
-        javaMailSender.send(mimeMessage);
-        log.info("Email sent!");
 
+        try {
+            javaMailSender.send(mimeMessage);
+            logService.save(newLog);
+            log.info("Email sent!");
+        } catch (MailException e) {
+            newLog.setErrorDesc(e.toString());
+            logService.save(newLog);
+            log.warn("error occurred in mailer");
+            e.printStackTrace();
+        }
     }
 }
