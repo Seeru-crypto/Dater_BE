@@ -1,43 +1,47 @@
 package com.example.dater.controller;
 
-import java.util.List;
-
-import com.example.dater.service.EventService;
 import com.example.dater.model.Event;
+import com.example.dater.service.EventService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.dater.schedulingtasks.EventDateChecker;
-import javax.mail.MessagingException;
-
-@CrossOrigin
+import java.util.List;
+@RequiredArgsConstructor
+//@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
-@RequestMapping(path = "api/")
+@RequestMapping(path = "api/events")
 public class EventController {
+    public String checkIniatedByAdmin = "Admin";
 
     private final EventService eventService;
-    private final EventDateChecker eventDateChecker;
 
-    @Autowired
-    public EventController(EventService eventService, EventDateChecker eventDateChecker) {
-        this.eventService = eventService;
-        this.eventDateChecker = eventDateChecker;
+    @GetMapping
+    public List<Event> findAll() {
+        return eventService.findAll();
     }
 
-    @GetMapping("/event")
-    public List<Event> getItems() {
-        return eventService.getStorage();
+    @PostMapping
+    public Event save(@RequestBody Event newEvent) {
+        return eventService.save(newEvent);
+    }
+
+    @DeleteMapping(path = "{eventId}")
+    public void delete(@PathVariable("eventId") String eventId){
+        eventService.delete(eventId);
+    }
+
+    @PostMapping(path = "/delete")
+    public void deleteEvents(@RequestBody List<String> eventIds) {
+        eventService.deleteEvents(eventIds);
+    }
+
+    @PutMapping(path = "{eventId}")
+    public void put(@PathVariable("eventId") String eventId, @RequestBody Event event ){
+        eventService.update(event, eventId);
     }
 
     @GetMapping("/checkEvents")
     public void checkItems() {
-        try {
-            eventDateChecker.checkEventDates();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        eventService.checkEventDates(checkIniatedByAdmin);
     }
 }

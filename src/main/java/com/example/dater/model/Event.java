@@ -2,14 +2,25 @@ package com.example.dater.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Event {
     @Id
     private String id;
-    private String eventName;
+    @NotBlank(message = "Name is mandatory")
+    @Size(min = 1, max = 26, message = "Name is mandatory")
+    private String name;
+    @Size(min = 20, max = 26, message = "date value is incorrect")
     private String date;
+    @NotNull
     private Boolean reminder;
+    @Max(31)
     private Integer reminderDays;
-    private String eventDescription;
+    @Size(max = 121, message = "desc len is too high")
+    private String description;
     private Boolean accountForYear;
 
     public String getId() {
@@ -28,12 +39,12 @@ public class Event {
         this.accountForYear = accountForYear;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDate() {
@@ -48,6 +59,10 @@ public class Event {
         return reminder;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setReminder(Boolean reminder) {
         this.reminder = reminder;
     }
@@ -60,20 +75,32 @@ public class Event {
         this.reminderDays = reminderDays;
     }
 
-    public String geteventDescription() {
-        return eventDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void seteventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+    public void setEvent(Event event) {
+        this.name = event.name;
+        this.date = event.date;
+        this.reminder = event.reminder;
+        this.reminderDays = event.reminderDays;
+        this.description = event.description;
+        this.accountForYear = event.accountForYear;
+    }
+
+    public void setEvent(String name, String date, Boolean reminder, Integer reminderDays, String description, Boolean accountForYear) {
+        this.name = name;
+        this.date = date;
+        this.reminder = reminder;
+        this.reminderDays = reminderDays;
+        this.description = description;
+        this.accountForYear = accountForYear;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Event[id='%s', eventName='%s', date='%s', reminder='%s', reminderDays='%s', eventDescription='%s', accountForYear='%s']",
-                id, eventName, date, reminder, reminderDays, eventDescription, accountForYear);
-
+                "Event[id='%s', name='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s']",
+                id, name, date, reminder, reminderDays, description, accountForYear);
     }
-
 }

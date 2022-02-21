@@ -2,12 +2,16 @@ package com.example.dater.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Settings {
 
     @Id
     private String id;
+    @NotNull
     private Boolean sendEmails;
-    private Boolean sendSMS;
+    @Size(max = 35, message = "Email is too long")
     private String emailAddress;
     private int checkInterval;
 
@@ -27,14 +31,6 @@ public class Settings {
         this.sendEmails = sendEmails;
     }
 
-    public Boolean getSendSMS() {
-        return sendSMS;
-    }
-
-    public void setSendSMS(Boolean sendSMS) {
-        this.sendSMS = sendSMS;
-    }
-
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -49,6 +45,12 @@ public class Settings {
 
     public void setCheckInterval(int checkInterval) {
         this.checkInterval = checkInterval;
+    }
+
+    public void setSettings(Settings settings) {
+        this.sendEmails = settings.sendEmails;
+        this.emailAddress = settings.emailAddress;
+        this.checkInterval = settings.checkInterval;
     }
 
 }
