@@ -17,9 +17,4 @@ public class LogController {
     public List<Log> findAll() {
         return logService.findAll();
     }
-
-//    @PostMapping
-//    public Log save(@RequestBody Log log) {
-//        return logService.save(log);
-//    }
 }

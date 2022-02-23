@@ -1,5 +1,5 @@
 #server
-server.port: 8080
+server.port: 5005
 #server.address: wifi_address
 
 #mongodb
@@ -22,4 +22,4 @@ spring.mail:
 #logging
 logging.level.org.springframework.data: debug
 #logging.level.root: trace
-FRONT_URL: "http://localhost:3000/"
+FRONT_URL: "http://localhost:5000/"

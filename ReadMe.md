@@ -9,71 +9,64 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 // ToDo update readme
 ## Setup
 
-1.  On first time setup, user needs to configure email aadres, which is used to send out emails.
+1.  On first time setup, user needs to configure email address, which is used to send out emails.
     The config email security settings has to be turned on to allow outside apps to access this email acc.
 
-        In `application.properties` Replace the email-address and email password with your actual email address and password.
+        In `application.properties` Replace the username with email aadress and email password with your emaol password.
 
-        For the configurations above to work in our applications, we must set up Gmail to allow connections from less secure apps.
+        For the configurations to work in our applications, you must configure gmail account settings to allow connections from less secure apps.
 
-        On your Gmail account, click on manage account -> security -> turn on access to less secure apps
+        On the Gmail account, click on manage account -> security -> turn on access to less secure apps
 
 2.  Setup mongoDb docker
 
-   - navigate to mongo docker folder
    - To build the image
        -   `docker pull mongo`
    - To run the image
        -   `docker run -d --name mongo -p 270717:27017 mongo`
-   - To test the connection, a connection string can be used `mongodb://localhost:270717`
+   - In application.properties file set the mongoDB.uri filed as the connection string (`mongodb://localhost:270717`)
 
 3. Start Gradle server
 
 ---
 
-## useful info
-
-Front end uses ports:
-
--   prod uses: 4000
--   dev uses: 4001
-
 ### ToDo:
 
--   [ ] Server servers API endpoints
+- [x] Serve API endpoints
     -   [x] GET events
         -   [x] with specific ID
     -   [x] POST Events
     -   [x] DELETE Event
     -   [x] UPDATE Event
     -   [x] Add GetBy endpoints (eventDescription, date, ect).
-    -   [ ] Add data validation for POST requests.
--   [x] During start-up server creates a custom schema to DB
--   [x] Server can implement CRUD functionality to DB
--   [x] Integrate React Application with Spring boot back-end
--   [ ] Server Sends the e-mail at a specified date.
+    -   [x] Add data validation for POST requests.
+- [x] During start-up server creates a custom schema to DB
+- [x] Server can implement CRUD functionality to DB
+- [x] Integrate React Application with Spring boot back-end
+- [x] Server Sends the e-mail at a specified date.
     -   [x] Server Check the dates in DB once every 24h
         -   [x] [Create recurring tasks](https://spring.io/guides/gs/scheduling-tasks/)
         -   [x] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
         -   [x] Create date check logic
-        -   [x] By default the checker ingores year variables.
-    -   [ ] function that sends e-mail to designated aadress
+        -   [x] By default the checker ignores year variables.
+    -   [x] function that sends e-mail to designated aadress
         -   [x] [Testing emails](https://mailtrap.io/blog/spring-send-email),
         -   [x] [Emailer implementation](https://www.section.io/engineering-education/spring-boot-smtp/)
         -   [x] [Function that that sends the email, using a given template, which uses given variables](https://springhow.com/spring-boot-email-thymeleaf)
-        -   [ ] Create a daily report, using said templates
+        -   [x] Create a daily report, using said templates
                 (name of event, date)
-        -   [ ] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
--   [ ] Create admin object model.
--   [ ] Add Send email REST API endpoint.
--   [ ] Add 66% test coverage
--   [ ] Create server Dockerfile
--   [ ] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
--   [ ] Change MongoDB admin password!
--   [ ] Publish
+        -   [x] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
+- [x] Create admin object model.
+- [x] Add Send email REST API endpoint.
+- [ ] Add 66% test coverage
+- [ ] Create server Dockerfile
+- [x] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+- [x] Publish
     -   [x] Setup MongoDB server
-    -   [ ] Publish FE & BE in heroku.
--   [ ] Setup authentication module
+    -   [x] Publish FE & BE in heroku.
+
+#### Realised in module 3
+- [ ] Setup authentication module
 
 ### MongoDB Database
 
