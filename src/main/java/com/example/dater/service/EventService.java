@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,7 +26,9 @@ public class EventService {
     }
 
     public Event save(Event event) {
-        if (event.getId() != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot exist");
+        if (event.getId() != null || event.getDateCreated() != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot exist");
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneOffset.of("+02:00"));
+        event.setDateCreated(localDateTime);
         return eventRepository.save(event);
     }
 
@@ -32,6 +36,8 @@ public class EventService {
     public Event update(Event event, String eventId) {
         Event exisingEvent = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneOffset.of("+02:00"));
+        event.setDateUpdated(localDateTime);
         exisingEvent.setEvent(event);
         return eventRepository.save(exisingEvent);
     }
