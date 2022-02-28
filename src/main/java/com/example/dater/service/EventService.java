@@ -4,8 +4,10 @@ import com.example.dater.model.Event;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.schedulingtasks.EventDateChecker;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
 import java.util.List;
@@ -22,13 +24,14 @@ public class EventService {
     }
 
     public Event save(Event event) {
+        if (event.getId() != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot exist");
         return eventRepository.save(event);
     }
 
     @Transactional
     public Event update(Event event, String eventId) {
         Event exisingEvent = eventRepository.findById(eventId)
-                .orElseThrow(() -> new IllegalStateException("event with ID " + eventId + "does not exist"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
         exisingEvent.setEvent(event);
         return eventRepository.save(exisingEvent);
     }

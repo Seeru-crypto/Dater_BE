@@ -28,9 +28,7 @@ public class DaterApplication{
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/events/**").allowedOrigins(devLink).allowedMethods("GET", "PUT", "POST", "DELETE");
-				registry.addMapping("/api/settings/**").allowedOrigins(devLink).allowedMethods("GET", "PUT");
-				registry.addMapping("/api/logs/**").allowedOrigins(devLink).allowedMethods("GET");
+				registry.addMapping("/**").allowedOrigins(devLink).allowedMethods("*");
 			}
 		};
 	}

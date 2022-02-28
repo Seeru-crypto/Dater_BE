@@ -26,7 +26,7 @@ public class DailyCheck {
 
     @Scheduled(fixedRate = 10 * 60000)
     public void reportCurrentTime() throws MessagingException {
-        String logValue = ("Event checked at: " + dateFormat.format(new Date())+ "next check in 10 min");
+        String logValue = ("Event checked at: " + dateFormat.format(new Date())+ " next check in 10 min");
         log.info(logValue);
         eventDateChecker.checkEventDates(checkIniatedByScheduler);
     }

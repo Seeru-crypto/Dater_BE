@@ -60,7 +60,7 @@ public class SendMailServiceImpl implements SendMailService {
 
         helper.setTo(emailAddressTo);
         LocalDateTime localDateTime = LocalDateTime.now();
-        String subject = ("Event report: " + LocalDate.now());
+        String subject = ("Dater report: " + LocalDate.now());
         helper.setSubject(subject);
         newLog.setLog(localDateTime.toString(), emailAddressTo, iniatedBy, eventList.toString(), 10);
 

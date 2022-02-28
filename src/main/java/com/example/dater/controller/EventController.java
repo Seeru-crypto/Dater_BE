@@ -5,6 +5,7 @@ import com.example.dater.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @RequiredArgsConstructor
 //@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
@@ -20,23 +21,24 @@ public class EventController {
         return eventService.findAll();
     }
 
+    // ToDo Fix bug where a user can insert their own ID
     @PostMapping
-    public Event save(@RequestBody Event newEvent) {
+    public Event save(@Valid @RequestBody Event newEvent) {
         return eventService.save(newEvent);
     }
 
     @DeleteMapping(path = "{eventId}")
-    public void delete(@PathVariable("eventId") String eventId){
+    public void delete(@Valid @PathVariable("eventId") String eventId){
         eventService.delete(eventId);
     }
 
     @PostMapping(path = "/delete")
-    public void deleteEvents(@RequestBody List<String> eventIds) {
+    public void deleteEvents(@Valid @RequestBody List<String> eventIds) {
         eventService.deleteEvents(eventIds);
     }
 
     @PutMapping(path = "{eventId}")
-    public void put(@PathVariable("eventId") String eventId, @RequestBody Event event ){
+    public void put(@Valid @PathVariable("eventId") String eventId, @RequestBody Event event ){
         eventService.update(event, eventId);
     }
 
