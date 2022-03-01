@@ -1,10 +1,16 @@
 package com.example.dater.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class Log {
     @Id
     private String id;
@@ -20,60 +26,12 @@ public class Log {
     private Integer schedulerValue;
     private String errorDesc;
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setSentToAddress(String sentToAddress) {
-        this.sentToAddress = sentToAddress;
-    }
-
-    public void setInitiatedBy(String initiatedBy) {
-        this.initiatedBy = initiatedBy;
-    }
-
-    public void setMailContent(String mailContent) {
-        this.mailContent = mailContent;
-    }
-
-    public void setSchedulerValue(Integer schedulerValue) {
-        this.schedulerValue = schedulerValue;
-    }
-
-    public void setErrorDesc(String errorDesc) {
-        this.errorDesc = errorDesc;
-    }
-
     public void setLog(String date, String sentToAddress, String initiatedBy, String mailContent, Integer schedulerValue){
         this.date = date;
         this.sentToAddress = sentToAddress;
         this.initiatedBy = initiatedBy;
         this.mailContent = mailContent;
         this.schedulerValue = schedulerValue;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getSentToAddress() {
-        return sentToAddress;
-    }
-
-    public String getInitiatedBy() {
-        return initiatedBy;
-    }
-
-    public String getMailContent() {
-        return mailContent;
-    }
-
-    public Integer getSchedulerValue() {
-        return schedulerValue;
-    }
-
-    public String getErrorDesc() {
-        return errorDesc;
     }
 
     @Override

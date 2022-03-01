@@ -6,12 +6,10 @@ import com.example.dater.schedulingtasks.EventDateChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,20 +24,20 @@ public class EventService {
     }
 
     public Event save(Event event) {
-        if (event.getId() != null || event.getDateCreated() != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot exist");
-        LocalDateTime localDateTime = LocalDateTime.now(ZoneOffset.of("+02:00"));
+        LocalDateTime localDateTime = LocalDateTime.now();
+//        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+//        event.setDateCreated(offsetDateTime);
         event.setDateCreated(localDateTime);
         return eventRepository.save(event);
     }
 
-    @Transactional
     public Event update(Event event, String eventId) {
-        Event exisingEvent = eventRepository.findById(eventId)
+        eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
-        LocalDateTime localDateTime = LocalDateTime.now(ZoneOffset.of("+02:00"));
-        event.setDateUpdated(localDateTime);
-        exisingEvent.setEvent(event);
-        return eventRepository.save(exisingEvent);
+//        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+//        event.setDateUpdated(offsetDateTime);
+        event.setId(eventId);
+        return eventRepository.save(event);
     }
 
     public void delete(String eventId) {
@@ -58,4 +56,5 @@ public class EventService {
             e.printStackTrace();
         }
     }
+
 }

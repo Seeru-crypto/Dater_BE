@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -24,7 +25,7 @@ public class Event {
     @NotNull
     private String date;
     private LocalDateTime dateCreated;
-    private LocalDateTime dateUpdated;
+    private OffsetDateTime dateUpdated;
     @NotNull
     private Boolean reminder;
     @Max(31)

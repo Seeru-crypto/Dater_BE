@@ -42,7 +42,7 @@ public class SendMailServiceImpl implements SendMailService {
 
         try {
             emailAddressTo = list.get(0).getEmailAddress();
-            emailToggle = list.get(0).getSendEmails();
+            emailToggle = list.get(0).getIsEmailActive();
         } catch (Exception e) {
             log.warn("error has occured ", e);
         }
