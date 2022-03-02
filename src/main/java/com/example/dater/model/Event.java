@@ -9,8 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 @NoArgsConstructor
 @Getter
@@ -24,8 +23,8 @@ public class Event {
     @Size(min = 20, max = 26, message = "date value is incorrect")
     @NotNull
     private String date;
-    private LocalDateTime dateCreated;
-    private OffsetDateTime dateUpdated;
+    private Instant dateCreated;
+    private Instant dateUpdated;
     @NotNull
     private Boolean reminder;
     @Max(31)
@@ -35,16 +34,6 @@ public class Event {
     private String description;
     @NotNull
     private Boolean accountForYear;
-
-    public Event setEvent(Event event) {
-        this.name = event.name;
-        this.date = event.date;
-        this.reminder = event.reminder;
-        this.reminderDays = event.reminderDays;
-        this.description = event.description;
-        this.accountForYear = event.accountForYear;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -28,6 +28,10 @@ public class EventController {
         return eventService.save(newEvent);
     }
 
+    @PutMapping(path = "{eventId}")
+    public Event put(@PathVariable String eventId, @Valid @RequestBody Event event) {
+        return eventService.update(event, eventId);
+    }
     @DeleteMapping(path = "{eventId}")
     public void delete(@Valid @PathVariable("eventId") String eventId){
         eventService.delete(eventId);
@@ -36,11 +40,6 @@ public class EventController {
     @PostMapping(path = "/delete")
     public void deleteEvents(@Valid @RequestBody List<String> eventIds) {
         eventService.deleteEvents(eventIds);
-    }
-
-    @PutMapping(path = "{eventId}")
-    public Event put(@Valid @PathVariable("eventId") String eventId, @RequestBody Event event ){
-        return eventService.update(event, eventId);
     }
 
     @GetMapping("/checkEvents")

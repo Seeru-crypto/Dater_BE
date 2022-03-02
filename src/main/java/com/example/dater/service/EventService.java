@@ -9,13 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class EventService {
-
     private final EventRepository eventRepository;
     private final EventDateChecker eventDateChecker;
 
@@ -24,23 +23,28 @@ public class EventService {
     }
 
     public Event save(Event event) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-//        OffsetDateTime offsetDateTime = OffsetDateTime.now();
-//        event.setDateCreated(offsetDateTime);
-        event.setDateCreated(localDateTime);
+        event.setDateCreated(Instant.now());
         return eventRepository.save(event);
     }
 
-    public Event update(Event event, String eventId) {
-        eventRepository.findById(eventId)
+    public Event update(Event eventDto, String eventId) {
+        Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
-//        OffsetDateTime offsetDateTime = OffsetDateTime.now();
-//        event.setDateUpdated(offsetDateTime);
-        event.setId(eventId);
+        event.setName(eventDto.getName())
+                .setDate(eventDto.getDate())
+                .setDescription(eventDto.getDescription())
+                .setReminder(eventDto.getReminder())
+                .setReminderDays(eventDto.getReminderDays())
+                .setAccountForYear(eventDto.getAccountForYear())
+                .setDateUpdated(Instant.now())
+                .setDateCreated(event.getDateCreated());
         return eventRepository.save(event);
     }
 
     public void delete(String eventId) {
+        eventRepository.findById(eventId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
+
         eventRepository.deleteById(eventId);
     }
 
@@ -56,5 +60,4 @@ public class EventService {
             e.printStackTrace();
         }
     }
-
 }

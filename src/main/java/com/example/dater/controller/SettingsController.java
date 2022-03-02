@@ -23,11 +23,10 @@ public class SettingsController {
     }
 
     @PutMapping(path = "{settingId}")
-    public Settings put(@Valid @PathVariable("settingId") String settingId, @RequestBody Settings settings, @RequestParam Integer pin ){
+    public Settings put(@PathVariable("settingId") String settingId, @Valid @RequestBody Settings settings, @RequestParam Integer pin ){
         if  (pin != 154878 ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pin incorrect");
         }
         return settingService.update(settings, settingId);
     }
-
 }

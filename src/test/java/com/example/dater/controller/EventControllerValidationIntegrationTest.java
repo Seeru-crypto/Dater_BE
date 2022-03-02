@@ -3,11 +3,11 @@ package com.example.dater.controller;
 import com.example.dater.model.Event;
 import org.junit.jupiter.api.Test;
 
-import static com.example.dater.controller.TestObject.createEvent;
+import static com.example.dater.controller.TestObject.createEventWithoutCreated;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class EventControllerValidationIntegrationTest extends BaseIntegrationTest {
@@ -22,60 +22,61 @@ class EventControllerValidationIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void createEvent_shouldThrow_exception_whenNameEmptyString() throws Exception {
-        Event event = createEvent().setName("");
+        Event event = createEventWithoutCreated().setName("");
         postFunctionBody(getBytes(event));
     }
 
     @Test
     void createEvent_shouldThrow_exception_whenNameTooLong() throws Exception {
-        Event event = createEvent().setName("Lorem ipsum dolor sit nunc.");
+        Event event = createEventWithoutCreated().setName("Lorem ipsum dolor sit nunc.");
         postFunctionBody(getBytes(event));
     };
-   @Test
+
+    @Test
     void createEvent_shouldThrow_exception_whenNameNull() throws Exception {
-       Event event = createEvent().setName(null);
+       Event event = createEventWithoutCreated().setName(null);
        postFunctionBody(getBytes(event));
    };
 
     @Test
     void createEvent_shouldThrow_exception_whenDateEmpty() throws Exception {
-        Event event = createEvent().setDate("");
+        Event event = createEventWithoutCreated().setDate("");
         postFunctionBody(getBytes(event));
     };
 
     @Test
     void createEvent_shouldThrow_exception_whenDateTooLong() throws Exception {
-        Event event = createEvent().setDate("2022-02-19T13:26:13.836ZASDASDASFAG");
+        Event event = createEventWithoutCreated().setDate("2022-02-19T13:26:13.836ZASDASDASFAG");
         postFunctionBody(getBytes(event));
     };
 
     @Test
     void createEvent_shouldThrow_exception_whenReminderInDaysNull() throws Exception {
-        Event event = createEvent().setReminderDays(null);
+        Event event = createEventWithoutCreated().setReminderDays(null);
         postFunctionBody(getBytes(event));
     };
 
     @Test
     void createEvent_shouldThrow_exception_whenReminderDaysTooHigh() throws Exception {
-        Event event = createEvent().setReminderDays(32);
+        Event event = createEventWithoutCreated().setReminderDays(32);
         postFunctionBody(getBytes(event));
     };
 
     @Test
     void createEvent_shouldThrow_exception_whenReminderNull() throws Exception {
-        Event event = createEvent().setReminder(null);
+        Event event = createEventWithoutCreated().setReminder(null);
         postFunctionBody(getBytes(event));
     }
 
     @Test
     void createEvent_shouldThrow_exception_whenAccountForYearNull() throws Exception {
-        Event event = createEvent().setAccountForYear(null);
+        Event event = createEventWithoutCreated().setAccountForYear(null);
         postFunctionBody(getBytes(event));
     }
 
     @Test
-    void createEvent_shouldThrow_exception_whenIdisGiven() throws Exception {
-        Event event = createEvent().setId("id");
+    void createEvent_shouldThrow_exception_whenIdIsGiven() throws Exception {
+        Event event = createEventWithoutCreated().setId("id");
         postFunctionBody(getBytes(event));
     }
 
@@ -91,7 +92,7 @@ class EventControllerValidationIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void updateEvent_shouldThrow_exception_whenNoIdIsGiven() throws Exception {
-        Event updatedEvent = createEvent().setName("New Name");
+        Event updatedEvent = createEventWithoutCreated();
 
         String path = "/api/events/";
         mockMvc.perform(put(path)
@@ -100,19 +101,31 @@ class EventControllerValidationIntegrationTest extends BaseIntegrationTest {
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
     }
+
     @Test
-    void updateEvent_shouldThrow_exception_whenNotExistingPinIsGiven() throws Exception {
-        Event updatedEvent = createEvent().setName("New Name");
+    void updateEvent_shouldThrow_exception_whenNotExistingIdIsGiven() throws Exception {
+        Event updatedEvent = createEventWithoutCreated();
 
         updateFunctionBody(getBytes(updatedEvent), "abc");
     }
 
-    // ToDo Fix test
-    //    @Test
-//    void updateEvent_shouldThrow_exception_whenInvalidNameIsGiven() throws Exception {
-//        Event existingEvent = mongoTemplate.insert(createEvent());
-//        Event updatedEvent = createEvent().setName("");
-//
-//        updateFunctionBody(getBytes(updatedEvent), existingEvent.getId());
-//    }
+    @Test
+    void updateEvent_shouldThrow_exception_whenInvalidNameIsGiven() throws Exception {
+        Event existingEvent = mongoTemplate.insert(createEventWithoutCreated());
+        Event updatedEvent = createEventWithoutCreated().setName("");
+        updateFunctionBody(getBytes(updatedEvent), existingEvent.getId());
+    }
+
+    @Test
+    void deleteEvent_shouldThrow_exception_whenInvalidId() throws Exception {
+        mongoTemplate.insert(createEventWithoutCreated());
+
+        String path = "/api/events/adasd";
+        mockMvc.perform(delete(path))
+                .andExpect(status().isBadRequest());
+
+        mockMvc.perform(get("/api/events"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(1));
+    }
 }

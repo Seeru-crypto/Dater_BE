@@ -3,8 +3,6 @@ package com.example.dater.service;
 import com.example.dater.model.Settings;
 import com.example.dater.repository.SettingRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,17 +11,20 @@ import java.util.List;
 @Service
 public class SettingsService {
 
-    private final SettingRepository settingsRepositoy;
-    private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
+    private final SettingRepository settingsRepository;
 
     public List<Settings> getSettings() {
-        return settingsRepositoy.findAll();
+        return settingsRepository.findAll();
     }
 
-    public Settings update(Settings settings, String settingId) {
-        Settings existingSetting = settingsRepositoy.findById(settingId)
+    public Settings update(Settings settingDto, String settingId) {
+        Settings existingSetting = settingsRepository.findById(settingId)
                         .orElseThrow(() -> new IllegalStateException("Setting with ID " + settingId + "does not exist"));
-        existingSetting.setSettings(settings);
-        return settingsRepositoy.save(existingSetting);
+
+        existingSetting
+                .setIsEmailActive(settingDto.getIsEmailActive())
+                .setEmailAddress(settingDto.getEmailAddress());
+
+        return settingsRepository.save(existingSetting);
     }
 }
