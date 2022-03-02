@@ -1,30 +1,28 @@
-package com.example.dater.controller;
+package controller.events;
 
 import com.example.dater.model.Event;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static com.example.dater.controller.TestObject.createEventWithCreatedDate;
-import static com.example.dater.controller.TestObject.createEventWithoutCreated;
+import static controller.TestObjects.createEventWithCreatedDate;
+import static controller.TestObjects.createEventWithoutCreatedDate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EventControllerIntegrationTest extends BaseIntegrationTest {
+class EventControllerIntegrationTestEvent extends EventBaseIntegrationTest {
 
     @Test
      void shouldCreateEvent () throws Exception {
-        Event event = createEventWithoutCreated().setName("Event created now!");
+        Event event = createEventWithoutCreatedDate().setName("Event created now!");
         mockMvc.perform(post("/api/events")
                         .content(getBytes(event))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print())
                 .andExpect(jsonPath("$.name").value("Event created now!"))
                 .andExpect(jsonPath("$.dateCreated").isNotEmpty());
     }
@@ -61,7 +59,7 @@ class EventControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void shouldGetEvents() throws Exception {
-        mongoTemplate.insert(createEventWithoutCreated());
+        mongoTemplate.insert(createEventWithoutCreatedDate());
 
         mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
@@ -72,7 +70,7 @@ class EventControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void shouldDeleteEvent() throws Exception {
-        Event createdEvent =  mongoTemplate.insert(createEventWithoutCreated());
+        Event createdEvent =  mongoTemplate.insert(createEventWithoutCreatedDate());
         mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1));
 
@@ -84,8 +82,8 @@ class EventControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void shouldDeleteEvents() throws Exception {
-        Event createdEvent1 =  mongoTemplate.insert(createEventWithoutCreated());
-        Event createdEvent2 =  mongoTemplate.insert(createEventWithoutCreated());
+        Event createdEvent1 =  mongoTemplate.insert(createEventWithoutCreatedDate());
+        Event createdEvent2 =  mongoTemplate.insert(createEventWithoutCreatedDate());
 
         String[] idList = {createdEvent1.getId(), createdEvent2.getId()};
         mockMvc.perform(post("/api/events/delete").content(getBytes(idList))

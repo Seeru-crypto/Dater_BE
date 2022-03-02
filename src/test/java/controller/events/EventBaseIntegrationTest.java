@@ -1,4 +1,4 @@
-package com.example.dater.controller;
+package controller.events;
 
 import com.example.dater.DaterApplication;
 import com.example.dater.model.Event;
@@ -18,7 +18,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = DaterApplication.class)
-class BaseIntegrationTest {
+class EventBaseIntegrationTest {
     static {
       new MongoDBContainer(DockerImageName.parse("mongo:4.0.10")).withExposedPorts(27070).start();
     }

@@ -1,7 +1,6 @@
 package controller.settings;
 
 import com.example.dater.model.Settings;
-import controller.BaseIntegrationTest2;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -14,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class SettingControllerIntegrationTest extends BaseIntegrationTest2{
+class SettingControllerIntegrationTestSetting extends SettingBaseIntegrationTest {
 
     @Test
     void shouldUpdateSettings() throws Exception {

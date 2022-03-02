@@ -1,7 +1,6 @@
 package controller.settings;
 
 import com.example.dater.model.Settings;
-import controller.BaseIntegrationTest2;
 import org.junit.jupiter.api.Test;
 
 import static controller.TestObjects.createSetting;
@@ -10,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class SettingsControllerValidationIntegrationTest extends BaseIntegrationTest2 {
+class SettingsControllerValidationIntegrationTestSetting extends SettingBaseIntegrationTest {
 
     String correctPin = "154878";
     private void putFunctionBody(byte[] newSetting, String settingId, String pinValue) throws Exception {
