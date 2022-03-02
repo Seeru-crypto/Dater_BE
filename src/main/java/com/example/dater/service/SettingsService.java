@@ -5,6 +5,7 @@ import com.example.dater.repository.SettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,8 +24,8 @@ public class SettingsService {
 
         existingSetting
                 .setIsEmailActive(settingDto.getIsEmailActive())
-                .setEmailAddress(settingDto.getEmailAddress());
-
+                .setEmailAddress(settingDto.getEmailAddress())
+                .setDateUpdated(Instant.now());
         return settingsRepository.save(existingSetting);
     }
 }

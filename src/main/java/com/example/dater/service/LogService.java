@@ -4,6 +4,8 @@ import com.example.dater.model.Log;
 import com.example.dater.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ public class LogService {
     }
 
     public Log save(Log log) {
+        log.setDateCreated(Instant.now());
         return logRepository.save(log);
     }
 }

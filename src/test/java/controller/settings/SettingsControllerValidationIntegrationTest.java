@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class SettingsControllerValidationIntegrationTestSetting extends SettingBaseIntegrationTest {
+class SettingsControllerValidationIntegrationTest extends SettingBaseIntegrationTest {
 
     String correctPin = "154878";
     private void putFunctionBody(byte[] newSetting, String settingId, String pinValue) throws Exception {

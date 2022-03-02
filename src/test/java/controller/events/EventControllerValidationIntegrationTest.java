@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class EventControllerValidationIntegrationTestEvent extends EventBaseIntegrationTest {
+class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest {
 
     private void postFunctionBody(byte[] event) throws Exception {
         mockMvc.perform(post("/api/events")

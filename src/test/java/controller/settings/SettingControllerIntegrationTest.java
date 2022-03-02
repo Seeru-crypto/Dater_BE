@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class SettingControllerIntegrationTestSetting extends SettingBaseIntegrationTest {
+class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
 
     @Test
     void shouldUpdateSettings() throws Exception {
@@ -29,7 +29,8 @@ class SettingControllerIntegrationTestSetting extends SettingBaseIntegrationTest
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isEmailActive").value(true))
-                .andExpect(jsonPath("$.emailAddress").value("id-with-dash@domain.com"));
+                .andExpect(jsonPath("$.emailAddress").value("id-with-dash@domain.com"))
+                .andExpect(jsonPath("$.dateUpdated").isNotEmpty());
 
         mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))

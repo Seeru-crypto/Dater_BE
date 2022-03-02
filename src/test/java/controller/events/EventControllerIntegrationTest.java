@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EventControllerIntegrationTestEvent extends EventBaseIntegrationTest {
+class EventControllerIntegrationTest extends EventBaseIntegrationTest {
 
     @Test
      void shouldCreateEvent () throws Exception {

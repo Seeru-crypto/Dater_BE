@@ -13,7 +13,7 @@ public class TestObjects {
 
     }
     public static Log createLog() {
-        return new Log().setSentToAddress("person@gmail.com").setInitiatedBy("admin").setDate("2022-02-19T13:26:13.836Z").setMailContent("[mail]").setSchedulerValue(10);
+        return new Log().setSentToAddress("person@gmail.com").setInitiatedBy("admin").setDateCreated(Instant.parse("2022-02-19T13:26:13.836Z")).setMailContent("[mail]").setSchedulerValue(10);
 
     }
 

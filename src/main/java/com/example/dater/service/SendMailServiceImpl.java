@@ -14,7 +14,6 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -44,7 +43,7 @@ public class SendMailServiceImpl implements SendMailService {
             emailAddressTo = list.get(0).getEmailAddress();
             emailToggle = list.get(0).getIsEmailActive();
         } catch (Exception e) {
-            log.warn("error has occured ", e);
+            log.warn("error has occurred ", e);
         }
         if (Boolean.FALSE.equals(emailToggle)) {
             log.info("Emails are not enabled");
@@ -59,10 +58,9 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setText(process, true);
 
         helper.setTo(emailAddressTo);
-        LocalDateTime localDateTime = LocalDateTime.now();
         String subject = ("Dater report: " + LocalDate.now());
         helper.setSubject(subject);
-        newLog.setLog(localDateTime.toString(), emailAddressTo, iniatedBy, eventList.toString(), 10);
+        newLog.setSentToAddress(emailAddressTo).setInitiatedBy(iniatedBy).setMailContent(eventList.toString()).setSchedulerValue(10);
 
         try {
             javaMailSender.send(mimeMessage);
