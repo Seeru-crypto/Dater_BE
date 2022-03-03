@@ -74,45 +74,6 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     }
 
     @Test
-    void updateSetting_shouldThrow_exception_whenEmailStructureIsWrong1() throws Exception {
-        String wrongEmailStructure = "usernamedomain.com";
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress(wrongEmailStructure);
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-    @Test
-    void updateSetting_shouldThrow_exception_whenEmailStructureIsWrong2() throws Exception {
-        String wrongEmailStructure = "username@domaincom";
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress(wrongEmailStructure);
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
-    void updateSetting_shouldThrow_exception_whenEmailStructureIsWrong3() throws Exception {
-        String wrongEmailStructure = "A@b@c@domain.com";
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress(wrongEmailStructure);
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
-    void updateSetting_shouldThrow_exception_whenEmailStructureIsWrong4() throws Exception {
-        String wrongEmailStructure = "abc\\ is\\”not\\valid@domain.com";
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress(wrongEmailStructure);
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
-    void updateSetting_shouldThrow_exception_whenEmailStructureIsWrong5() throws Exception {
-        String wrongEmailStructure = "a”b(c)d,e:f;gi[j\\k]l@domain.com";
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress(wrongEmailStructure);
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
     void updateSetting_shouldThrow_exception_whenIsEmailActiveIsNull() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createSetting().setIsEmailActive(null);

@@ -1,6 +1,7 @@
 package controller.log;
 
 import com.example.dater.DaterApplication;
+import com.example.dater.model.Event;
 import com.example.dater.model.Log;
 import com.example.dater.model.Settings;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,8 +41,14 @@ class LogBaseIntegrationTest {
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         mongoTemplate.dropCollection(Log.class);
+        mongoTemplate.dropCollection(Event.class);
+        mongoTemplate.dropCollection(Settings.class);
     }
 
+    protected byte[] getBytes(Event event) throws JsonProcessingException {
+        byte[] content = objectMapper.writeValueAsBytes(event);
+        return content;
+    }
     protected byte[] getBytes(Log log) throws JsonProcessingException {
         byte[] content = objectMapper.writeValueAsBytes(log);
         return content;

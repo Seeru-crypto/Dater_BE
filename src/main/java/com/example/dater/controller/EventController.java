@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/events")
 public class EventController {
-    public String checkIniatedByAdmin = "Admin";
+    private static final String CHECK_INIATED_BY_ADMIN = "Admin";
 
     private final EventService eventService;
 
@@ -44,6 +44,6 @@ public class EventController {
 
     @GetMapping("/checkEvents")
     public void checkItems() {
-        eventService.checkEventDates(checkIniatedByAdmin);
+        eventService.checkEventDates(CHECK_INIATED_BY_ADMIN);
     }
 }

@@ -19,6 +19,12 @@ spring.mail:
     writetimeout: 5000
     starttls.enable: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,scheduledtasks"
+
 #logging
 logging.level.org.springframework.data: debug
 #logging.level.root: trace
