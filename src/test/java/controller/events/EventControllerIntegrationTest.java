@@ -12,7 +12,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class EventControllerIntegrationTest extends EventBaseIntegrationTest {
 
@@ -24,7 +23,8 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Event created now!"))
-                .andExpect(jsonPath("$.dateCreated").isNotEmpty());
+                .andExpect(jsonPath("$.dateCreated").isNotEmpty())
+                .andExpect(jsonPath("$.dateUpdated").isEmpty());
     }
 
     @Test

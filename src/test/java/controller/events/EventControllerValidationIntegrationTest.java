@@ -3,9 +3,11 @@ package controller.events;
 import com.example.dater.model.Event;
 import org.junit.jupiter.api.Test;
 
+import static com.example.dater.model.Event.*;
 import static controller.TestObjects.createEventWithoutCreatedDate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,8 +18,16 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
                         .content(event)
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void createEvent_shouldThrow_exception_whenDescriptionTooLong() throws Exception {
+        String tooLongDesc = new String(new char[MAX_DESC_LEN + 5]).replace('\0', 'a');
+        Event event = createEventWithoutCreatedDate().setDescription(tooLongDesc);
+        postFunctionBody(getBytes(event));
+    };
 
     @Test
     void createEvent_shouldThrow_exception_whenNameEmptyString() throws Exception {
@@ -27,7 +37,8 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
 
     @Test
     void createEvent_shouldThrow_exception_whenNameTooLong() throws Exception {
-        Event event = createEventWithoutCreatedDate().setName("Lorem ipsum dolor sit nunc.");
+        String tooLongName = new String(new char[MAX_NAME_LEN + 5]).replace('\0', 'a');
+        Event event = createEventWithoutCreatedDate().setName(tooLongName);
         postFunctionBody(getBytes(event));
     };
 
@@ -57,7 +68,7 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
 
     @Test
     void createEvent_shouldThrow_exception_whenReminderDaysTooHigh() throws Exception {
-        Event event = createEventWithoutCreatedDate().setReminderDays(32);
+        Event event = createEventWithoutCreatedDate().setReminderDays(REMINDER_DAYS_MAX_VALUE+1);
         postFunctionBody(getBytes(event));
     };
 

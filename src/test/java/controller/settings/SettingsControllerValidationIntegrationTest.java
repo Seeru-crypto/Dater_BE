@@ -3,6 +3,7 @@ package controller.settings;
 import com.example.dater.model.Settings;
 import org.junit.jupiter.api.Test;
 
+import static com.example.dater.model.Settings.MAX_EMAIL_LEN;
 import static controller.TestObjects.createSetting;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,7 +68,8 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
 
     @Test
     void updateSetting_shouldThrow_exception_whenEmailTooLong() throws Exception {
-        String longEmail = "ThisWayyyyyyyyyyTooLongAddress@gmail.com";
+        String tooLongEmailBody = new String(new char[MAX_EMAIL_LEN]).replace('\0', 'a');
+        String longEmail = tooLongEmailBody + "@gmail.com";
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createSetting().setEmailAddress(longEmail);
         putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);

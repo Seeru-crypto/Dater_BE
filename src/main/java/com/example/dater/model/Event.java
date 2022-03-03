@@ -15,10 +15,14 @@ import java.time.Instant;
 @Getter
 @Setter
 public class Event {
+    public static final int MAX_DESC_LEN = 121;
+    public static final int MAX_NAME_LEN = 26;
+    public static final int REMINDER_DAYS_MAX_VALUE = 31;
+
     @Id
     private String id;
     @NotBlank(message = "Name is mandatory")
-    @Size(min = 1, max = 26, message = "Name is mandatory")
+    @Size(min = 1, max = MAX_NAME_LEN, message = "Name is mandatory")
     private String name;
     @Size(min = 20, max = 26, message = "date value is incorrect")
     @NotNull
@@ -27,10 +31,10 @@ public class Event {
     private Instant dateUpdated;
     @NotNull
     private Boolean reminder;
-    @Max(31)
+    @Max(REMINDER_DAYS_MAX_VALUE)
     @NotNull
     private Integer reminderDays;
-    @Size(max = 121, message = "desc len is too high")
+    @Size(max = MAX_DESC_LEN, message = "desc len is too high")
     private String description;
     @NotNull
     private Boolean accountForYear;

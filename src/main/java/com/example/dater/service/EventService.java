@@ -44,7 +44,6 @@ public class EventService {
     public void delete(String eventId) {
         eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with Id " +eventId+ " does not exist"));
-
         eventRepository.deleteById(eventId);
     }
 
