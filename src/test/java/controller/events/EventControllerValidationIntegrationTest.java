@@ -104,7 +104,12 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
     void updateEvent_shouldThrow_exception_whenNotExistingIdIsGiven() throws Exception {
         Event updatedEvent = createEventWithoutCreatedDate();
 
-        updateFunctionBody(getBytes(updatedEvent), "abc");
+        String path = "/api/events/abc";
+        mockMvc.perform(put(path)
+                        .content(getBytes(updatedEvent))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -120,7 +125,7 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
 
         String path = "/api/events/adasd";
         mockMvc.perform(delete(path))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
 
         mockMvc.perform(get("/api/events"))
                 .andExpect(status().isOk())

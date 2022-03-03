@@ -29,7 +29,7 @@ public class EventService {
 
     public Event update(Event eventDto, String eventId) {
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with Id " +eventId+ " does not exist"));
         event.setName(eventDto.getName())
                 .setDate(eventDto.getDate())
                 .setDescription(eventDto.getDescription())
@@ -43,7 +43,7 @@ public class EventService {
 
     public void delete(String eventId) {
         eventRepository.findById(eventId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event with Id " +eventId+ " does not exist"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with Id " +eventId+ " does not exist"));
 
         eventRepository.deleteById(eventId);
     }
