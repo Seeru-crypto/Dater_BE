@@ -22,6 +22,7 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
                 .andExpect(status().isBadRequest());
 
     }
+
     @Test
     void createSetting_shouldThrow_exception() throws Exception {
         Settings settings = createSetting();
@@ -31,6 +32,7 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isMethodNotAllowed());
     }
+
     @Test
     void deleteSetting_shouldThrow_exception() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());

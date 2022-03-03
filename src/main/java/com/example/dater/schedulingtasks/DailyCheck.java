@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class DailyCheck {
     private final EventDateChecker eventDateChecker;
-    private static final String CHECK_INIATED_BY_SCHEDULER = "Scheduler";
+    private static final String CHECK_INITIATED_BY_SCHEDULER = "Scheduler";
     private static final int SCHEDULER_VALUE_MINUTES = 10;
 
     @Autowired
@@ -28,6 +28,6 @@ public class DailyCheck {
     public void reportCurrentTime() throws MessagingException {
         String logValue = ("Event checked at: " + dateFormat.format(new Date())+ " next check in "+SCHEDULER_VALUE_MINUTES+" min");
         log.info(logValue);
-        eventDateChecker.checkEventDates(CHECK_INIATED_BY_SCHEDULER);
+        eventDateChecker.checkEventDates(CHECK_INITIATED_BY_SCHEDULER);
     }
 }

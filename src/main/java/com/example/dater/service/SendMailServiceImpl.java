@@ -3,6 +3,7 @@ package com.example.dater.service;
 import com.example.dater.model.Event;
 import com.example.dater.model.Log;
 import com.example.dater.model.Settings;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
@@ -16,6 +17,7 @@ import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SendMailServiceImpl implements SendMailService {
     private final JavaMailSender javaMailSender;
@@ -23,13 +25,6 @@ public class SendMailServiceImpl implements SendMailService {
     private final SettingsService settingService;
     private final LogService logService;
 
-    public SendMailServiceImpl(JavaMailSender javaMailSender, TemplateEngine templateEngine,
-            SettingsService settingService, LogService logService) {
-        this.javaMailSender = javaMailSender;
-        this.templateEngine = templateEngine;
-        this.settingService = settingService;
-        this.logService = logService;
-    }
     private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
     public void sendMimeMailList(List<Event> eventList, String iniatedBy) throws MessagingException {

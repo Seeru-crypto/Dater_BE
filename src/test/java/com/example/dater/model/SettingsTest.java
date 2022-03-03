@@ -9,9 +9,8 @@ import static org.junit.Assert.assertTrue;
 class SettingsTest {
 
     String errorMsg = "The given email does not match regex expression";
-
     @Test
-    void shoulAcceptEmailAddress() {
+    void shouldAcceptEmailAddress() {
         assertTrue(errorMsg, "username@domain.com".matches(EMAIL_REGEX));
         assertTrue(errorMsg, "email@gmail.com".matches(EMAIL_REGEX));
         assertTrue(errorMsg, "test@domain.com".matches(EMAIL_REGEX));

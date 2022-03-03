@@ -28,7 +28,7 @@ public class EventDateChecker {
         this.sendMailService = sendMailService;
     }
 
-    public void checkEventDates(String iniatedBy) throws MessagingException {
+    public void checkEventDates(String initiatedBy) throws MessagingException {
         eventList = eventRepository.findAll();
         LocalDate currentDate = LocalDate.now();
         List<Event> eventsToSendOut = new ArrayList<>();
@@ -52,15 +52,17 @@ public class EventDateChecker {
         }
 
         log.info("******************");
-        if (eventsToSendOut.isEmpty())
+        if (eventsToSendOut.isEmpty()) {
+            log.info("No events to send out");
             return;
+        }
 
         for (int a = 0; a < eventsToSendOut.size(); a++) {
             Event event = eventsToSendOut.get(a);
             event.setDate(event.getDate().substring(0, 10));
             eventsToSendOut.set(a, event);
         }
-        sendMailService.sendMimeMailList(eventsToSendOut, iniatedBy);
+        sendMailService.sendMimeMailList(eventsToSendOut, initiatedBy);
     }
 
 }

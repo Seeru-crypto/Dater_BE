@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class LogControllerIntegrationTestSetting extends LogBaseIntegrationTest {
+class LogControllerIntegrationTest extends LogBaseIntegrationTest {
 
     @Test
     void shouldSaveNewLog() throws Exception {
@@ -24,22 +24,18 @@ class LogControllerIntegrationTestSetting extends LogBaseIntegrationTest {
         LocalDateTime currentDate = LocalDateTime.now();
         Event remindedEvent = createEventWithoutCreatedDate().setDate(currentDate.toString()).setReminder(true).setReminderDays(0);
 
-        // Should create event, which will be reminded
         mockMvc.perform(post("/api/events")
                         .content(getBytes(remindedEvent))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        // Will initate manual event check, which will create a second log entry
+        // Will initiate an event check, which will generate a log entry
         mockMvc.perform(get("/api/events/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(status().isOk());
 
-        // Will verify created log values
         mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("length()").isNotEmpty())
-
-        ;
+                .andExpect(jsonPath("length()").isNotEmpty());
     }
 
     @Test

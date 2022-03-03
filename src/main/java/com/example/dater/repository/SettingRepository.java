@@ -8,6 +8,4 @@ import java.util.Optional;
 public interface SettingRepository extends MongoRepository<Settings, String> {
 
     Optional<Settings> findById(String id);
-
-
 }
