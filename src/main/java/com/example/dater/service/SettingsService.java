@@ -34,4 +34,9 @@ public class SettingsService {
                 .setDateUpdated(Instant.now());
         return settingsRepository.save(existingSetting);
     }
+    public String getFullEmail(String settingId) {
+        Settings existingSetting = settingsRepository.findById(settingId)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Setting with ID " + settingId + "does not exist"));
+        return existingSetting.getEmailAddress();
+    }
 }
