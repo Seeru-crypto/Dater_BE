@@ -13,11 +13,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class SettingsService {
-
     private final SettingRepository settingsRepository;
+    private final HelperFunctions helperFunctions;
 
     public List<Settings> getSettings() {
-        return settingsRepository.findAll();
+        List <Settings> settingList = settingsRepository.findAll();
+        Settings existingSetting = settingList.get(0);
+        String formattedEmail = helperFunctions.obfuscateEmail(existingSetting.getEmailAddress());
+        existingSetting.setEmailAddress(formattedEmail);
+        settingList.set(0, existingSetting);
+        return settingList;
     }
 
     public Settings update(Settings settingDto, String settingId) {

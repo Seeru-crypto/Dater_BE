@@ -4,11 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
 
 @NoArgsConstructor
@@ -27,7 +30,10 @@ public class Event {
     @Size(min = 20, max = 26, message = "date value is incorrect")
     @NotNull
     private String date;
+    @DateTimeFormat()
+    @Past(message = "Date created has to be in the past")
     private Instant dateCreated;
+    @PastOrPresent
     private Instant dateUpdated;
     @NotNull
     private Boolean reminder;

@@ -45,7 +45,7 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
         mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
-                .andExpect(jsonPath("$.[0].sentToAddress").value("person@gmail.com"))
+                .andExpect(jsonPath("$.[0].sentToAddress").value("per...@gmail.com"))
                 .andExpect(jsonPath("$.[0].dateCreated").isNotEmpty())
                 .andExpect(jsonPath("$.[0].initiatedBy").value("admin"))
                 .andExpect(jsonPath("$.[0].mailContent").value("[mail]"))

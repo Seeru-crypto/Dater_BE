@@ -11,11 +11,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class LogService {
-
     private final LogRepository logRepository;
+    private final HelperFunctions helperFunctions;
 
     public List<Log> findAll() {
-        return logRepository.findAll();
+        return helperFunctions.obfuscateLogs(logRepository.findAll());
     }
 
     public Log save(Log log) {

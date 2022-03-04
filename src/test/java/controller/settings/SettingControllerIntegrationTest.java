@@ -35,7 +35,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
         mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].isEmailActive").value(true))
-                .andExpect(jsonPath("$.[0].emailAddress").value("id-with-dash@domain.com"));
+                .andExpect(jsonPath("$.[0].emailAddress").value("id-...@domain.com"));
     }
 
     @Test
@@ -44,6 +44,6 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
         mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].isEmailActive").value(false))
-                .andExpect(jsonPath("$.[0].emailAddress").value("email@gmail.com"));
+                .andExpect(jsonPath("$.[0].emailAddress").value("ema...@gmail.com"));
     }
 }
