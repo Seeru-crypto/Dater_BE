@@ -17,6 +17,8 @@ import java.util.List;
 public class EventService {
     private final EventRepository eventRepository;
     private final EventDateChecker eventDateChecker;
+    private final HelperFunctions helperFunctions;
+
 
     public List<Event> findAll() {
         return eventRepository.findAll();
@@ -24,6 +26,7 @@ public class EventService {
 
     public Event save(Event event) {
         event.setDateCreated(Instant.now());
+        event.setDateNextReminder(helperFunctions.returnNextReminderDate(event));
         return eventRepository.save(event);
     }
 
@@ -37,7 +40,9 @@ public class EventService {
                 .setReminderDays(eventDto.getReminderDays())
                 .setAccountForYear(eventDto.getAccountForYear())
                 .setDateUpdated(Instant.now())
-                .setDateCreated(event.getDateCreated());
+                .setDateCreated(event.getDateCreated())
+                .setDateNextReminder((helperFunctions.returnNextReminderDate(eventDto))
+                );
         return eventRepository.save(event);
     }
 

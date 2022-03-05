@@ -27,7 +27,7 @@ public class Event {
     @NotBlank(message = "Name is mandatory")
     @Size(min = 1, max = MAX_NAME_LEN, message = "Name is mandatory")
     private String name;
-    @Size(min = 20, max = 26, message = "date value is incorrect")
+    @Size(min = 20, max = 30, message = "date value is incorrect")
     @NotNull
     private String date;
     @DateTimeFormat()
@@ -44,6 +44,7 @@ public class Event {
     private String description;
     @NotNull
     private Boolean accountForYear;
+    private Instant dateNextReminder;
 
     @Override
     public String toString() {

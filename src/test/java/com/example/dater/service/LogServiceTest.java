@@ -10,7 +10,7 @@ import static controller.TestObjects.createLog;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LogServiceTest {
-    private HelperFunctions testHelperFunction = new HelperFunctions();
+    private final HelperFunctions testHelperFunction = new HelperFunctions();
     String shortEmailValue = "pe@gmail.com";
     String longEmailValue = "person@gmail.com";
 

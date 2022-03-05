@@ -27,7 +27,7 @@ public class TestObjects {
         return new Event().setName("Hello world!")
                 .setDate("2022-02-19T13:26:13.836Z")
                 .setAccountForYear(false)
-                .setReminder(false)
+                .setReminder(true)
                 .setReminderDays(1);
     };
 

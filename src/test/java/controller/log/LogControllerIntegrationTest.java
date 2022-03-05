@@ -6,7 +6,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static controller.TestObjects.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -21,7 +21,7 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
     @Test
     void shouldSaveNewLog() throws Exception {
         mongoTemplate.insert(createSetting().setIsEmailActive(true));
-        LocalDateTime currentDate = LocalDateTime.now();
+        Instant currentDate = Instant.now();
         Event remindedEvent = createEventWithoutCreatedDate().setDate(currentDate.toString()).setReminder(true).setReminderDays(0);
 
         mockMvc.perform(post("/api/events")

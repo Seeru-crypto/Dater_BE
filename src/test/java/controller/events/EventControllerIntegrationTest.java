@@ -24,7 +24,8 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Event created now!"))
                 .andExpect(jsonPath("$.dateCreated").isNotEmpty())
-                .andExpect(jsonPath("$.dateUpdated").isEmpty());
+                .andExpect(jsonPath("$.dateUpdated").isEmpty())
+                .andExpect(jsonPath("$.dateNextReminder").value("2022-02-18T13:26:13.836Z"));
     }
 
     @Test
@@ -54,7 +55,8 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                 .andExpect(jsonPath("$.[0].reminderDays").value(2))
                 .andExpect(jsonPath("$.[0].description").isEmpty())
                 .andExpect(jsonPath("$.[0].dateCreated").isNotEmpty())
-                .andExpect(jsonPath("$.[0].dateUpdated").isNotEmpty());
+                .andExpect(jsonPath("$.[0].dateUpdated").isNotEmpty())
+                .andExpect(jsonPath("$.[0].dateNextReminder").value("2023-02-17T13:26:13.836Z"));
     }
 
     @Test
@@ -65,7 +67,7 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].name").value("Hello world!"))
                 .andExpect(jsonPath("$.[0].date").value("2022-02-19T13:26:13.836Z"))
-                .andExpect(jsonPath("$.[0].reminder").value(false));
+                .andExpect(jsonPath("$.[0].reminder").value(true));
     }
 
     @Test
