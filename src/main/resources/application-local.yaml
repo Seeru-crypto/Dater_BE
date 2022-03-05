@@ -22,6 +22,9 @@ spring.mail:
 management:
   endpoints:
     web:
+      cors:
+        allowed-origins: http://localhost:5000/
+        allowed-methods: GET
       exposure:
         include: "health,scheduledtasks"
 

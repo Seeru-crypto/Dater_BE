@@ -14,7 +14,7 @@ import java.util.Date;
 public class DailyCheck {
     private final EventDateChecker eventDateChecker;
     private static final String CHECK_INITIATED_BY_SCHEDULER = "Scheduler";
-    private static final int SCHEDULER_VALUE_MINUTES = 30;
+    private static final int SCHEDULER_VALUE_MINUTES = 60;
 
     @Autowired
     public DailyCheck(EventDateChecker eventDateChecker) {
