@@ -5,6 +5,8 @@ import com.example.dater.model.Log;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -32,6 +34,20 @@ public class HelperFunctions {
 
     public Instant returnNextReminderDate(Event event) {
         if (Boolean.FALSE.equals(event.getReminder())) return null;
-        return event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
+
+        if (Boolean.TRUE.equals(event.getAccountForYear())) {
+            return event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
+        }
+        else{
+            Instant correctMonth = event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
+            LocalDate currentDate = LocalDate.now();
+            LocalDate date = correctMonth.atZone(ZoneOffset.UTC).toLocalDate();
+
+            return correctMonth.atZone(ZoneOffset.UTC)
+                    .withDayOfMonth(date.getDayOfMonth())
+                    .withMonth(date.getMonthValue())
+                    .withYear(currentDate.getYear())
+                    .toInstant();
+        }
     }
 }
