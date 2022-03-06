@@ -20,7 +20,7 @@ import java.time.Instant;
 public class Event {
     public static final int MAX_DESC_LEN = 121;
     public static final int MAX_NAME_LEN = 26;
-    public static final int REMINDER_DAYS_MAX_VALUE = 31;
+    public static final int REMINDER_DAYS_MAX_VALUE = 90;
     public static final Instant MAX_DATE = Instant.parse("2040-12-30T22:00:00.000Z");
     public static final Instant MIN_DATE = Instant.parse("1959-12-31T21:00:00.000Z");
 
