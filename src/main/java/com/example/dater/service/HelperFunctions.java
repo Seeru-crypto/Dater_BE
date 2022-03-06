@@ -32,7 +32,6 @@ public class HelperFunctions {
 
     public Instant returnNextReminderDate(Event event) {
         if (Boolean.FALSE.equals(event.getReminder())) return null;
-        Instant userEnteredDate = Instant.parse(event.getDate());
-        return userEnteredDate.minus(event.getReminderDays(), ChronoUnit.DAYS);
+        return event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
     }
 }

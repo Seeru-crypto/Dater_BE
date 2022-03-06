@@ -3,6 +3,8 @@ package controller.events;
 import com.example.dater.model.Event;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+
 import static com.example.dater.model.Event.*;
 import static controller.TestObjects.createEventWithoutCreatedDate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -49,14 +51,14 @@ class EventControllerValidationIntegrationTest extends EventBaseIntegrationTest 
    };
 
     @Test
-    void createEvent_shouldThrow_exception_whenDateEmpty() throws Exception {
-        Event event = createEventWithoutCreatedDate().setDate("");
+    void createEvent_shouldThrow_exception_whenDateYearisBefore1960() throws Exception {
+        Event event = createEventWithoutCreatedDate().setDate(Instant.parse("1959-12-30T21:00:00.000Z"));
         postFunctionBody(getBytes(event));
     };
 
     @Test
-    void createEvent_shouldThrow_exception_whenDateTooLong() throws Exception {
-        Event event = createEventWithoutCreatedDate().setDate("2022-02-19T13:26:13.836ZASDASDASFAG");
+    void createEvent_shouldThrow_exception_whenDateYearisAfter2040() throws Exception {
+        Event event = createEventWithoutCreatedDate().setDate(Instant.parse("2040-12-31T22:00:00.000Z"));
         postFunctionBody(getBytes(event));
     };
 

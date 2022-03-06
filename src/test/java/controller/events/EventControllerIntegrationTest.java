@@ -5,6 +5,8 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.time.Instant;
+
 import static controller.TestObjects.createEventWithCreatedDate;
 import static controller.TestObjects.createEventWithoutCreatedDate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -35,7 +37,7 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
         String path = "/api/events/" + createdEvent.getId();
         Event updatedEvent = new Event()
                 .setName("UPDATED_NAME")
-                .setDate("2023-02-19T13:26:13.836Z")
+                .setDate(Instant.parse("2023-02-19T13:26:13.836Z"))
                 .setAccountForYear(true)
                 .setReminder(true)
                 .setReminderDays(2);

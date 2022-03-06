@@ -21,8 +21,7 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
     @Test
     void shouldSaveNewLog() throws Exception {
         mongoTemplate.insert(createSetting().setIsEmailActive(true));
-        Instant currentDate = Instant.now();
-        Event remindedEvent = createEventWithoutCreatedDate().setDate(currentDate.toString()).setReminder(true).setReminderDays(0);
+        Event remindedEvent = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
 
         mockMvc.perform(post("/api/events")
                         .content(getBytes(remindedEvent))

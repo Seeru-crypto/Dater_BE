@@ -12,19 +12,24 @@ import javax.mail.MessagingException;
 import java.time.Instant;
 import java.util.List;
 
+import static com.example.dater.model.Event.MAX_DATE;
+import static com.example.dater.model.Event.MIN_DATE;
+
 @RequiredArgsConstructor
 @Service
 public class EventService {
     private final EventRepository eventRepository;
     private final EventDateChecker eventDateChecker;
     private final HelperFunctions helperFunctions;
-
-
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
 
     public Event save(Event event) {
+        if (event.getDate().isBefore(MIN_DATE) || event.getDate().isAfter(MAX_DATE)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date is invalid");
+        }
+
         event.setDateCreated(Instant.now());
         event.setDateNextReminder(helperFunctions.returnNextReminderDate(event));
         return eventRepository.save(event);
