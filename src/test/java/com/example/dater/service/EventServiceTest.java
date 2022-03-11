@@ -28,9 +28,9 @@ class EventServiceTest {
 
     @Test
     void shouldNotAccountForYear() {
-        Event event = createEventWithoutCreatedDate().setDate(Instant.parse("2020-03-13T02:00:00.000Z")).setReminderDays(7).setReminder(true).setAccountForYear(false);
+        Event event = createEventWithoutCreatedDate().setDate(Instant.parse("2020-03-06T02:00:00Z")).setReminderDays(7).setReminder(true).setAccountForYear(false);
         Instant reminderDate = testHelperFunction.returnNextReminderDate(event);
-        Instant expectedResult = Instant.parse("2022-03-06T02:00:00Z");
+        Instant expectedResult = Instant.parse("2020-02-28T02:00:00Z");
         assertEquals(reminderDate, expectedResult);
     }
 
@@ -38,7 +38,7 @@ class EventServiceTest {
     void shouldAccountForYear() {
         Event event = createEventWithoutCreatedDate().setDate(Instant.parse("2020-03-13T02:00:00.000Z")).setReminderDays(7).setReminder(true).setAccountForYear(true);
         Instant reminderDate = testHelperFunction.returnNextReminderDate(event);
-        Instant expectedResult = Instant.parse("2020-03-06T02:00:00Z");
+        Instant expectedResult = Instant.parse("2022-03-06T02:00:00Z");
         assertEquals(reminderDate, expectedResult);
     }
 }

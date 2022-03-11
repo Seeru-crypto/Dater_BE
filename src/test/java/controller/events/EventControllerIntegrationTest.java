@@ -58,7 +58,7 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                 .andExpect(jsonPath("$.[0].description").isEmpty())
                 .andExpect(jsonPath("$.[0].dateCreated").isNotEmpty())
                 .andExpect(jsonPath("$.[0].dateUpdated").isNotEmpty())
-                .andExpect(jsonPath("$.[0].dateNextReminder").value("2023-02-17T13:26:13.836Z"));
+                .andExpect(jsonPath("$.[0].dateNextReminder").value("2022-02-17T13:26:13.836Z"));
     }
 
     @Test
