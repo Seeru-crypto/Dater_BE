@@ -32,7 +32,7 @@ public class Event {
     @NotNull
     private Instant date;
     @DateTimeFormat()
-    @Past(message = "Date created has to be in the past")
+    @PastOrPresent(message = "Date created has to be in the past")
     private Instant dateCreated;
     @PastOrPresent
     private Instant dateUpdated;
