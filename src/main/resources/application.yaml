@@ -26,3 +26,13 @@ logging.level:
 
 # @valueToken
 FRONT_URL: "https://date-manager-front.herokuapp.com/"
+
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: https://date-manager-front.herokuapp.com/
+        allowed-methods: GET
+      exposure:
+        include: "health,scheduledtasks"
+
