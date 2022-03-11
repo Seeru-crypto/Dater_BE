@@ -3,15 +3,17 @@ package com.example.dater.controller;
 import com.example.dater.model.Event;
 import com.example.dater.service.EventService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 @RequiredArgsConstructor
-//@CrossOrigin(origins = {"http://localhost:3000", "https://date-manager-front.herokuapp.com/"})
 @RestController
 @RequestMapping(path = "api/events")
 public class EventController {
-    public String checkIniatedByAdmin = "Admin";
+    private static final String CHECK_INIATED_BY_ADMIN = "Admin";
 
     private final EventService eventService;
 
@@ -21,27 +23,27 @@ public class EventController {
     }
 
     @PostMapping
-    public Event save(@RequestBody Event newEvent) {
+    public Event save(@Valid @RequestBody Event newEvent) {
+        if (newEvent.getId() != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id cannot exist");
         return eventService.save(newEvent);
     }
 
+    @PutMapping(path = "{eventId}")
+    public Event put(@PathVariable String eventId, @Valid @RequestBody Event event) {
+        return eventService.update(event, eventId);
+    }
     @DeleteMapping(path = "{eventId}")
-    public void delete(@PathVariable("eventId") String eventId){
+    public void delete(@Valid @PathVariable("eventId") String eventId){
         eventService.delete(eventId);
     }
 
     @PostMapping(path = "/delete")
-    public void deleteEvents(@RequestBody List<String> eventIds) {
+    public void deleteEvents(@Valid @RequestBody List<String> eventIds) {
         eventService.deleteEvents(eventIds);
-    }
-
-    @PutMapping(path = "{eventId}")
-    public void put(@PathVariable("eventId") String eventId, @RequestBody Event event ){
-        eventService.update(event, eventId);
     }
 
     @GetMapping("/checkEvents")
     public void checkItems() {
-        eventService.checkEventDates(checkIniatedByAdmin);
+        eventService.checkEventDates(CHECK_INIATED_BY_ADMIN);
     }
 }

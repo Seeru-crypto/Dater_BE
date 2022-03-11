@@ -1,56 +1,36 @@
 package com.example.dater.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.Instant;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class Settings {
-
+    public static final int MAX_EMAIL_LEN = 35;
+     public static final String EMAIL_REGEX = "^[\\w!#$%&’*+\\/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+\\/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     @Id
     private String id;
     @NotNull
-    private Boolean sendEmails;
-    @Size(max = 35, message = "Email is too long")
+    private Boolean isEmailActive;
+    @NotBlank(message = "Email is mandatory")
+    @Size(max = MAX_EMAIL_LEN, message = "Email is too long")
+    @Email(message = "Email is not valid", regexp = EMAIL_REGEX)
     private String emailAddress;
-    private int checkInterval;
+    private Instant dateUpdated;
 
-    public String getId() {
-        return id;
+    @Override
+    public String toString() {
+        return String.format(
+                "Settings[id='%s', isEmailActive='%s', emailAddress='%s']",
+                id, isEmailActive, emailAddress);
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Boolean getSendEmails() {
-        return sendEmails;
-    }
-
-    public void setSendEmails(Boolean sendEmails) {
-        this.sendEmails = sendEmails;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public int getCheckInterval() {
-        return checkInterval;
-    }
-
-    public void setCheckInterval(int checkInterval) {
-        this.checkInterval = checkInterval;
-    }
-
-    public void setSettings(Settings settings) {
-        this.sendEmails = settings.sendEmails;
-        this.emailAddress = settings.emailAddress;
-        this.checkInterval = settings.checkInterval;
-    }
-
 }

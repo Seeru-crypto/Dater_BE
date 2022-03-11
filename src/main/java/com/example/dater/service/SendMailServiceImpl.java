@@ -3,6 +3,7 @@ package com.example.dater.service;
 import com.example.dater.model.Event;
 import com.example.dater.model.Log;
 import com.example.dater.model.Settings;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
@@ -14,9 +15,9 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SendMailServiceImpl implements SendMailService {
     private final JavaMailSender javaMailSender;
@@ -24,13 +25,6 @@ public class SendMailServiceImpl implements SendMailService {
     private final SettingsService settingService;
     private final LogService logService;
 
-    public SendMailServiceImpl(JavaMailSender javaMailSender, TemplateEngine templateEngine,
-            SettingsService settingService, LogService logService) {
-        this.javaMailSender = javaMailSender;
-        this.templateEngine = templateEngine;
-        this.settingService = settingService;
-        this.logService = logService;
-    }
     private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
     public void sendMimeMailList(List<Event> eventList, String iniatedBy) throws MessagingException {
@@ -42,9 +36,10 @@ public class SendMailServiceImpl implements SendMailService {
 
         try {
             emailAddressTo = list.get(0).getEmailAddress();
-            emailToggle = list.get(0).getSendEmails();
+            emailToggle = list.get(0).getIsEmailActive();
+            emailAddressTo = settingService.getFullEmail(list.get(0).getId());
         } catch (Exception e) {
-            log.warn("error has occured ", e);
+            log.warn("error has occurred ", e);
         }
         if (Boolean.FALSE.equals(emailToggle)) {
             log.info("Emails are not enabled");
@@ -59,10 +54,9 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setText(process, true);
 
         helper.setTo(emailAddressTo);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String subject = ("Event report: " + LocalDate.now());
+        String subject = ("Dater report: " + LocalDate.now());
         helper.setSubject(subject);
-        newLog.setLog(localDateTime.toString(), emailAddressTo, iniatedBy, eventList.toString(), 10);
+        newLog.setSentToAddress(emailAddressTo).setInitiatedBy(iniatedBy).setMailContent(eventList.toString()).setSchedulerValue(10);
 
         try {
             javaMailSender.send(mimeMessage);

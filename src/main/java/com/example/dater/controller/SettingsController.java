@@ -4,7 +4,11 @@ import java.util.List;
 import com.example.dater.service.SettingsService;
 import com.example.dater.model.Settings;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +23,10 @@ public class SettingsController {
     }
 
     @PutMapping(path = "{settingId}")
-    public void put(@PathVariable("settingId") String settingId, @RequestBody Settings settings, @RequestParam Integer pin ){
-        settingService.update(settings, settingId, pin);
+    public Settings put(@PathVariable("settingId") String settingId, @Valid @RequestBody Settings settings, @RequestParam Integer pin ){
+        if  (pin != 154878 ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pin incorrect");
+        }
+        return settingService.update(settings, settingId);
     }
-
 }

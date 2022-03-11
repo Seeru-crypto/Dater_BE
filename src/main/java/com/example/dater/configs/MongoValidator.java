@@ -1,4 +1,4 @@
-package com.example.dater.model;
+package com.example.dater.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

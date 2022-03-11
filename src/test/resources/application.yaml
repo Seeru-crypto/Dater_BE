@@ -1,0 +1,6 @@
+spring.data.mongodb:
+  url:
+
+spring.mail:
+  host:
+FRONT_URL: "FRONT_URL"
