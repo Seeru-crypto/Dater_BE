@@ -1,6 +1,7 @@
 package com.example.dater.service;
 
 import com.example.dater.model.Settings;
+import com.example.dater.model.SettingsDTO;
 import com.example.dater.repository.SettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -25,12 +27,16 @@ public class SettingsService {
         return settingList;
     }
 
-    public Settings update(Settings settingDto, String settingId) {
+    public Settings update(SettingsDTO settingDto, String settingId) {
         Settings existingSetting = settingsRepository.findById(settingId)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Setting with ID " + settingId + "does not exist"));
+        String emailAdressToSave;
+        if (settingDto.getEmailAddress() == null || Objects.equals(settingDto.getEmailAddress(), "")) emailAdressToSave = existingSetting.getEmailAddress();
+        else emailAdressToSave = settingDto.getEmailAddress();
+
         existingSetting
                 .setIsEmailActive(settingDto.getIsEmailActive())
-                .setEmailAddress(settingDto.getEmailAddress())
+                .setEmailAddress(emailAdressToSave)
                 .setDateUpdated(Instant.now());
         return settingsRepository.save(existingSetting);
     }

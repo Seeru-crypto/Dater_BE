@@ -1,6 +1,8 @@
 package com.example.dater.controller;
 
 import java.util.List;
+
+import com.example.dater.model.SettingsDTO;
 import com.example.dater.service.SettingsService;
 import com.example.dater.model.Settings;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ public class SettingsController {
     }
 
     @PutMapping(path = "{settingId}")
-    public Settings put(@PathVariable("settingId") String settingId, @Valid @RequestBody Settings settings, @RequestParam Integer pin ){
+    public Settings put(@PathVariable("settingId") String settingId,@Valid @RequestBody SettingsDTO settings, @RequestParam Integer pin ){
         if  (pin != 154878 ) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pin incorrect");
         }

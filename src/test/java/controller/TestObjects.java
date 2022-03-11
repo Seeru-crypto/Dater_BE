@@ -12,8 +12,8 @@ public class TestObjects {
         return new Settings()
                 .setIsEmailActive(false)
                 .setEmailAddress("email@gmail.com");
-
     }
+
     public static Log createLog() {
         return new Log()
                 .setSentToAddress("person@gmail.com")
