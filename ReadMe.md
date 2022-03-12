@@ -1,12 +1,12 @@
 # Dater Back-end
 
-This is the Dater project Back-end server. It is built using Spring Boot, thymeleaf and implements basic CRUD functionality, checks all the events in the database daily and if needed sends out a daily report incoming events to the user.
+This is the Dater project Back-end. It is built using Spring Boot. It implements basic CRUD functionality on all models, checks all the events in the events at the given interval and if needed sends out a daily report incoming events to the user.
+Every notification (mail or sms) is logged in the logging database. 
 
-[Data validation is spring](https://www.baeldung.com/spring-boot-bean-validation)
+[Front-end github repo](https://github.com/Seeru-crypto/Dater_FE)
 
 
 ---
-// ToDo update readme
 ## Setup
 
 1.  On first time setup, user needs to configure email address, which is used to send out emails.
@@ -34,7 +34,6 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 
 - [x] Serve API endpoints
     -   [x] GET events
-        -   [x] with specific ID
     -   [x] POST Events
     -   [x] DELETE Event
     -   [x] UPDATE Event
@@ -44,31 +43,37 @@ This is the Dater project Back-end server. It is built using Spring Boot, thymel
 - [x] Server can implement CRUD functionality to DB
 - [x] Integrate React Application with Spring boot back-end
 - [x] Server Sends the e-mail at a specified date.
-    -   [x] Server Check the dates in DB once every 24h
-        -   [x] [Create recurring tasks](https://spring.io/guides/gs/scheduling-tasks/)
-        -   [x] [Get all event info from mongoDb](https://www.codementor.io/@prasadsaya/access-mongodb-database-from-a-spring-boot-application-17nwi5shuc)
-        -   [x] Create date check logic
-        -   [x] By default the checker ignores year variables.
-    -   [x] function that sends e-mail to designated aadress
-        -   [x] [Testing emails](https://mailtrap.io/blog/spring-send-email),
-        -   [x] [Emailer implementation](https://www.section.io/engineering-education/spring-boot-smtp/)
-        -   [x] [Function that that sends the email, using a given template, which uses given variables](https://springhow.com/spring-boot-email-thymeleaf)
-        -   [x] Create a daily report, using said templates
-                (name of event, date)
-        -   [x] [Sent emails are logged](https://www.baeldung.com/spring-boot-logging)
+    - [x] Server Check the dates in DB once every 24h
+        -   [x] Create recurring tasks
+        -   [x] Create Event date validation logic
+        -   [x] add remind annually functionality
+    - [ ] function that sends e-mail to designated aadress
+        - [x] Emailer implementation
+        - [x] email body is defined in a given template
+        - [x] Create a daily report, using said templates (name of event, date and desc)
+        - [x] Sent emails are logged
+        - [ ] [Testing emails](https://mailtrap.io/blog/spring-send-email),
+    - [ ] server sends sms notification if the sms value is selected. 
+      - [ ] sms integration tests are done. 
+      - [ ] sms model structure is implemented
+      - [ ] sms funcationlity is implemented, using twilio
 - [x] Create admin object model.
 - [x] Add Send email REST API endpoint.
-- [ ] Add 66% test coverage
+- [x] Add 66% test coverage
 - [ ] Create server Dockerfile
-- [x] [Add Swagger Module](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+- [x] Add Swagger Module
+- [x] enable spring actuator with health & scheduler endpoints
+- [x] make CORS settings configurable
 - [x] Publish
     -   [x] Setup MongoDB server
     -   [x] Publish FE & BE in heroku.
+- [ ] Security
+  - [x] Add data validation to all requests where applicable
+  - [ ] Add request throttling, to prevent DDOS and malicous spamming. 
+  - [ ] Add proper user registration and authentication, using auth0 (Realised in module 3)
+- 
+### PORTS
 
-#### Realised in module 3
-- [ ] Setup authentication module
-
-### MongoDB Database
-
--   uses port 270717
--   [x] Create DB Dockerfile, with default settings
+- Front uses port 5000
+- Back-end uses 5005
+- MongoDB uses port 270717
