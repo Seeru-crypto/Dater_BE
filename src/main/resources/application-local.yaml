@@ -32,3 +32,6 @@ management:
 logging.level.org.springframework.data: debug
 #logging.level.root: trace
 FRONT_URL: "http://localhost:5000/"
+TWILIO_ACCOUNT_SID:
+TWILIO_AUTH_TOKEN:
+TWILIO_PHONE_NUMBER:

@@ -26,11 +26,13 @@ public class Settings {
     @Email(message = "Email is not valid", regexp = EMAIL_REGEX)
     private String emailAddress;
     private Instant dateUpdated;
+    private String smsTo;
+    private String smsMessage;
 
     @Override
     public String toString() {
         return String.format(
-                "Settings[id='%s', isEmailActive='%s', emailAddress='%s']",
-                id, isEmailActive, emailAddress);
+                "Settings[id='%s', isEmailActive='%s', emailAddress='%s', smsTo='%s', smsMessage='%s']",
+                id, isEmailActive, emailAddress, smsTo, smsMessage);
     }
 }
