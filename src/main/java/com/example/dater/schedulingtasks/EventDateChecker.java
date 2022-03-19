@@ -42,6 +42,7 @@ public class EventDateChecker {
         if (Boolean.TRUE.equals(event.getAccountForYear()) && currentDate.equals(reminderDate)){
             return true;
         }
+
         else if (Boolean.FALSE.equals(event.getAccountForYear())){
             ZoneId z = ZoneId.systemDefault();
             ZonedDateTime currentDateTime = ZonedDateTime.ofInstant(currentDate, z);
