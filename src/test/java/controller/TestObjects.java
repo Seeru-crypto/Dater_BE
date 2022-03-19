@@ -11,7 +11,9 @@ public class TestObjects {
     public static Settings createSetting() {
         return new Settings()
                 .setIsEmailActive(false)
-                .setEmailAddress("email@gmail.com");
+                .setEmailAddress("email@gmail.com")
+                .setIsSmsActive(false)
+                .setSmsTo("+372 1234567");
     }
 
     public static Log createLog() {
@@ -19,7 +21,7 @@ public class TestObjects {
                 .setSentToAddress("person@gmail.com")
                 .setInitiatedBy("admin")
                 .setDateCreated(Instant.parse("2022-02-19T13:26:13.836Z"))
-                .setMailContent("[mail]")
+                .setMessageContent("[mail]")
                 .setSchedulerValue(10);
     }
 

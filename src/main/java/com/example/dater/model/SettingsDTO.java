@@ -19,4 +19,6 @@ public class SettingsDTO {
     @Size(max = MAX_EMAIL_LEN, message = "Email is too long")
     private String emailAddress;
     private Instant dateUpdated;
+    private String smsTo;
+    private Boolean isSmsActive;
 }

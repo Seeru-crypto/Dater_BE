@@ -27,12 +27,12 @@ public class Settings {
     private String emailAddress;
     private Instant dateUpdated;
     private String smsTo;
-    private String smsMessage;
+    private Boolean isSmsActive;
 
     @Override
     public String toString() {
         return String.format(
-                "Settings[id='%s', isEmailActive='%s', emailAddress='%s', smsTo='%s', smsMessage='%s']",
-                id, isEmailActive, emailAddress, smsTo, smsMessage);
+                "Settings[id='%s', isEmailActive='%s', emailAddress='%s', smsTo='%s', isSmsActive='%s']",
+                id, isEmailActive, emailAddress, smsTo, isSmsActive);
     }
 }

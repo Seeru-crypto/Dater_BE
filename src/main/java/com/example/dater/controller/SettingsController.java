@@ -3,7 +3,6 @@ package com.example.dater.controller;
 import com.example.dater.model.Settings;
 import com.example.dater.model.SettingsDTO;
 import com.example.dater.service.SettingsService;
-import com.twilio.exception.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +31,4 @@ public class SettingsController {
         return settingService.update(settings, settingId);
     }
 
-    @GetMapping(path = "/sms")
-    public void smsSubmit() {
-        try{
-            settingService.send();
-        }
-        catch(ApiException e){
-            throw e;
-        }
-    }
 }

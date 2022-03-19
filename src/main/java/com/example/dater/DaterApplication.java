@@ -47,8 +47,8 @@ public class DaterApplication implements CommandLineRunner {
 			Settings setting = new Settings();
 			setting.setEmailAddress("email@gmail.com");
 			setting.setIsEmailActive(false);
-			setting.setSmsMessage("test msg");
 			setting.setSmsTo("+372 1234567");
+			setting.setIsSmsActive(false);
 			settingRepository.save(setting);
 			log.info("Settings repo created");
 		}

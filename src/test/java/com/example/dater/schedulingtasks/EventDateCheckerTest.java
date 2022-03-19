@@ -3,6 +3,7 @@ package com.example.dater.schedulingtasks;
 import com.example.dater.model.Event;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.service.HelperFunctions;
+import com.example.dater.service.SettingsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +18,8 @@ class EventDateCheckerTest {
 
     @Autowired
     private EventRepository eventRepository;
-    private final EventDateChecker eventDateChecker = new EventDateChecker(eventRepository);
+    private SettingsService settingsService;
+    private final EventDateChecker eventDateChecker = new EventDateChecker(eventRepository, settingsService);
     private final HelperFunctions helperFunctions = new HelperFunctions();
 
     @Test
