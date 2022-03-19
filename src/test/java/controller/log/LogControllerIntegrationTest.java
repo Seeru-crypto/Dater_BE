@@ -19,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class LogControllerIntegrationTest extends LogBaseIntegrationTest {
 
     @Test
-    void shouldSaveNewLog() throws Exception {
-        mongoTemplate.insert(createSetting().setIsEmailActive(true));
+    void shouldSaveNewLogWithMail() throws Exception {
+        mongoTemplate.insert(createSetting().setIsEmailActive(true).setIsSmsActive(false));
         Event remindedEvent = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
 
         mockMvc.perform(post("/api/events")
@@ -47,7 +47,7 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
                 .andExpect(jsonPath("$.[0].sentToAddress").value("per...@gmail.com"))
                 .andExpect(jsonPath("$.[0].dateCreated").isNotEmpty())
                 .andExpect(jsonPath("$.[0].initiatedBy").value("admin"))
-                .andExpect(jsonPath("$.[0].mailContent").value("[mail]"))
+                .andExpect(jsonPath("$.[0].messageContent").value("[mail]"))
                 .andExpect(jsonPath("$.[0].schedulerValue").value(10))
                 .andExpect(jsonPath("$.[0].id").value(existingLog.getId()));
     }

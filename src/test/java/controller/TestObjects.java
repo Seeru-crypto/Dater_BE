@@ -6,6 +6,8 @@ import com.example.dater.model.Settings;
 
 import java.time.Instant;
 
+import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
+
 public class TestObjects {
 
     public static Settings createSetting() {
@@ -22,7 +24,8 @@ public class TestObjects {
                 .setInitiatedBy("admin")
                 .setDateCreated(Instant.parse("2022-02-19T13:26:13.836Z"))
                 .setMessageContent("[mail]")
-                .setSchedulerValue(10);
+                .setSchedulerValue(10)
+                .setMessageType(MESSAGE_TYPE_MAIL);
     }
 
     public static Event createEventWithoutCreatedDate() {

@@ -25,7 +25,7 @@ import static com.example.dater.schedulingtasks.DailyCheck.SCHEDULER_VALUE_MINUT
 @RequiredArgsConstructor
 @Service
 public class SettingsService {
-    private static final String MESSAGE_TYPE_SMS = "sms";
+    public static final String MESSAGE_TYPE_SMS = "sms";
     private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
     private final SettingRepository settingsRepository;
     private final LogService logService;
@@ -83,7 +83,7 @@ public class SettingsService {
         List <Settings> settingList = settingsRepository.findAll();
         Settings settings = settingList.get(0);
 
-        if (Boolean.FALSE.equals(settings.getIsEmailActive())) return;
+        if (Boolean.FALSE.equals(settings.getIsSmsActive())) return;
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 

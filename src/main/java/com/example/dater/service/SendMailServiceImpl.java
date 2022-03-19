@@ -22,7 +22,7 @@ import static com.example.dater.schedulingtasks.DailyCheck.SCHEDULER_VALUE_MINUT
 @RequiredArgsConstructor
 @Service
 public class SendMailServiceImpl implements SendMailService {
-    private static final String MESSAGE_TYPE_MAIL = "mail";
+    public static final String MESSAGE_TYPE_MAIL = "mail";
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final SettingsService settingService;

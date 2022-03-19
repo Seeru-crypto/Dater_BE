@@ -11,12 +11,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
+
 @Configuration
 public class HelperFunctions {
 
     public List<Log> obfuscateLogs(List<Log> existingLogs) {
         for (Log log : existingLogs){
-            if (Objects.equals(log.getMessageType(), "mail")) {
+            if (Objects.equals(log.getMessageType(), MESSAGE_TYPE_MAIL)) {
                 String formattedMail = obfuscateEmail(log.getSentToAddress());
                 log.setSentToAddress(formattedMail);
             }
