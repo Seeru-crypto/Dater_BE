@@ -26,6 +26,9 @@ logging.level:
 
 # @valueToken
 FRONT_URL: "https://date-manager-front.herokuapp.com/"
+TWILIO_ACCOUNT_SID: ""
+TWILIO_AUTH_TOKEN: ""
+TWILIO_PHONE_NUMBER: ""
 
 management:
   endpoints:

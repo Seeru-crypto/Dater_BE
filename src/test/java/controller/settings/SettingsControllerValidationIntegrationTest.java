@@ -21,7 +21,6 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
-
     }
 
     @Test
@@ -63,13 +62,6 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     }
 
     @Test
-    void updateSetting_shouldThrow_exception_whenEmailEmpty() throws Exception {
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress("");
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
     void updateSetting_shouldThrow_exception_whenEmailTooLong() throws Exception {
         String longEmail = RandomStringUtils.random(MAX_EMAIL_LEN+1) + "@gmail.com";
         Settings createdSetting = mongoTemplate.insert(createSetting());
@@ -82,6 +74,5 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createSetting().setIsEmailActive(null);
         putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-
     }
 }

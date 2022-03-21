@@ -17,9 +17,12 @@ import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.example.dater.schedulingtasks.DailyCheck.SCHEDULER_VALUE_MINUTES;
+
 @RequiredArgsConstructor
 @Service
 public class SendMailServiceImpl implements SendMailService {
+    public static final String MESSAGE_TYPE_MAIL = "mail";
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
     private final SettingsService settingService;
@@ -56,8 +59,11 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setTo(emailAddressTo);
         String subject = ("Dater report: " + LocalDate.now());
         helper.setSubject(subject);
-        newLog.setSentToAddress(emailAddressTo).setInitiatedBy(iniatedBy).setMailContent(eventList.toString()).setSchedulerValue(10);
-
+        newLog.setSentToAddress(emailAddressTo)
+                .setInitiatedBy(iniatedBy)
+                .setMessageContent(eventList.toString())
+                .setSchedulerValue(SCHEDULER_VALUE_MINUTES)
+                .setMessageType(MESSAGE_TYPE_MAIL);
         try {
             javaMailSender.send(mimeMessage);
             logService.save(newLog);
