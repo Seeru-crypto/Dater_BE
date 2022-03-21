@@ -44,7 +44,10 @@ public class SettingsService {
         List <Settings> settingList = settingsRepository.findAll();
         Settings existingSetting = settingList.get(0);
         String formattedEmail = helperFunctions.obfuscateEmail(existingSetting.getEmailAddress());
-        existingSetting.setEmailAddress(formattedEmail);
+        String formatSmsTo = helperFunctions.obfuscatePhoneNumber(existingSetting.getSmsTo());
+        existingSetting
+                .setEmailAddress(formattedEmail)
+                .setSmsTo(formatSmsTo);
         settingList.set(0, existingSetting);
         return settingList;
     }
@@ -87,7 +90,7 @@ public class SettingsService {
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-        String messageBody = "Dater has found " + nrOfEvents+ " upcoming events";
+        String messageBody = "\nDater has found " + nrOfEvents+ " upcoming events";
         String smsFrom = FROM_NUMBER;
         String smsTo = settings.getSmsTo();
 
