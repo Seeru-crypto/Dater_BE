@@ -72,7 +72,6 @@ public class SendMailServiceImpl implements SendMailService {
             newLog.setErrorDesc(e.toString());
             logService.save(newLog);
             log.warn("error occurred in mailer");
-            e.printStackTrace();
         }
     }
 }

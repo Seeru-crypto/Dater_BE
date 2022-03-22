@@ -5,6 +5,7 @@ import com.example.dater.model.Settings;
 import com.example.dater.model.SettingsDTO;
 import com.example.dater.repository.SettingRepository;
 import com.twilio.Twilio;
+import com.twilio.exception.ApiException;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import lombok.RequiredArgsConstructor;
@@ -90,18 +91,26 @@ public class SettingsService {
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-        String messageBody = "\nDater has found " + nrOfEvents+ " upcoming events";
+        String messageBody = " \n Dater has found " + nrOfEvents+ " upcoming events. Click to view: \n https://date-manager-front.herokuapp.com/eventList";
+        if (nrOfEvents==1) messageBody = " \n Dater has found " + nrOfEvents+ " upcoming event. Click to view: \n https://date-manager-front.herokuapp.com/eventList";
+
         String smsFrom = FROM_NUMBER;
         String smsTo = settings.getSmsTo();
 
-        Message.creator(new PhoneNumber(smsTo), new PhoneNumber(smsFrom), messageBody)
-                .create();
         newLog.setInitiatedBy(initiatedBy)
                 .setMessageContent(messageBody)
                 .setSentToAddress(smsTo)
                 .setSchedulerValue(SCHEDULER_VALUE_MINUTES)
                 .setMessageType(MESSAGE_TYPE_SMS);
+        try{
+            Message.creator(new PhoneNumber(smsTo), new PhoneNumber(smsFrom), messageBody)
+                    .create();
+            log.info("Sms has been sent out");
+        }
+        catch(ApiException e){
+            newLog.setErrorDesc(e.toString());
+            log.warn("Error has occured in sms send ", e);
+        }
         logService.save(newLog);
-        log.info("Sms has been sent out");
     }
 }
