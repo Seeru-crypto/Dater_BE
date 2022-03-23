@@ -9,12 +9,12 @@ import static controller.TestObjects.createSetting;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
+    private final String pinValue = "123456";
 
     @Test
     void shouldUpdateSettings() throws Exception {
@@ -25,7 +25,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
                 .setIsEmailActive(true)
                 .setEmailAddress("id-with-dash@domain.com");
 
-        mockMvc.perform(put(path).param("pin","154878")
+        mockMvc.perform(put(path).param("pin",pinValue)
                 .content(getBytes(updatedSettings))
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -41,17 +41,15 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
 
     @Test
     void whenUpdatingEmailShouldDefaultToSavedValue() throws Exception {
-        String pin = "154878";
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createdSetting.setEmailAddress("");
         String path = "/api/settings/" + createdSetting.getId();
 
-        mockMvc.perform(put(path).param("pin", pin)
+        mockMvc.perform(put(path).param("pin", pinValue)
                         .content(getBytes(newSetting))
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print())
                 .andExpect(jsonPath("$.emailAddress").value("email@gmail.com"));
     }
 

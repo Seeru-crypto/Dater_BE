@@ -13,6 +13,8 @@ class SettingsTest {
     @Test
     void shouldAcceptEmailAddress() {
         assertTrue(emailErrorMsg, "username@domain.com".matches(EMAIL_REGEX));
+        assertTrue(emailErrorMsg, "username@domain.eu".matches(EMAIL_REGEX));
+        assertTrue(emailErrorMsg, "username@domain.co.uk".matches(EMAIL_REGEX));
         assertTrue(emailErrorMsg, "email@gmail.com".matches(EMAIL_REGEX));
         assertTrue(emailErrorMsg, "test@domain.com".matches(EMAIL_REGEX));
         assertTrue(emailErrorMsg, "lastname@domain.com".matches(EMAIL_REGEX));
@@ -40,5 +42,9 @@ class SettingsTest {
         assertFalse(phoneErrorMsg, "1234567".matches(PHONE_NR_REGEX));
         assertFalse(phoneErrorMsg, "12345678".matches(PHONE_NR_REGEX));
         assertFalse(phoneErrorMsg, "+372 s1234567".matches(PHONE_NR_REGEX));
+        assertFalse(phoneErrorMsg, "+372 123 45 678".matches(PHONE_NR_REGEX));
+        assertFalse(phoneErrorMsg, "+372 123 45 67".matches(PHONE_NR_REGEX));
+        assertFalse(phoneErrorMsg, "+372 123-45-67".matches(PHONE_NR_REGEX));
+        assertFalse(phoneErrorMsg, "+372 123-45-678".matches(PHONE_NR_REGEX));
     }
 }
