@@ -14,7 +14,7 @@ import java.time.Instant;
 public class Settings {
     public static final int MAX_EMAIL_LEN = 35;
     public static final String EMAIL_REGEX = "^[\\w!#$%&’*+\\/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+\\/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    public static final String PHONE_NR_REGEX = "^$|^[+]*[0-9]{1,4}[-\\s.0-9]{10,10}$";
+    public static final String PHONE_NR_REGEX = "\\+[0-9]{1,3} [0-9]{7,8}";
     @Id
     private String id;
     @NotNull
@@ -26,6 +26,7 @@ public class Settings {
     private Instant dateUpdated;
     @Pattern(regexp = PHONE_NR_REGEX, message = "invalid phone number" )
     private String smsTo;
+    @NotNull
     private Boolean isSmsActive;
 
     @Override

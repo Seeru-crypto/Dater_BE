@@ -70,6 +70,14 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     }
 
     @Test
+    void updateSetting_shouldThrow_exception_whenSmsToIncorrect() throws Exception {
+        Settings createdSetting = mongoTemplate.insert(createSetting());
+        String incorrectSms = "+123 a1234567";
+        Settings newSetting = createSetting().setSmsTo(incorrectSms);
+        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
+    }
+
+    @Test
     void updateSetting_shouldThrow_exception_whenIsEmailActiveIsNull() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createSetting().setIsEmailActive(null);

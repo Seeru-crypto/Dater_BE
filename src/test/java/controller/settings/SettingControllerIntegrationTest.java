@@ -23,7 +23,8 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
 
         Settings updatedSettings = new Settings()
                 .setIsEmailActive(true)
-                .setEmailAddress("id-with-dash@domain.com");
+                .setEmailAddress("id-with-dash@domain.com")
+                .setSmsTo("+372 87654321");
 
         mockMvc.perform(put(path).param("pin",pinValue)
                 .content(getBytes(updatedSettings))
@@ -31,12 +32,8 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isEmailActive").value(true))
                 .andExpect(jsonPath("$.emailAddress").value("id-with-dash@domain.com"))
+                .andExpect(jsonPath("$.smsTo").value("+372 87654321"))
                 .andExpect(jsonPath("$.dateUpdated").isNotEmpty());
-
-        mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(1))
-                .andExpect(jsonPath("$.[0].isEmailActive").value(true))
-                .andExpect(jsonPath("$.[0].emailAddress").value("id-...@domain.com"));
     }
 
     @Test
@@ -51,6 +48,20 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.emailAddress").value("email@gmail.com"));
+    }
+
+    @Test
+    void whenUpdatingSmsShouldDefaultToSavedValue() throws Exception {
+        Settings createdSetting = mongoTemplate.insert(createSetting());
+        Settings newSetting = createdSetting.setSmsTo("");
+        String path = "/api/settings/" + createdSetting.getId();
+
+        mockMvc.perform(put(path).param("pin", pinValue)
+                        .content(getBytes(newSetting))
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.smsTo").value("+372 1234567"));
     }
 
     @Test
