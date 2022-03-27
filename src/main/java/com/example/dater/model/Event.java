@@ -51,7 +51,7 @@ public class Event {
     @Override
     public String toString() {
         return String.format(
-                "Event[id='%s', name='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s', dateCreated='%s', dateUpdated='%s']",
-                id, name, date, reminder, reminderDays, description, accountForYear, dateCreated, dateUpdated);
+                "Event[id='%s', name='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s', dateCreated='%s', dateUpdated='%s', dateNextReminder='%s', mailDisplayDate='%s']",
+                id, name, date, reminder, reminderDays, description, accountForYear, dateCreated, dateUpdated, dateNextReminder, mailDisplayDate);
     }
 }

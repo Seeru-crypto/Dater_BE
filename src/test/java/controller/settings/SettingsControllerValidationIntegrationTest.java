@@ -21,7 +21,6 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
-
     }
 
     @Test
@@ -63,13 +62,6 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     }
 
     @Test
-    void updateSetting_shouldThrow_exception_whenEmailEmpty() throws Exception {
-        Settings createdSetting = mongoTemplate.insert(createSetting());
-        Settings newSetting = createSetting().setEmailAddress("");
-        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-    }
-
-    @Test
     void updateSetting_shouldThrow_exception_whenEmailTooLong() throws Exception {
         String longEmail = RandomStringUtils.random(MAX_EMAIL_LEN+1) + "@gmail.com";
         Settings createdSetting = mongoTemplate.insert(createSetting());
@@ -78,10 +70,17 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     }
 
     @Test
+    void updateSetting_shouldThrow_exception_whenSmsToIncorrect() throws Exception {
+        Settings createdSetting = mongoTemplate.insert(createSetting());
+        String incorrectSms = "+123 a1234567";
+        Settings newSetting = createSetting().setSmsTo(incorrectSms);
+        putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
+    }
+
+    @Test
     void updateSetting_shouldThrow_exception_whenIsEmailActiveIsNull() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createSetting().setIsEmailActive(null);
         putFunctionBody(getBytes(newSetting), createdSetting.getId(), correctPin);
-
     }
 }

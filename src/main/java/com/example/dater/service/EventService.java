@@ -21,6 +21,7 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventDateChecker eventDateChecker;
     private final HelperFunctions helperFunctions;
+
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
@@ -61,7 +62,6 @@ public class EventService {
         eventRepository.deleteAllById(eventIds);
     }
 
-    // ToDo will be replaced with proper o-auth in module 3
     public void checkEventDates(String iniatedBy) {
         try {
             eventDateChecker.checkEventDates(iniatedBy);

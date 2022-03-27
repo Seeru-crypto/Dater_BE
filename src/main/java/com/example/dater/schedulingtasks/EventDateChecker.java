@@ -3,6 +3,7 @@ package com.example.dater.schedulingtasks;
 import com.example.dater.model.Event;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.service.SendMailService;
+import com.example.dater.service.SettingsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +25,27 @@ import java.util.List;
 public class EventDateChecker {
     private final EventRepository eventRepository;
     private SendMailService sendMailService;
+    private final SettingsService settingsService;
 
     List<Event> eventList;
 
     @Autowired
-    public EventDateChecker(EventRepository eventRepository, SendMailService sendMailService) {
+    public EventDateChecker(EventRepository eventRepository, SendMailService sendMailService, SettingsService settingsService) {
         this.eventRepository = eventRepository;
         this.sendMailService = sendMailService;
+        this.settingsService = settingsService;
     }
 
-    protected Boolean dateVerification(Event event, Instant currentDate){
+    protected Boolean dateVerification(Event event, Instant currentDate) {
         if (Boolean.FALSE.equals(event.getReminder())) {
             return false;
         }
         Instant reminderDate = event.getDateNextReminder().truncatedTo(ChronoUnit.DAYS);
 
-        if (Boolean.TRUE.equals(event.getAccountForYear()) && currentDate.equals(reminderDate)){
+        if (Boolean.TRUE.equals(event.getAccountForYear()) && currentDate.equals(reminderDate)) {
             return true;
         }
+
         else if (Boolean.FALSE.equals(event.getAccountForYear())){
             ZoneId z = ZoneId.systemDefault();
             ZonedDateTime currentDateTime = ZonedDateTime.ofInstant(currentDate, z);
@@ -63,20 +67,19 @@ public class EventDateChecker {
 
         for (Event event : eventList) {
             if (Boolean.TRUE.equals(dateVerification(event, currentDate))) {
-                LocalDate eventDate =  event.getDate().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate eventDate = event.getDate().atZone(ZoneId.systemDefault()).toLocalDate();
                 event.setMailDisplayDate(myFormatter.format(eventDate));
                 eventsToSendOut.add(event);
             }
         }
 
         if (eventsToSendOut.isEmpty()) {
-            log.info("No events to send out");
+            log.info("No Events to send out");
             return;
         }
-
         log.info("Events to be sent:");
-        for (Event event: eventsToSendOut) log.info(event.getName());
-
+        for (Event event : eventsToSendOut) log.info(event.getName());
         sendMailService.sendMimeMailList(eventsToSendOut, initiatedBy);
+        settingsService.send(eventsToSendOut.size(), initiatedBy);
     }
 }

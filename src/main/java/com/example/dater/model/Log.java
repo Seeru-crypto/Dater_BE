@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
@@ -18,21 +17,22 @@ public class Log {
     @NotNull
     private Instant dateCreated;
     @NotNull
-    @Email
     private String sentToAddress;
     @NotNull
     private String initiatedBy;
     @NotNull
-    private String mailContent;
+    private String messageContent;
     @NotNull
     private Integer schedulerValue;
     private String errorDesc;
+    @NotNull
+    private String messageType;
 
     @Override
     public String toString() {
         return String.format(
-                "Event[id='%s', sentToAddress='%s', dateCreated='%s', initiatedBy='%s', mailContent='%s', errorDesc='%s']",
-                id, sentToAddress, dateCreated, initiatedBy, mailContent, errorDesc);
+                "Event[id='%s', sentToAddress='%s', dateCreated='%s', initiatedBy='%s', messageContent='%s', errorDesc='%s']",
+                id, sentToAddress, dateCreated, initiatedBy, messageContent, errorDesc);
     }
 
 }

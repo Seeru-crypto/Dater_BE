@@ -6,12 +6,16 @@ import com.example.dater.model.Settings;
 
 import java.time.Instant;
 
+import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
+
 public class TestObjects {
 
     public static Settings createSetting() {
         return new Settings()
                 .setIsEmailActive(false)
-                .setEmailAddress("email@gmail.com");
+                .setEmailAddress("email@gmail.com")
+                .setIsSmsActive(false)
+                .setSmsTo("+372 1234567");
     }
 
     public static Log createLog() {
@@ -19,8 +23,9 @@ public class TestObjects {
                 .setSentToAddress("person@gmail.com")
                 .setInitiatedBy("admin")
                 .setDateCreated(Instant.parse("2022-02-19T13:26:13.836Z"))
-                .setMailContent("[mail]")
-                .setSchedulerValue(10);
+                .setMessageContent("[mail]")
+                .setSchedulerValue(10)
+                .setMessageType(MESSAGE_TYPE_MAIL);
     }
 
     public static Event createEventWithoutCreatedDate() {

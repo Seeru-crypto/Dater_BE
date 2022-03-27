@@ -12,6 +12,7 @@ import static controller.TestObjects.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -19,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class LogControllerIntegrationTest extends LogBaseIntegrationTest {
 
     @Test
-    void shouldSaveNewLog() throws Exception {
-        mongoTemplate.insert(createSetting().setIsEmailActive(true));
+    void shouldSaveNewLogWithMail() throws Exception {
+        mongoTemplate.insert(createSetting().setIsEmailActive(true).setIsSmsActive(false));
         Event remindedEvent = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
 
         mockMvc.perform(post("/api/events")
@@ -35,6 +36,26 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
         mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").isNotEmpty());
+    }    
+    
+    @Test
+    void shouldSaveNewLogWithSms() throws Exception {
+        mongoTemplate.insert(createSetting().setIsEmailActive(false).setIsSmsActive(true));
+        Event remindedEvent = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
+
+         mockMvc.perform(post("/api/events")
+                        .content(getBytes(remindedEvent))
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        // Will initiate an event check, which will generate a log entry
+        mockMvc.perform(get("/api/events/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").isNotEmpty())
+                .andExpect(jsonPath("$.[0].id").isNotEmpty());
     }
 
     @Test
@@ -47,7 +68,7 @@ class LogControllerIntegrationTest extends LogBaseIntegrationTest {
                 .andExpect(jsonPath("$.[0].sentToAddress").value("per...@gmail.com"))
                 .andExpect(jsonPath("$.[0].dateCreated").isNotEmpty())
                 .andExpect(jsonPath("$.[0].initiatedBy").value("admin"))
-                .andExpect(jsonPath("$.[0].mailContent").value("[mail]"))
+                .andExpect(jsonPath("$.[0].messageContent").value("[mail]"))
                 .andExpect(jsonPath("$.[0].schedulerValue").value(10))
                 .andExpect(jsonPath("$.[0].id").value(existingLog.getId()));
     }

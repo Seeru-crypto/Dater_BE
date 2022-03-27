@@ -9,14 +9,23 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
+
+import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
 
 @Configuration
 public class HelperFunctions {
 
     public List<Log> obfuscateLogs(List<Log> existingLogs) {
         for (Log log : existingLogs){
-            String formattedMail = obfuscateEmail(log.getSentToAddress());
-            log.setSentToAddress(formattedMail);
+            if (Objects.equals(log.getMessageType(), MESSAGE_TYPE_MAIL)) {
+                String formattedMail = obfuscateEmail(log.getSentToAddress());
+                log.setSentToAddress(formattedMail);
+            }
+            else{
+                String formattedPhoneNumber = obfuscatePhoneNumber(log.getSentToAddress());
+                log.setSentToAddress(formattedPhoneNumber);
+            }
         }
         return existingLogs;
     }
@@ -30,6 +39,10 @@ public class HelperFunctions {
         if (mainPart.length() <= 3) formattedMain = "...";
         else formattedMain = mainPart.substring(0, 3) + "...";
         return formattedMain+lastPart;
+    }
+
+    public String obfuscatePhoneNumber(String number){
+        return number.substring(0, 8) + "...";
     }
 
     public Instant returnNextReminderDate(Event event) {
