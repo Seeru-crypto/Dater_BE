@@ -14,7 +14,7 @@ import java.time.Instant;
 public class Settings {
     public static final int MAX_EMAIL_LEN = 35;
     public static final String EMAIL_REGEX = "^[\\w!#$%&’*+\\/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+\\/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    public static final String PHONE_NR_REGEX = "\\+[0-9]{1,3} [0-9]{7,8}";
+    public static final String PHONE_NR_REGEX = "\\+[0-9]{1,3} [0-9]{7,10}";
     @Id
     private String id;
     @NotNull
