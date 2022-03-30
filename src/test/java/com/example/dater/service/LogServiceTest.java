@@ -43,4 +43,12 @@ class LogServiceTest {
         assertEquals(formattedLogs.get(0).getSentToAddress(), longExpectedValue);
         assertEquals(formattedLogs.get(1).getSentToAddress(), expectedPhoneNumber);
     }
+
+    @Test
+    void shouldObfuscateError() {
+        String errorMsg = "com.twilio.exception.ApiException: Permission to send an SMS has not been enabled for the region indicated by the 'To' number: +111234567890.";
+        String result = testHelperFunction.obfuscateError(errorMsg);
+        String expectedResult = "com.twilio.exception.ApiException: Permission to send an SMS has not been enabled for the region indicated by the 'To' number: +111234...";
+        assertEquals(expectedResult, result);
+    }
 }

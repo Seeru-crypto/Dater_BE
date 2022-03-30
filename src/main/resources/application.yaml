@@ -20,17 +20,11 @@ spring:
       writetimeout: 5000
       starttls.enable: true
 
+#Logging
 logging.level:
   org:springframework:data: debug
-#logging:level:root: trace
 
-# @valueToken
-FRONT_URL: "https://date-manager-front.herokuapp.com/"
-TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
-TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
-TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
-SETTING_PIN: ${SETTING_PIN}
-
+# cors & actuator settings
 management:
   endpoints:
     web:
@@ -40,3 +34,9 @@ management:
       exposure:
         include: "health,scheduledtasks"
 
+# custom settings
+FRONT_URL: "https://date-manager-front.herokuapp.com/"
+TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+SETTING_PIN: ${SETTING_PIN}

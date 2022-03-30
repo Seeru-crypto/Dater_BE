@@ -10,14 +10,24 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static com.example.dater.model.Settings.EMAIL_REGEX;
 import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
 
 @Configuration
 public class HelperFunctions {
+    public static final String ERROR_PHONE_REGEX = "\\+[0-9]{1,3}[0-9]{7,10}.";
+
+
 
     public List<Log> obfuscateLogs(List<Log> existingLogs) {
         for (Log log : existingLogs){
+            if (log.getErrorDesc() != null){
+                String formattedError = obfuscateError(log.getErrorDesc());
+                log.setErrorDesc(formattedError);
+            }
             if (Objects.equals(log.getMessageType(), MESSAGE_TYPE_MAIL)) {
                 String formattedMail = obfuscateEmail(log.getSentToAddress());
                 log.setSentToAddress(formattedMail);
@@ -62,5 +72,20 @@ public class HelperFunctions {
                     .withYear(currentDate.getYear())
                     .toInstant();
         }
+    }
+
+    public String obfuscateError(String errorMsg) {
+        Pattern pattern = Pattern.compile(ERROR_PHONE_REGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(errorMsg);
+        String phoneNr = "";
+        int startIndex = 0;
+        while (matcher.find()){
+            startIndex = matcher.start();
+        }
+        if (startIndex != 0){
+            phoneNr = errorMsg.substring(startIndex, startIndex+7)+"...";
+            return errorMsg.substring(0, startIndex) + phoneNr;
+        }
+        return errorMsg;
     }
 }
