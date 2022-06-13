@@ -24,16 +24,16 @@ class LogsControllerIntegrationTest extends LogBaseIntegrationTest {
         mongoTemplate.insert(createSetting().setIsEmailActive(true).setIsSmsActive(false));
         Events remindedEvents = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
 
-        mockMvc.perform(post("/api/events")
+        mockMvc.perform(post("/api/event")
                         .content(getBytes(remindedEvents))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         // Will initiate an event check, which will generate a log entry
-        mockMvc.perform(get("/api/events/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/log").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").isNotEmpty());
     }    
@@ -43,16 +43,16 @@ class LogsControllerIntegrationTest extends LogBaseIntegrationTest {
         mongoTemplate.insert(createSetting().setIsEmailActive(false).setIsSmsActive(true));
         Events remindedEvents = createEventWithoutCreatedDate().setDate(Instant.now()).setReminder(true).setReminderDays(0);
 
-         mockMvc.perform(post("/api/events")
+         mockMvc.perform(post("/api/event")
                         .content(getBytes(remindedEvents))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         // Will initiate an event check, which will generate a log entry
-        mockMvc.perform(get("/api/events/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/log").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").isNotEmpty())
                 .andExpect(jsonPath("$.[0].id").isNotEmpty());
@@ -62,7 +62,7 @@ class LogsControllerIntegrationTest extends LogBaseIntegrationTest {
     void shouldGetLogs() throws Exception {
         Logs existingLogs = mongoTemplate.insert(createLog());
 
-        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/log").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].sentToAddress").value("per...@gmail.com"))

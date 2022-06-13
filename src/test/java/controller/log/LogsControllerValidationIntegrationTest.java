@@ -29,7 +29,7 @@ class LogsControllerValidationIntegrationTest extends LogBaseIntegrationTest {
         mockMvc.perform(delete(path))
                 .andExpect(status().isNotFound());
 
-        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/log").contentType(APPLICATION_JSON))
                 .andExpect(jsonPath("length()").value(1));
     };
 
@@ -44,7 +44,7 @@ class LogsControllerValidationIntegrationTest extends LogBaseIntegrationTest {
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
-        mockMvc.perform(get("/api/logs").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/log").contentType(APPLICATION_JSON))
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].initiatedBy").value("admin"));
     }

@@ -20,7 +20,7 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
     @Test
      void shouldCreateEvent () throws Exception {
         Events events = createEventWithoutCreatedDate().setName("Event created now!");
-        mockMvc.perform(post("/api/events")
+        mockMvc.perform(post("/api/event")
                         .content(getBytes(events))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -34,7 +34,7 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
     void shouldUpdateEvent() throws Exception {
         Events createdEvents =  mongoTemplate.insert(createEventWithCreatedDate());
 
-        String path = "/api/events/" + createdEvents.getId();
+        String path = "/api/event/" + createdEvents.getId();
         Events updatedEvents = new Events()
                 .setName("UPDATED_NAME")
                 .setDate(Instant.parse("2023-02-19T13:26:13.836Z"))
@@ -47,7 +47,7 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/event").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].name").value("UPDATED_NAME"))
@@ -65,7 +65,7 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
     void shouldGetEvents() throws Exception {
         mongoTemplate.insert(createEventWithoutCreatedDate());
 
-        mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].name").value("Hello world!"))
                 .andExpect(jsonPath("$.[0].date").value("2022-02-19T13:26:13.836Z"))
@@ -75,12 +75,12 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
     @Test
     void shouldDeleteEvent() throws Exception {
         Events createdEvents =  mongoTemplate.insert(createEventWithoutCreatedDate());
-        mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1));
 
-        String path = "/api/events/" + createdEvents.getId();
+        String path = "/api/event/" + createdEvents.getId();
         mockMvc.perform(delete(path)).andExpect(status().isOk());
-        mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0));
     }
 
@@ -90,17 +90,17 @@ class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
         Events createdEvents2 =  mongoTemplate.insert(createEventWithoutCreatedDate());
 
         String[] idList = {createdEvents1.getId(), createdEvents2.getId()};
-        mockMvc.perform(post("/api/events/delete").content(getBytes(idList))
+        mockMvc.perform(post("/api/event/delete").content(getBytes(idList))
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
-        mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/api/event").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0));
     }
 
     @Test
     void shouldCheckEvents() throws Exception {
-        mockMvc.perform(get("/api/events/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/event/checkEvents").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(status().isOk());
     }
 }

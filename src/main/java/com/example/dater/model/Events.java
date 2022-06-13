@@ -3,20 +3,17 @@ package com.example.dater.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.time.Instant;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Events {
     public static final int MAX_DESC_LEN = 121;
     public static final int MAX_NAME_LEN = 26;
@@ -47,11 +44,4 @@ public class Events {
     private Boolean accountForYear;
     private Instant dateNextReminder;
     private String mailDisplayDate;
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Event[id='%s', name='%s', date='%s', reminder='%s', reminderDays='%s', description='%s', accountForYear='%s', dateCreated='%s', dateUpdated='%s', dateNextReminder='%s', mailDisplayDate='%s']",
-                id, name, date, reminder, reminderDays, description, accountForYear, dateCreated, dateUpdated, dateNextReminder, mailDisplayDate);
-    }
 }

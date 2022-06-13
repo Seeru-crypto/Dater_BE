@@ -19,7 +19,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
     @Test
     void shouldUpdateSettings() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
-        String path = "/api/settings/" + createdSetting.getId();
+        String path = "/api/setting/" + createdSetting.getId();
 
         Settings updatedSettings = new Settings()
                 .setIsEmailActive(true)
@@ -40,7 +40,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
     void whenUpdatingEmailShouldDefaultToSavedValue() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createdSetting.setEmailAddress("");
-        String path = "/api/settings/" + createdSetting.getId();
+        String path = "/api/setting/" + createdSetting.getId();
 
         mockMvc.perform(put(path).param("pin", pinValue)
                         .content(getBytes(newSetting))
@@ -54,7 +54,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
     void whenUpdatingSmsShouldDefaultToSavedValue() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
         Settings newSetting = createdSetting.setSmsTo("");
-        String path = "/api/settings/" + createdSetting.getId();
+        String path = "/api/setting/" + createdSetting.getId();
 
         mockMvc.perform(put(path).param("pin", pinValue)
                         .content(getBytes(newSetting))
@@ -67,7 +67,7 @@ class SettingControllerIntegrationTest extends SettingBaseIntegrationTest {
     @Test
     void shouldGetSettings() throws Exception {
         mongoTemplate.insert(createSetting());
-        mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/setting").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].isEmailActive").value(false))
                 .andExpect(jsonPath("$.[0].emailAddress").value("ema...@gmail.com"));

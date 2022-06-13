@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EventControllerValidationIntegrationTest extends EventsBaseIntegrationTest {
 
     private void postFunctionBody(byte[] event) throws Exception {
-        mockMvc.perform(post("/api/events")
+        mockMvc.perform(post("/api/event")
                         .content(event)
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
@@ -91,7 +91,7 @@ class EventControllerValidationIntegrationTest extends EventsBaseIntegrationTest
     }
 
     private void updateFunctionBody(byte[] updatedEvent, String existingId) throws Exception {
-        String path = "/api/events/" + existingId;
+        String path = "/api/event/" + existingId;
         mockMvc.perform(put(path)
                         .content(updatedEvent)
                         .contentType(APPLICATION_JSON)
@@ -103,7 +103,7 @@ class EventControllerValidationIntegrationTest extends EventsBaseIntegrationTest
     void updateEvent_shouldThrow_exception_whenNoIdIsGiven() throws Exception {
         Events updatedEvents = createEventWithoutCreatedDate();
 
-        String path = "/api/events/";
+        String path = "/api/event/";
         mockMvc.perform(put(path)
                         .content(getBytes(updatedEvents))
                         .contentType(APPLICATION_JSON)
@@ -115,7 +115,7 @@ class EventControllerValidationIntegrationTest extends EventsBaseIntegrationTest
     void updateEvent_shouldThrow_exception_whenNotExistingIdIsGiven() throws Exception {
         Events updatedEvents = createEventWithoutCreatedDate();
 
-        String path = "/api/events/abc";
+        String path = "/api/event/abc";
         mockMvc.perform(put(path)
                         .content(getBytes(updatedEvents))
                         .contentType(APPLICATION_JSON)
@@ -134,11 +134,11 @@ class EventControllerValidationIntegrationTest extends EventsBaseIntegrationTest
     void deleteEvent_shouldThrow_exception_whenInvalidId() throws Exception {
         mongoTemplate.insert(createEventWithoutCreatedDate());
 
-        String path = "/api/events/adasd";
+        String path = "/api/event/adasd";
         mockMvc.perform(delete(path))
                 .andExpect(status().isNotFound());
 
-        mockMvc.perform(get("/api/events"))
+        mockMvc.perform(get("/api/event"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1));
     }
