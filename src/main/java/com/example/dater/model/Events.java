@@ -17,7 +17,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Event {
+public class Events {
     public static final int MAX_DESC_LEN = 121;
     public static final int MAX_NAME_LEN = 26;
     public static final int REMINDER_DAYS_MAX_VALUE = 90;

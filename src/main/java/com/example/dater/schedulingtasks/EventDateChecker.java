@@ -1,6 +1,6 @@
 package com.example.dater.schedulingtasks;
 
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.service.SendMailService;
 import com.example.dater.service.SettingsService;
@@ -27,7 +27,7 @@ public class EventDateChecker {
     private SendMailService sendMailService;
     private final SettingsService settingsService;
 
-    List<Event> eventList;
+    List<Events> eventsList;
 
     @Autowired
     public EventDateChecker(EventRepository eventRepository, SendMailService sendMailService, SettingsService settingsService) {
@@ -36,17 +36,17 @@ public class EventDateChecker {
         this.settingsService = settingsService;
     }
 
-    protected Boolean dateVerification(Event event, Instant currentDate) {
-        if (Boolean.FALSE.equals(event.getReminder())) {
+    protected Boolean dateVerification(Events events, Instant currentDate) {
+        if (Boolean.FALSE.equals(events.getReminder())) {
             return false;
         }
-        Instant reminderDate = event.getDateNextReminder().truncatedTo(ChronoUnit.DAYS);
+        Instant reminderDate = events.getDateNextReminder().truncatedTo(ChronoUnit.DAYS);
 
-        if (Boolean.TRUE.equals(event.getAccountForYear()) && currentDate.equals(reminderDate)) {
+        if (Boolean.TRUE.equals(events.getAccountForYear()) && currentDate.equals(reminderDate)) {
             return true;
         }
 
-        else if (Boolean.FALSE.equals(event.getAccountForYear())){
+        else if (Boolean.FALSE.equals(events.getAccountForYear())){
             ZoneId z = ZoneId.systemDefault();
             ZonedDateTime currentDateTime = ZonedDateTime.ofInstant(currentDate, z);
             ZonedDateTime reminderDateTime = ZonedDateTime.ofInstant(reminderDate, z);
@@ -60,16 +60,17 @@ public class EventDateChecker {
     }
 
     public void checkEventDates(String initiatedBy) throws MessagingException {
-        eventList = eventRepository.findAll();
-        List<Event> eventsToSendOut = new ArrayList<>();
+        eventsList = eventRepository.findAll();
+        List<Events> eventsToSendOut = new ArrayList<>();
         Instant currentDate = Instant.now().truncatedTo(ChronoUnit.DAYS);
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd.MMM.yy");
 
-        for (Event event : eventList) {
-            if (Boolean.TRUE.equals(dateVerification(event, currentDate))) {
-                LocalDate eventDate = event.getDate().atZone(ZoneId.systemDefault()).toLocalDate();
-                event.setMailDisplayDate(myFormatter.format(eventDate));
-                eventsToSendOut.add(event);
+        for (Events events : eventsList) {
+            if (Boolean.TRUE.equals(dateVerification(events, currentDate))) {
+                LocalDate eventDate = events.getDate().atZone(ZoneId.systemDefault()).toLocalDate();
+                events.setMailDisplayDate(myFormatter.format(eventDate));
+                eventsToSendOut.add(events);
+
             }
         }
 
@@ -78,7 +79,7 @@ public class EventDateChecker {
             return;
         }
         log.info("Events to be sent:");
-        for (Event event : eventsToSendOut) log.info(event.getName());
+        for (Events events : eventsToSendOut) log.info(events.getName());
         sendMailService.sendMimeMailList(eventsToSendOut, initiatedBy);
         settingsService.send(eventsToSendOut.size(), initiatedBy);
     }

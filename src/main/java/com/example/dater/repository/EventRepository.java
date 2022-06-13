@@ -1,12 +1,12 @@
 package com.example.dater.repository;
 
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
 
-public interface EventRepository extends MongoRepository<Event, String> {
+public interface EventRepository extends MongoRepository<Events, String> {
 
-    Optional<Event> findById(String id);
+    Optional<Events> findById(String id);
 }

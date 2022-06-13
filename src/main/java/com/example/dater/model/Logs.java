@@ -11,7 +11,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Log {
+public class Logs {
     @Id
     private String id;
     @NotNull

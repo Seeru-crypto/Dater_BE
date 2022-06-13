@@ -1,6 +1,6 @@
 package com.example.dater.service;
 
-import com.example.dater.model.Log;
+import com.example.dater.model.Logs;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import static com.example.dater.service.SettingsService.MESSAGE_TYPE_SMS;
 import static controller.TestObjects.createLog;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LogServiceTest {
+class LogsServiceTest {
     private final HelperFunctions testHelperFunction = new HelperFunctions();
     String longEmailValue = "person@gmail.com";
     String longExpectedValue = "per...@gmail.com";
@@ -34,12 +34,12 @@ class LogServiceTest {
 
     @Test
     void shouldObfuscateDifferentLogs() {
-        Log newLog = createLog().setSentToAddress(longEmailValue);
-        Log newLog2 = createLog().setSentToAddress(phoneNumber).setMessageType(MESSAGE_TYPE_SMS);
-        List<Log> logList = new ArrayList<>();
-        logList.add(newLog);
-        logList.add(newLog2);
-        List <Log> formattedLogs =  testHelperFunction.obfuscateLogs(logList);
+        Logs newLogs = createLog().setSentToAddress(longEmailValue);
+        Logs newLogs2 = createLog().setSentToAddress(phoneNumber).setMessageType(MESSAGE_TYPE_SMS);
+        List<Logs> logsList = new ArrayList<>();
+        logsList.add(newLogs);
+        logsList.add(newLogs2);
+        List <Logs> formattedLogs =  testHelperFunction.obfuscateLogs(logsList);
         assertEquals(formattedLogs.get(0).getSentToAddress(), longExpectedValue);
         assertEquals(formattedLogs.get(1).getSentToAddress(), expectedPhoneNumber);
     }

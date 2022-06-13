@@ -44,10 +44,10 @@
 <!--                        <td style="padding: 15px 0 15px 7px; width: 30%; font-size: larger">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie tincidunt lorem, et tincidunt dui iaculis dui.-->
 <!--                        </td>-->
 <!--                    </tr>-->
-                    <tr style="border-bottom: 1px solid #ecedee; padding-top: 5px" th:each="event: ${eventList}">
-                        <td style="padding: 15px 0; ; width: 30%; font-size: larger" th:text="${event.name}"></td>
-                        <td style="padding: 15px 0; width: 30%; font-size: larger" th:text="${event.mailDisplayDate}"></td>
-                        <td style="padding: 15px 0 15px 7px; width: 30%; font-size: larger" th:text="${event.description}"></td>
+                    <tr style="border-bottom: 1px solid #ecedee; padding-top: 5px" th:each="events: ${eventsList}">
+                        <td style="padding: 15px 0; ; width: 30%; font-size: larger" th:text="${events.name}"></td>
+                        <td style="padding: 15px 0; width: 30%; font-size: larger" th:text="${events.mailDisplayDate}"></td>
+                        <td style="padding: 15px 0 15px 7px; width: 30%; font-size: larger" th:text="${events.description}"></td>
                     </tr>
                 </mj-table>
             </mj-column>

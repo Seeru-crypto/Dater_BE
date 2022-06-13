@@ -1,7 +1,7 @@
 package controller.events;
 
 import com.example.dater.DaterApplication;
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = DaterApplication.class)
-class EventBaseIntegrationTest {
+class EventsBaseIntegrationTest {
     static {
       new MongoDBContainer(DockerImageName.parse("mongo:4.0.10")).withExposedPorts(27070).start();
     }
@@ -37,11 +37,11 @@ class EventBaseIntegrationTest {
     @BeforeEach
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        mongoTemplate.dropCollection(Event.class);
+        mongoTemplate.dropCollection(Events.class);
     }
 
-    protected byte[] getBytes(Event event) throws JsonProcessingException {
-        byte[] content = objectMapper.writeValueAsBytes(event);
+    protected byte[] getBytes(Events events) throws JsonProcessingException {
+        byte[] content = objectMapper.writeValueAsBytes(events);
         return content;
     }
     protected byte[] getBytes(String[]  stringList) throws JsonProcessingException {

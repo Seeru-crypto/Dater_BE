@@ -1,6 +1,6 @@
 package controller.events;
 
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -15,13 +15,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class EventControllerIntegrationTest extends EventBaseIntegrationTest {
+class EventControllerIntegrationTest extends EventsBaseIntegrationTest {
 
     @Test
      void shouldCreateEvent () throws Exception {
-        Event event = createEventWithoutCreatedDate().setName("Event created now!");
+        Events events = createEventWithoutCreatedDate().setName("Event created now!");
         mockMvc.perform(post("/api/events")
-                        .content(getBytes(event))
+                        .content(getBytes(events))
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Event created now!"))
@@ -32,10 +32,10 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
 
     @Test
     void shouldUpdateEvent() throws Exception {
-        Event createdEvent =  mongoTemplate.insert(createEventWithCreatedDate());
+        Events createdEvents =  mongoTemplate.insert(createEventWithCreatedDate());
 
-        String path = "/api/events/" + createdEvent.getId();
-        Event updatedEvent = new Event()
+        String path = "/api/events/" + createdEvents.getId();
+        Events updatedEvents = new Events()
                 .setName("UPDATED_NAME")
                 .setDate(Instant.parse("2023-02-19T13:26:13.836Z"))
                 .setAccountForYear(true)
@@ -43,7 +43,7 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
                 .setReminderDays(2);
 
         mockMvc.perform(put(path)
-                .content(getBytes(updatedEvent))
+                .content(getBytes(updatedEvents))
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -74,11 +74,11 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
 
     @Test
     void shouldDeleteEvent() throws Exception {
-        Event createdEvent =  mongoTemplate.insert(createEventWithoutCreatedDate());
+        Events createdEvents =  mongoTemplate.insert(createEventWithoutCreatedDate());
         mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1));
 
-        String path = "/api/events/" + createdEvent.getId();
+        String path = "/api/events/" + createdEvents.getId();
         mockMvc.perform(delete(path)).andExpect(status().isOk());
         mockMvc.perform(get("/api/events").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0));
@@ -86,10 +86,10 @@ class EventControllerIntegrationTest extends EventBaseIntegrationTest {
 
     @Test
     void shouldDeleteEvents() throws Exception {
-        Event createdEvent1 =  mongoTemplate.insert(createEventWithoutCreatedDate());
-        Event createdEvent2 =  mongoTemplate.insert(createEventWithoutCreatedDate());
+        Events createdEvents1 =  mongoTemplate.insert(createEventWithoutCreatedDate());
+        Events createdEvents2 =  mongoTemplate.insert(createEventWithoutCreatedDate());
 
-        String[] idList = {createdEvent1.getId(), createdEvent2.getId()};
+        String[] idList = {createdEvents1.getId(), createdEvents2.getId()};
         mockMvc.perform(post("/api/events/delete").content(getBytes(idList))
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk());

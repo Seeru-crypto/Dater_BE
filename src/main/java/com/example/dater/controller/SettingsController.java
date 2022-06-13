@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/settings")
+@RequestMapping(path = "api/setting")
 public class SettingsController {
 
     @Value("${SETTING_PIN}")

@@ -1,7 +1,7 @@
 package com.example.dater.service;
 
-import com.example.dater.model.Event;
-import com.example.dater.model.Log;
+import com.example.dater.model.Events;
+import com.example.dater.model.Logs;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
@@ -13,28 +13,25 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.dater.model.Settings.EMAIL_REGEX;
 import static com.example.dater.service.SendMailServiceImpl.MESSAGE_TYPE_MAIL;
 
 @Configuration
 public class HelperFunctions {
     public static final String ERROR_PHONE_REGEX = "\\+[0-9]{1,3}[0-9]{7,10}.";
 
-
-
-    public List<Log> obfuscateLogs(List<Log> existingLogs) {
-        for (Log log : existingLogs){
-            if (log.getErrorDesc() != null){
-                String formattedError = obfuscateError(log.getErrorDesc());
-                log.setErrorDesc(formattedError);
+    public List<Logs> obfuscateLogs(List<Logs> existingLogs) {
+        for (Logs logs : existingLogs){
+            if (logs.getErrorDesc() != null){
+                String formattedError = obfuscateError(logs.getErrorDesc());
+                logs.setErrorDesc(formattedError);
             }
-            if (Objects.equals(log.getMessageType(), MESSAGE_TYPE_MAIL)) {
-                String formattedMail = obfuscateEmail(log.getSentToAddress());
-                log.setSentToAddress(formattedMail);
+            if (Objects.equals(logs.getMessageType(), MESSAGE_TYPE_MAIL)) {
+                String formattedMail = obfuscateEmail(logs.getSentToAddress());
+                logs.setSentToAddress(formattedMail);
             }
             else{
-                String formattedPhoneNumber = obfuscatePhoneNumber(log.getSentToAddress());
-                log.setSentToAddress(formattedPhoneNumber);
+                String formattedPhoneNumber = obfuscatePhoneNumber(logs.getSentToAddress());
+                logs.setSentToAddress(formattedPhoneNumber);
             }
         }
         return existingLogs;
@@ -55,14 +52,14 @@ public class HelperFunctions {
         return number.substring(0, 8) + "...";
     }
 
-    public Instant returnNextReminderDate(Event event) {
-        if (Boolean.FALSE.equals(event.getReminder())) return null;
+    public Instant returnNextReminderDate(Events events) {
+        if (Boolean.FALSE.equals(events.getReminder())) return null;
 
-        if (Boolean.FALSE.equals(event.getAccountForYear())) {
-            return event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
+        if (Boolean.FALSE.equals(events.getAccountForYear())) {
+            return events.getDate().minus(events.getReminderDays(), ChronoUnit.DAYS);
         }
         else{
-            Instant correctMonth = event.getDate().minus(event.getReminderDays(), ChronoUnit.DAYS);
+            Instant correctMonth = events.getDate().minus(events.getReminderDays(), ChronoUnit.DAYS);
             LocalDate currentDate = LocalDate.now();
             LocalDate date = correctMonth.atZone(ZoneOffset.UTC).toLocalDate();
 

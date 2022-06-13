@@ -1,7 +1,7 @@
 package controller;
 
-import com.example.dater.model.Event;
-import com.example.dater.model.Log;
+import com.example.dater.model.Events;
+import com.example.dater.model.Logs;
 import com.example.dater.model.Settings;
 
 import java.time.Instant;
@@ -18,8 +18,8 @@ public class TestObjects {
                 .setSmsTo("+372 1234567");
     }
 
-    public static Log createLog() {
-        return new Log()
+    public static Logs createLog() {
+        return new Logs()
                 .setSentToAddress("person@gmail.com")
                 .setInitiatedBy("admin")
                 .setDateCreated(Instant.parse("2022-02-19T13:26:13.836Z"))
@@ -28,16 +28,16 @@ public class TestObjects {
                 .setMessageType(MESSAGE_TYPE_MAIL);
     }
 
-    public static Event createEventWithoutCreatedDate() {
-        return new Event().setName("Hello world!")
+    public static Events createEventWithoutCreatedDate() {
+        return new Events().setName("Hello world!")
                 .setDate(Instant.parse("2022-02-19T13:26:13.836Z"))
                 .setAccountForYear(false)
                 .setReminder(true)
                 .setReminderDays(1);
     };
 
-    public static Event createEventWithCreatedDate() {
-        return new Event().setName("Hello world!")
+    public static Events createEventWithCreatedDate() {
+        return new Events().setName("Hello world!")
                 .setDate(Instant.parse("2022-02-19T13:26:13.836Z"))
                 .setAccountForYear(false)
                 .setReminder(false)
