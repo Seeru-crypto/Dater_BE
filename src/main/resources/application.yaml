@@ -26,6 +26,9 @@ logging.level:
 
 # cors & actuator settings
 management:
+  health:
+    mail:
+      enabled: false
   endpoints:
     web:
       cors:
