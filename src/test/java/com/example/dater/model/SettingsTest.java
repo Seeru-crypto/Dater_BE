@@ -2,7 +2,8 @@ package com.example.dater.model;
 
 import org.junit.jupiter.api.Test;
 
-import static com.example.dater.model.Settings.*;
+import static com.example.dater.model.Settings.EMAIL_REGEX;
+import static com.example.dater.model.Settings.PHONE_NR_REGEX;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -35,6 +36,7 @@ class SettingsTest {
     void shouldAcceptPhoneNumber() {
         assertTrue(phoneErrorMsg, "+372 1234567".matches(PHONE_NR_REGEX));
         assertTrue(phoneErrorMsg, "+123 12345678".matches(PHONE_NR_REGEX));
+        assertTrue(phoneErrorMsg, "+44 1234567890".matches(PHONE_NR_REGEX));
     }
 
     @Test

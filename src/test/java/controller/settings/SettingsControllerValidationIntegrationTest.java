@@ -15,7 +15,7 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
 
     String correctPin = "154878";
     private void putFunctionBody(byte[] newSetting, String settingId, String pinValue) throws Exception {
-        String path = "/api/settings/" + settingId;
+        String path = "/api/setting/" + settingId;
         mockMvc.perform(put(path).param("pin",pinValue)
                         .content(newSetting)
                         .contentType(APPLICATION_JSON)
@@ -26,7 +26,7 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     @Test
     void createSetting_shouldThrow_exception() throws Exception {
         Settings settings = createSetting();
-        mockMvc.perform(post("/api/settings")
+        mockMvc.perform(post("/api/setting")
                         .content(getBytes(settings))
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
@@ -36,11 +36,11 @@ class SettingsControllerValidationIntegrationTest extends SettingBaseIntegration
     @Test
     void deleteSetting_shouldThrow_exception() throws Exception {
         Settings createdSetting = mongoTemplate.insert(createSetting());
-        mockMvc.perform(get("/api/settings").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+        mockMvc.perform(get("/api/setting").contentType(APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
                 .andExpect(jsonPath("$.[0].id").value(createdSetting.getId()));
 
-        String path = "/api/settings/" + createdSetting.getId();
+        String path = "/api/setting/" + createdSetting.getId();
         mockMvc.perform(delete(path))
                 .andExpect(status().isMethodNotAllowed());
     }

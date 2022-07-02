@@ -1,8 +1,8 @@
 package controller.log;
 
-import com.example.dater.DaterApplication;
-import com.example.dater.model.Event;
-import com.example.dater.model.Log;
+import com.example.dater.Application;
+import com.example.dater.model.Events;
+import com.example.dater.model.Logs;
 import com.example.dater.model.Settings;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +19,7 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DaterApplication.class)
+@SpringBootTest(classes = Application.class)
 public
 class LogBaseIntegrationTest {
     static {
@@ -40,17 +40,17 @@ class LogBaseIntegrationTest {
     @BeforeEach
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        mongoTemplate.dropCollection(Log.class);
-        mongoTemplate.dropCollection(Event.class);
+        mongoTemplate.dropCollection(Logs.class);
+        mongoTemplate.dropCollection(Events.class);
         mongoTemplate.dropCollection(Settings.class);
     }
 
-    protected byte[] getBytes(Event event) throws JsonProcessingException {
-        byte[] content = objectMapper.writeValueAsBytes(event);
+    protected byte[] getBytes(Events events) throws JsonProcessingException {
+        byte[] content = objectMapper.writeValueAsBytes(events);
         return content;
     }
-    protected byte[] getBytes(Log log) throws JsonProcessingException {
-        byte[] content = objectMapper.writeValueAsBytes(log);
+    protected byte[] getBytes(Logs logs) throws JsonProcessingException {
+        byte[] content = objectMapper.writeValueAsBytes(logs);
         return content;
     }
 

@@ -1,6 +1,6 @@
 package com.example.dater.schedulingtasks;
 
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.service.HelperFunctions;
 import com.example.dater.service.SettingsService;
@@ -24,40 +24,40 @@ class EventDateCheckerTest {
 
     @Test
     void dateVerification_shouldReturnFalse_whenReminderIsFalse() {
-        Event event = createEventWithCreatedDate().setReminder(false);
+        Events events = createEventWithCreatedDate().setReminder(false);
         Instant currentDate = Instant.now().truncatedTo(DAYS);
-        Boolean result = eventDateChecker.dateVerification(event, currentDate);
+        Boolean result = eventDateChecker.dateVerification(events, currentDate);
         assertFalse(result);
     }
 
     @Test
     void dateVerification_shouldReturnFalse_whenReminderIsTrueButDatesDontMatch() {
         Instant currentDate = Instant.now().truncatedTo(DAYS);
-        Event event = createEventWithCreatedDate()
+        Events events = createEventWithCreatedDate()
                 .setReminder(true)
                 .setReminderDays(0)
                 .setDate(currentDate);
-        Instant nextReminderDate = helperFunctions.returnNextReminderDate(event);
-        event.setDateNextReminder(nextReminderDate);
+        Instant nextReminderDate = helperFunctions.returnNextReminderDate(events);
+        events.setDateNextReminder(nextReminderDate);
 
         Instant futureDate = currentDate.plus(2, DAYS);
 
-        Boolean result = eventDateChecker.dateVerification(event, futureDate);
+        Boolean result = eventDateChecker.dateVerification(events, futureDate);
         assertFalse(result);
     }
 
     @Test
     void dateVerification_shouldReturnTrue_whenDatesMatchAndAccountForYearIsTrue() {
         Instant currentDate = Instant.now().truncatedTo(DAYS);
-        Event event = createEventWithCreatedDate()
+        Events events = createEventWithCreatedDate()
                 .setReminder(true).
                 setReminderDays(0).
                 setDate(currentDate).
                 setAccountForYear(true);
-        Instant nextReminderDate = helperFunctions.returnNextReminderDate(event);
-        event.setDateNextReminder(nextReminderDate);
+        Instant nextReminderDate = helperFunctions.returnNextReminderDate(events);
+        events.setDateNextReminder(nextReminderDate);
 
-        Boolean result = eventDateChecker.dateVerification(event, currentDate);
+        Boolean result = eventDateChecker.dateVerification(events, currentDate);
         assertTrue(result);
     }
 
@@ -65,14 +65,14 @@ class EventDateCheckerTest {
     void dateVerification_shouldReturnTrue_whenDaysAndMonthsMatchAndAccountForYearIsFalse() {
         Instant date = Instant.parse("2022-03-19T00:00:00.000Z");
         Instant reminderDate = Instant.parse("1990-03-19T00:00:00.000Z");
-        Event event = createEventWithCreatedDate()
+        Events events = createEventWithCreatedDate()
                 .setReminder(true).
                 setReminderDays(0).
                 setDate(date).
                 setAccountForYear(false)
                 .setDateNextReminder(reminderDate);
 
-        Boolean result = eventDateChecker.dateVerification(event, date);
+        Boolean result = eventDateChecker.dateVerification(events, date);
         assertTrue(result);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.dater.service;
 
-import com.example.dater.model.Event;
-import com.example.dater.model.Log;
+import com.example.dater.model.Events;
+import com.example.dater.model.Logs;
 import com.example.dater.model.Settings;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,8 +30,8 @@ public class SendMailServiceImpl implements SendMailService {
 
     private static final Logger log = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
-    public void sendMimeMailList(List<Event> eventList, String iniatedBy) throws MessagingException {
-        Log newLog = new Log();
+    public void sendMimeMailList(List<Events> eventsList, String iniatedBy) throws MessagingException {
+        Logs newLogs = new Logs();
         String emailAddressTo = "ERROR!";
         Boolean emailToggle = false;
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -50,7 +50,7 @@ public class SendMailServiceImpl implements SendMailService {
         }
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         Context context = new Context();
-        context.setVariable("eventList", eventList);
+        context.setVariable("eventList", eventsList);
 
         String process = templateEngine.process("eventListTemplate", context);
 
@@ -59,18 +59,18 @@ public class SendMailServiceImpl implements SendMailService {
         helper.setTo(emailAddressTo);
         String subject = ("Dater report: " + LocalDate.now());
         helper.setSubject(subject);
-        newLog.setSentToAddress(emailAddressTo)
+        newLogs.setSentToAddress(emailAddressTo)
                 .setInitiatedBy(iniatedBy)
-                .setMessageContent(eventList.toString())
+                .setMessageContent(eventsList.toString())
                 .setSchedulerValue(SCHEDULER_VALUE_MINUTES)
                 .setMessageType(MESSAGE_TYPE_MAIL);
         try {
             javaMailSender.send(mimeMessage);
-            logService.save(newLog);
+            logService.save(newLogs);
             log.info("Email sent!");
         } catch (MailException e) {
-            newLog.setErrorDesc(e.toString());
-            logService.save(newLog);
+            newLogs.setErrorDesc(e.toString());
+            logService.save(newLogs);
             log.warn("error occurred in mailer");
         }
     }

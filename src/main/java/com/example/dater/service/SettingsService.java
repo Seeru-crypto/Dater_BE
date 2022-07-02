@@ -1,6 +1,6 @@
 package com.example.dater.service;
 
-import com.example.dater.model.Log;
+import com.example.dater.model.Logs;
 import com.example.dater.model.Settings;
 import com.example.dater.model.SettingsDTO;
 import com.example.dater.repository.SettingRepository;
@@ -83,7 +83,7 @@ public class SettingsService {
     }
 
     public void send(int nrOfEvents, String initiatedBy) {
-        Log newLog = new Log();
+        Logs newLogs = new Logs();
         List <Settings> settingList = settingsRepository.findAll();
         Settings settings = settingList.get(0);
 
@@ -97,7 +97,7 @@ public class SettingsService {
         String smsFrom = FROM_NUMBER;
         String smsTo = settings.getSmsTo();
 
-        newLog.setInitiatedBy(initiatedBy)
+        newLogs.setInitiatedBy(initiatedBy)
                 .setMessageContent(messageBody)
                 .setSentToAddress(smsTo)
                 .setSchedulerValue(SCHEDULER_VALUE_MINUTES)
@@ -108,9 +108,9 @@ public class SettingsService {
             log.info("Sms has been sent out");
         }
         catch(ApiException e){
-            newLog.setErrorDesc(e.toString());
+            newLogs.setErrorDesc(e.toString());
             log.warn("Error has occured in sms send ", e);
         }
-        logService.save(newLog);
+        logService.save(newLogs);
     }
 }

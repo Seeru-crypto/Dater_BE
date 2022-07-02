@@ -5,7 +5,9 @@ Every notification (mail or sms) is logged in the logging database.
 
 [Front-end github repo](https://github.com/Seeru-crypto/Dater_FE)
 
-
+    docker build --build-arg JAR_FILE=build/libs/\*.jar -t dater-be .
+    docker run -e "SETTING_PIN=1234 spring.data.mongodb.uri=mongodb://localhost:27017" -p 5005:8080 -t dater-be
+ 
 ---
 ## Setup
 
@@ -20,10 +22,8 @@ Every notification (mail or sms) is logged in the logging database.
 
 2.  Setup mongoDb docker
 
-   - To build the image
-       -   `docker pull mongo`
-   - To run the image
-       -   `docker run -d --name mongo -p 270717:27017 mongo`
+   - To build & run the image
+       -   `docker pull mongo && docker run -d --name mongo -p 27017:27017 mongo`
    - In application.properties file set the mongoDB.uri filed as the connection string (`mongodb://localhost:270717`)
 
 3. Start Gradle server
@@ -50,7 +50,7 @@ Every notification (mail or sms) is logged in the logging database.
     - [ ] function that sends e-mail to designated aadress
         - [x] Emailer implementation
         - [x] email body is defined in a given template
-        - [x] Create a daily report, using said templates (name of event, date and desc)
+        - [x] Create a daily report, using said templates (name of events, date and desc)
         - [x] Sent emails are logged
         - [ ] [Testing emails](https://mailtrap.io/blog/spring-send-email),
     - [ ] server sends sms notification if the sms value is selected. 

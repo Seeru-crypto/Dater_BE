@@ -3,6 +3,7 @@ package com.example.dater.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.*;
@@ -11,10 +12,11 @@ import java.time.Instant;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Settings {
     public static final int MAX_EMAIL_LEN = 35;
     public static final String EMAIL_REGEX = "^[\\w!#$%&’*+\\/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+\\/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    public static final String PHONE_NR_REGEX = "\\+[0-9]{1,3} [0-9]{7,8}";
+    public static final String PHONE_NR_REGEX = "\\+[0-9]{1,3} [0-9]{7,10}";
     @Id
     private String id;
     @NotNull
@@ -28,11 +30,4 @@ public class Settings {
     private String smsTo;
     @NotNull
     private Boolean isSmsActive;
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Settings[id='%s', isEmailActive='%s', emailAddress='%s', smsTo='%s', isSmsActive='%s']",
-                id, isEmailActive, emailAddress, smsTo, isSmsActive);
-    }
 }

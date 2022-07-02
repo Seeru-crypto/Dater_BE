@@ -1,6 +1,6 @@
 package com.example.dater.service;
 
-import com.example.dater.model.Event;
+import com.example.dater.model.Events;
 import com.example.dater.repository.EventRepository;
 import com.example.dater.schedulingtasks.EventDateChecker;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +12,8 @@ import javax.mail.MessagingException;
 import java.time.Instant;
 import java.util.List;
 
-import static com.example.dater.model.Event.MAX_DATE;
-import static com.example.dater.model.Event.MIN_DATE;
+import static com.example.dater.model.Events.MAX_DATE;
+import static com.example.dater.model.Events.MIN_DATE;
 
 @RequiredArgsConstructor
 @Service
@@ -22,34 +22,34 @@ public class EventService {
     private final EventDateChecker eventDateChecker;
     private final HelperFunctions helperFunctions;
 
-    public List<Event> findAll() {
+    public List<Events> findAll() {
         return eventRepository.findAll();
     }
 
-    public Event save(Event event) {
-        if (event.getDate().isBefore(MIN_DATE) || event.getDate().isAfter(MAX_DATE)) {
+    public Events save(Events events) {
+        if (events.getDate().isBefore(MIN_DATE) || events.getDate().isAfter(MAX_DATE)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date is invalid");
         }
 
-        event.setDateCreated(Instant.now());
-        event.setDateNextReminder(helperFunctions.returnNextReminderDate(event));
-        return eventRepository.save(event);
+        events.setDateCreated(Instant.now());
+        events.setDateNextReminder(helperFunctions.returnNextReminderDate(events));
+        return eventRepository.save(events);
     }
 
-    public Event update(Event eventDto, String eventId) {
-        Event event = eventRepository.findById(eventId)
+    public Events update(Events eventsDto, String eventId) {
+        Events events = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with Id " +eventId+ " does not exist"));
-        event.setName(eventDto.getName())
-                .setDate(eventDto.getDate())
-                .setDescription(eventDto.getDescription())
-                .setReminder(eventDto.getReminder())
-                .setReminderDays(eventDto.getReminderDays())
-                .setAccountForYear(eventDto.getAccountForYear())
+        events.setName(eventsDto.getName())
+                .setDate(eventsDto.getDate())
+                .setDescription(eventsDto.getDescription())
+                .setReminder(eventsDto.getReminder())
+                .setReminderDays(eventsDto.getReminderDays())
+                .setAccountForYear(eventsDto.getAccountForYear())
                 .setDateUpdated(Instant.now())
-                .setDateCreated(event.getDateCreated())
-                .setDateNextReminder((helperFunctions.returnNextReminderDate(eventDto))
+                .setDateCreated(events.getDateCreated())
+                .setDateNextReminder((helperFunctions.returnNextReminderDate(eventsDto))
                 );
-        return eventRepository.save(event);
+        return eventRepository.save(events);
     }
 
     public void delete(String eventId) {
