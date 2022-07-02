@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableSwagger2
 @Log4j2
-public class DaterApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
 	@Value("${FRONT_URL}")
 	private String devLink;
@@ -27,7 +27,7 @@ public class DaterApplication implements CommandLineRunner {
 	private SettingRepository settingRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(DaterApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean

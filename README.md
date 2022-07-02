@@ -22,10 +22,8 @@ Every notification (mail or sms) is logged in the logging database.
 
 2.  Setup mongoDb docker
 
-   - To build the image
-       -   `docker pull mongo`
-   - To run the image
-       -   `docker run -d --name mongo -p 27017:27017 mongo`
+   - To build & run the image
+       -   `docker pull mongo && docker run -d --name mongo -p 27017:27017 mongo`
    - In application.properties file set the mongoDB.uri filed as the connection string (`mongodb://localhost:270717`)
 
 3. Start Gradle server

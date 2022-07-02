@@ -3,7 +3,6 @@ server:
   port: ${PORT:8080}
 
 #mongodb
-
 spring:
   data.mongodb.uri: ${MONGODB_URI}
   mail:

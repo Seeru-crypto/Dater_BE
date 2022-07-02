@@ -1,6 +1,6 @@
 package controller.events;
 
-import com.example.dater.DaterApplication;
+import com.example.dater.Application;
 import com.example.dater.model.Events;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,7 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DaterApplication.class)
+@SpringBootTest(classes = Application.class)
 class EventsBaseIntegrationTest {
     static {
       new MongoDBContainer(DockerImageName.parse("mongo:4.0.10")).withExposedPorts(27070).start();

@@ -1,6 +1,6 @@
 package controller.log;
 
-import com.example.dater.DaterApplication;
+import com.example.dater.Application;
 import com.example.dater.model.Events;
 import com.example.dater.model.Logs;
 import com.example.dater.model.Settings;
@@ -19,7 +19,7 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DaterApplication.class)
+@SpringBootTest(classes = Application.class)
 public
 class LogBaseIntegrationTest {
     static {

@@ -18,7 +18,7 @@ class LogsControllerValidationIntegrationTest extends LogBaseIntegrationTest {
                         .content(getBytes(newLogs))
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isMethodNotAllowed());
     }
 
     @Test
